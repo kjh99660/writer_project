@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Start_game : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Start_game : MonoBehaviour
     public void Start_yes()
     {
         //게임씬으로 이동
+        SceneManager.LoadScene("Ingame_scene");
         Debug.Log("게임씬으로 이동");
     }
     public void Start_no()
