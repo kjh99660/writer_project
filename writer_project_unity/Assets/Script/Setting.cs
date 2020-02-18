@@ -14,6 +14,8 @@ public class Setting : MonoBehaviour
     {
         Camera.transform.position = new Vector3(0, 0, -10);
     }
+    //메인화면 세팅 시 사용하는 메서드들
+    
     void Start()
     {
         
