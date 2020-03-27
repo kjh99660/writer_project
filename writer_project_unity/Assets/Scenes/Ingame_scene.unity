@@ -141,9 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0272ab0cab123f4c8dc9312bd9f065b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: {fileID: 1978481226}
-  Text: {fileID: 520318428}
-  Next_button: {fileID: 0}
+  NameS1: {fileID: 1978481226}
+  TextS1: {fileID: 520318428}
 --- !u!4 &11034564
 Transform:
   m_ObjectHideFlags: 0
@@ -1129,7 +1128,7 @@ GameObject:
   - component: {fileID: 520318429}
   - component: {fileID: 520318428}
   m_Layer: 5
-  m_Name: Chat_Text
+  m_Name: ChatS1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2431,7 +2430,7 @@ GameObject:
   - component: {fileID: 1978481225}
   - component: {fileID: 1978481226}
   m_Layer: 5
-  m_Name: Name
+  m_Name: NameS1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
