@@ -8,13 +8,14 @@ public class Chat_controller : MonoBehaviour
     // Start is called before the first frame update
     public Text NameS1;
     public Text TextS1;
-    private bool Click = true; 
-
+    private bool Click = true;
+    //private CSVfileReader CSVfileReader = GameObject.Find("CSVReader").GetComponent<CSVfileReader>();
+    private List<Dictionary<string, object>> data;
     public void Click_Text()
     {
         Click = false;
     }
-    IEnumerator Chatting(Text text ,string narrator, string narration)
+    IEnumerator Chatting(Text text ,string narrator, string narration)//채팅 진행 코루틴 , 한 프레임마다 한 글자씩 생성
     {
         NameS1.text = narrator;
         string writertext = "";
@@ -24,7 +25,7 @@ public class Chat_controller : MonoBehaviour
             text.text = writertext;
             yield return null;
         }
-    }//한 프레임마다 한 글자씩 생성
+    }
     IEnumerator Next()
     {
         Click = true;
@@ -36,7 +37,7 @@ public class Chat_controller : MonoBehaviour
     IEnumerator Texting()//Prologue
     {//대사 출력하는 곳
         yield return StartCoroutine(Next());
-        yield return StartCoroutine(Chatting(TextS1, "", "그녀는 남자의 뒤로 다가가.."));
+        yield return StartCoroutine(Chatting(TextS1, data[0]["a"].ToString(), "그녀는 남자의 뒤로 다가가.."));
 
         yield return StartCoroutine(Next());
         yield return StartCoroutine(Chatting(TextS1, "", "칼을 서서히 들었다..."));
@@ -77,6 +78,8 @@ public class Chat_controller : MonoBehaviour
     void Start()
     {
         StartCoroutine(Texting());
+        data = CSVfileReader.Read("EX");
+
     }
 
     // Update is called once per frame
