@@ -16,7 +16,6 @@ public class CSVfileReader : MonoBehaviour
         TextAsset data = Resources.Load(file) as TextAsset;
 
         var lines = Regex.Split(data.text, LINE_SPLIT_RE);
-
         if (lines.Length <= 1) return list;
 
         var header = Regex.Split(lines[0], SPLIT_RE);
@@ -50,13 +49,7 @@ public class CSVfileReader : MonoBehaviour
     }
     // Start is called before the first frame update
     void Start()
-    {
-        List<Dictionary<string, object>> data = CSVfileReader.Read("EX");
-        for (int i = 0; i < data.Count; i++)
-        {
-            Debug.Log(data[i]["a"] + " and " + data[i]["b"]);
-        }
-        
+    {        
     }
 
     // Update is called once per frame

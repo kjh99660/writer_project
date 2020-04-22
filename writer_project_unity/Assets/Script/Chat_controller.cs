@@ -9,6 +9,7 @@ public class Chat_controller : MonoBehaviour
     public Text NameS1;
     public Text TextS1;
     private bool Click = true;
+    private int Line = -1;
     //private CSVfileReader CSVfileReader = GameObject.Find("CSVReader").GetComponent<CSVfileReader>();
     private List<Dictionary<string, object>> data;
     public void Click_Text()
@@ -29,56 +30,30 @@ public class Chat_controller : MonoBehaviour
     IEnumerator Next()
     {
         Click = true;
+        Line++;
         while (Click)
         {
             yield return null;
         }
     }//대기하는 코루틴
-    IEnumerator Texting()//Prologue
+    IEnumerator Texting()
     {//대사 출력하는 곳
-        yield return StartCoroutine(Next());
-        yield return StartCoroutine(Chatting(TextS1, data[0]["a"].ToString(), "그녀는 남자의 뒤로 다가가.."));
+        for(int i = 0; i< 7;i++)//Prologue
+        {
+            yield return StartCoroutine(Next());
+            yield return StartCoroutine(Chatting(TextS1, data[Line]["p1"].ToString(), data[Line]["p2"].ToString()));
+        }
+        for (int i = 0; i< 39; i++)//1챕터
+        {
+            yield return StartCoroutine(Next());
+            yield return StartCoroutine(Chatting(TextS1, data[Line]["p1"].ToString(), data[Line]["p2"].ToString()));
+        }
 
-        yield return StartCoroutine(Next());
-        yield return StartCoroutine(Chatting(TextS1, "", "칼을 서서히 들었다..."));
-
-        yield return StartCoroutine(Next());
-        yield return StartCoroutine(Chatting(TextS1, "", "똑똑"));
-
-        yield return StartCoroutine(Next());
-        yield return StartCoroutine(Chatting(TextS1, "나", "무슨 소리지?"));
-
-        yield return StartCoroutine(Next());
-        yield return StartCoroutine(Chatting(TextS1, "", "나는 문을 열었다"));
-
-        yield return StartCoroutine(Next());
-        yield return StartCoroutine(Chatting(TextS1, "아이", "저 좀 도와주세요..."));
-
-        yield return StartCoroutine(Next());
-        yield return StartCoroutine(Chatting(TextS1, "", "나는 아이에게 따뜻한 우유를 주었다."));
-
-        yield return StartCoroutine(Next());
-        yield return StartCoroutine(Chatting(TextS1, "", "내가 아이를 처음 보았을 때 창백한 얼굴과 불완전한 형체를 한 아이의 모습에 놀랐다."));
-
-        yield return StartCoroutine(Next());
-        yield return StartCoroutine(Chatting(TextS1, "", "아이는 나의 표정을 보고선 곧이어 다급한 목소리로 자신의 이야기를 쏟아내기 시작했다."));
-
-        yield return StartCoroutine(Next());
-        yield return StartCoroutine(Chatting(TextS1, "", ""));
-
-        yield return StartCoroutine(Next());
-        yield return StartCoroutine(Chatting(TextS1, "", "나는 아이에게 따뜻한 우유를 주었다."));
-
-        yield return StartCoroutine(Next());
-        yield return StartCoroutine(Chatting(TextS1, "", "나는 아이에게 따뜻한 우유를 주었다."));
-
-        yield return StartCoroutine(Next());
-        yield return StartCoroutine(Chatting(TextS1, "", "나는 아이에게 따뜻한 우유를 주었다."));
     }
     void Start()
     {
         StartCoroutine(Texting());
-        data = CSVfileReader.Read("EX");
+        data = CSVfileReader.Read("scenario");
 
     }
 
