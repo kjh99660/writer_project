@@ -8,11 +8,14 @@ public class Ingame_setting : MonoBehaviour
     // Start is called before the first frame update
     public GameObject Camera;
     public GameObject Setting_panel;
-
+    private string path;
+    private int FileNumber = 0;
     public void Panel_onoff()
     {
         if(Setting_panel.activeSelf == false)
         {
+            Debug.Log("설정패널 온");
+            ScreenShot();
             Setting_panel.SetActive(true);
         }
         else
@@ -48,7 +51,18 @@ public class Ingame_setting : MonoBehaviour
     {
         SceneManager.LoadScene("Startscene");
     }
-
+    private IEnumerator ScreenShot()
+    {
+        Debug.Log("스크린 샷!");
+        Debug.Log(path);
+        path = "Assets/ScreenShot";
+        path += FileNumber + ".png";
+        ScreenCapture.CaptureScreenshot(path,2);
+        FileNumber++;
+        Debug.Log("스크린 샷!");
+        Debug.Log(path);
+        yield return new WaitForEndOfFrame();
+    }
     void Start()
     {
         

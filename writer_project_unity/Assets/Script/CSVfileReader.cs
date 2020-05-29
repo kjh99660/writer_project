@@ -6,9 +6,9 @@ using System.Text.RegularExpressions;
 
 public class CSVfileReader : MonoBehaviour
 {
-    static string SPLIT_RE = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
-    static string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
-    static char[] TRIM_CHARS = { '\"' };
+    private static string SPLIT_RE = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
+    private static string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
+    private static char[] TRIM_CHARS = { '\"' };
 
     public static List<Dictionary<string, object>> Read(string file)
     {
