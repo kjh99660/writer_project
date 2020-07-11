@@ -6,7 +6,7 @@ public class Setting : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject Camera;
-    public void Setting_in()
+    public void Setting_in()//인게임에서 사용
     {
         Camera.transform.position = new Vector3(-50, 0, -10);
     }
