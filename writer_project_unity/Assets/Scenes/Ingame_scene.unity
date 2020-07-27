@@ -143,6 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameS1: {fileID: 1978481226}
   TextS1: {fileID: 520318428}
+  Camera: {fileID: 1764169535}
 --- !u!4 &11034564
 Transform:
   m_ObjectHideFlags: 0
@@ -1708,8 +1709,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -538.57, y: -383.94}
-  m_SizeDelta: {x: 6.993, y: 4.614}
+  m_AnchoredPosition: {x: -538.57, y: -383.36984}
+  m_SizeDelta: {x: 6.993, y: 3.474}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &977436856
 MonoBehaviour:

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +9,9 @@ public class Chat_controller : MonoBehaviour
     // Start is called before the first frame update
     public Text NameS1;
     public Text TextS1;
+    public GameObject Camera;
     private bool Click = true;
+    private bool NextChapter = false;
     private int Line = -1;
     //private CSVfileReader CSVfileReader = GameObject.Find("CSVReader").GetComponent<CSVfileReader>();
     private List<Dictionary<string, object>> chapter;
@@ -31,8 +34,10 @@ public class Chat_controller : MonoBehaviour
     {
         Click = true;
         Line++;
+        
         while (Click)
         {
+            if (Input.GetKey(KeyCode.Escape)) NextChapter = true;//챕터 넘기기 용 esc 누르면 다음 챕터 대사로 넘어감
             yield return null;
         }
     }//대기하는 코루틴
@@ -40,33 +45,48 @@ public class Chat_controller : MonoBehaviour
     {//대사 출력하는 곳
         for(int i = 0; i< 7;i++)//Prologue
         {
+            if (NextChapter == true) break;//챕터 넘기기 용
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c1"].ToString(), chapter[Line]["sc1"].ToString()));
         }
+        
         for (int i = 0; i< 39; i++)//1챕터
         {
+            if (NextChapter == true) break;
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c1"].ToString(), chapter[Line]["sc1"].ToString()));
         }
+
+        NextChapter = false;
         Line = -1;
         chapter = CSVfileReader.Read("scenario_2");
         for (int i = 0; i<81; i++)//2챕터
         {
+            if (NextChapter == true) break;
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c2"].ToString(), chapter[Line]["sc2"].ToString()));
         }
+
+        NextChapter = false;
         Line = -1;
         chapter = CSVfileReader.Read("scenario_3Before");
-        for(int i = 0; i<25; i++)//3챕터 이야기 조사 전
+        for(int i = 0; i<13; i++)//3챕터 이야기 조사 전
         {
+            if (NextChapter == true) break;
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c3"].ToString(), chapter[Line]["sc3"].ToString()));
         }
-        // 조사 하는 스토리
+
+        // 조사 및 대화 관련 스크립트로 이동
+        yield return StartCoroutine(Next());
+        Camera.transform.position = new Vector3(25, 0, -10);
+
+        NextChapter = false;
         Line = -1;
         chapter = CSVfileReader.Read("scenario_3After");
         for (int i = 0; i < 43; i++)//3챕터 이야기 조사 후
         {
+            if (NextChapter == true) break;
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c3"].ToString(), chapter[Line]["sc3"].ToString()));
         }
