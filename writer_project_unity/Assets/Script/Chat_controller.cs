@@ -6,14 +6,12 @@ using UnityEngine.UI;
 
 public class Chat_controller : MonoBehaviour
 {
-    // Start is called before the first frame update
     public Text NameS1;
     public Text TextS1;
     public GameObject Camera;
     private bool Click = true;
     private bool NextChapter = false;
     private int Line = -1;
-    //private CSVfileReader CSVfileReader = GameObject.Find("CSVReader").GetComponent<CSVfileReader>();
     private List<Dictionary<string, object>> chapter;
     public void Click_Text()
     {
@@ -57,7 +55,8 @@ public class Chat_controller : MonoBehaviour
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c1"].ToString(), chapter[Line]["sc1"].ToString()));
         }
 
-        NextChapter = false;
+        NextChapter = false;//챕터 넘기기 용
+
         Line = -1;
         chapter = CSVfileReader.Read("scenario_2");
         for (int i = 0; i<81; i++)//2챕터
@@ -68,6 +67,7 @@ public class Chat_controller : MonoBehaviour
         }
 
         NextChapter = false;
+
         Line = -1;
         chapter = CSVfileReader.Read("scenario_3Before");
         for(int i = 0; i<13; i++)//3챕터 이야기 조사 전
@@ -82,6 +82,7 @@ public class Chat_controller : MonoBehaviour
         Camera.transform.position = new Vector3(25, 0, -10);
 
         NextChapter = false;
+
         Line = -1;
         chapter = CSVfileReader.Read("scenario_3After");
         for (int i = 0; i < 43; i++)//3챕터 이야기 조사 후

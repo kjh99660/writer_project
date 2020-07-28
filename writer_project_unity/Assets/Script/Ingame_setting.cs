@@ -22,7 +22,11 @@ public class Ingame_setting : MonoBehaviour
             Setting_panel.SetActive(false);
         }
     }
-    public void Save_in()//시작 씬에서 사용
+
+
+
+    //인게임에서 사용
+    public void Save_in()
     {
         Camera.transform.position = new Vector3(-25, 0, -10);
     }
@@ -30,7 +34,7 @@ public class Ingame_setting : MonoBehaviour
     {
         Camera.transform.position = new Vector3(0, 0, -10);
     }
-    public void Import_in()
+    public void Import_in()//불러오기
     {
         Camera.transform.position = new Vector3(-50, 0, -10);
     }
@@ -38,7 +42,7 @@ public class Ingame_setting : MonoBehaviour
     {
         Camera.transform.position = new Vector3(0, 0, -10);
     }
-    public void Setting_in()
+    public void Setting_in()//환경 설정
     {
         Camera.transform.position = new Vector3(-75, 0, -10);
     }
@@ -46,7 +50,8 @@ public class Ingame_setting : MonoBehaviour
     {
         Camera.transform.position = new Vector3(0, 0, -10);
     }
-    public void Goto_main()
+
+    public void Goto_main()//메인으로가기
     {
         SceneManager.LoadScene("Startscene");
     }

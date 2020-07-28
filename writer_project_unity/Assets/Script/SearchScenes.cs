@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Search : MonoBehaviour
+public class SearchScenes : MonoBehaviour
 {
     // Start is called before the first frame update
     public Text NameS2;
     public Text TextS2;
     private bool Click = true;
-    private bool NextChapter = false;
     private int Line = -1;
-
     private List<Dictionary<string, object>> chapter;
+
     public void Click_Text()
     {
         Click = false;
@@ -35,27 +34,45 @@ public class Search : MonoBehaviour
 
         while (Click)
         {
-            if (Input.GetKey(KeyCode.Escape)) NextChapter = true;//챕터 넘기기 용 esc 누르면 다음 챕터 대사로 넘어감
             yield return null;
         }
     }//대기하는 코루틴
-    IEnumerator Texting()
-    {//대사 출력하는 곳
-        for (int i = 0; i < 7; i++)//Prologue
+    IEnumerator Watch()
+    {
+        Line = 3;
+        yield return StartCoroutine(Chatting(TextS2, chapter[Line]["search1"].ToString(), chapter[Line]["search2"].ToString()));
+        for (int i = 0; i < 6; i++)
         {
-            if (NextChapter == true) break;//챕터 넘기기 용
             yield return StartCoroutine(Next());
-            yield return StartCoroutine(Chatting(TextS2, chapter[Line]["c1"].ToString(), chapter[Line]["sc1"].ToString()));
+            yield return StartCoroutine(Chatting(TextS2, chapter[Line]["search1"].ToString(), chapter[Line]["search2"].ToString()));
         }
-
+        //글씨 지우는 작업 추가 필요
+    }
+    IEnumerator Blanket()
+    {
+        Line = 0;
+        yield return StartCoroutine(Chatting(TextS2, chapter[Line]["search1"].ToString(), chapter[Line]["search2"].ToString()));
+        for (int i = 0; i < 2; i++)
+        {
+            yield return StartCoroutine(Next());
+            yield return StartCoroutine(Chatting(TextS2, chapter[Line]["search1"].ToString(), chapter[Line]["search2"].ToString()));
+        }
+        //글씨 지우는 작업 추가 필요
+    }
     
+    public void ClickBlanket()
+    {
+        StartCoroutine(Blanket());
+    }
+    public void ClickWatch()
+    {
+        StartCoroutine(Watch());
     }
 
     void Start()
     {
-
+        chapter = CSVfileReader.Read("search_1");
     }
-    // Update is called once per frame
     void Update()
     {
         
