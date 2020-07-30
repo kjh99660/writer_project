@@ -39,6 +39,8 @@ public class SearchScenes : MonoBehaviour
     }//대기하는 코루틴
     IEnumerator Watch()
     {
+        NameS2.gameObject.SetActive(true);
+        TextS2.gameObject.SetActive(true);
         Line = 3;
         yield return StartCoroutine(Chatting(TextS2, chapter[Line]["search1"].ToString(), chapter[Line]["search2"].ToString()));
         for (int i = 0; i < 6; i++)
@@ -46,10 +48,15 @@ public class SearchScenes : MonoBehaviour
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS2, chapter[Line]["search1"].ToString(), chapter[Line]["search2"].ToString()));
         }
+        yield return StartCoroutine(Next());
+        NameS2.gameObject.SetActive(false);
+        TextS2.gameObject.SetActive(false);
         //글씨 지우는 작업 추가 필요
     }
     IEnumerator Blanket()
     {
+        NameS2.gameObject.SetActive(true);
+        TextS2.gameObject.SetActive(true);
         Line = 0;
         yield return StartCoroutine(Chatting(TextS2, chapter[Line]["search1"].ToString(), chapter[Line]["search2"].ToString()));
         for (int i = 0; i < 2; i++)
@@ -57,6 +64,9 @@ public class SearchScenes : MonoBehaviour
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS2, chapter[Line]["search1"].ToString(), chapter[Line]["search2"].ToString()));
         }
+        yield return StartCoroutine(Next());
+        NameS2.gameObject.SetActive(false);
+        TextS2.gameObject.SetActive(false);
         //글씨 지우는 작업 추가 필요
     }
     
