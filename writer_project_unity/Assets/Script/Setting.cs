@@ -5,14 +5,14 @@ using UnityEngine;
 public class Setting : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject Camera;
+    public GameObject SoundPanel;
     public void Setting_in()//인게임에서 사용
     {
-        Camera.transform.position = new Vector3(-50, 0, -10);
+        SoundPanel.SetActive(true);
     }
     public void Setting_out()
     {
-        Camera.transform.position = new Vector3(0, 0, -10);
+        SoundPanel.SetActive(false);
     }
     //메인화면 세팅 시 사용하는 메서드들
     
