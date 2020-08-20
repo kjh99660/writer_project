@@ -11,9 +11,25 @@ public class Ingame_setting : MonoBehaviour
     // Start is called before the first frame update
     public GameObject Camera;
     public GameObject Setting_panel;
+
+    private Vector3 startPos;
+    private Vector3 targetPos;
+
+    private bool isClose = true;
+
+    void Start()
+    {
+        startPos = transform.position;
+        targetPos = transform.position;
+        targetPos.x -= 3.4f;
+    }
+
     public void Panel_onoff()
     {
-        if(Setting_panel.activeSelf == false)
+        if (isClose) isClose = false;
+        else isClose = true;
+        /*
+        if (Setting_panel.activeSelf == false)
         {
             Setting_panel.SetActive(true);
         }
@@ -21,6 +37,7 @@ public class Ingame_setting : MonoBehaviour
         {
             Setting_panel.SetActive(false);
         }
+        */
     }
 
 
@@ -56,15 +73,20 @@ public class Ingame_setting : MonoBehaviour
         SceneManager.LoadScene("Startscene");
     }
 
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (isClose == false)
+        {
+            Vector3 velo = Vector3.zero;
+            transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velo, 0.1f);
+        }
+        else
+        {
+            Vector3 velo = Vector3.zero;
+            transform.position = Vector3.SmoothDamp(transform.position, startPos, ref velo, 0.1f);
+        }
     }
 
 }

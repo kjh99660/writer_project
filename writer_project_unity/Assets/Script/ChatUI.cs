@@ -7,7 +7,7 @@ public class ChatUI : MonoBehaviour
     private Vector3 startPos;
     private Vector3 targetPos;
 
-    bool isClose = false;
+    private bool isClose = false;
 
     void Start()
     {
