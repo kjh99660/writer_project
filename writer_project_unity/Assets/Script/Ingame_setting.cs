@@ -11,6 +11,7 @@ public class Ingame_setting : MonoBehaviour
     // Start is called before the first frame update
     public GameObject Camera;
     public GameObject Setting_panel;
+    public GameObject soundPanel;
 
     private Vector3 startPos;
     private Vector3 targetPos;
@@ -59,14 +60,19 @@ public class Ingame_setting : MonoBehaviour
     {
         Camera.transform.position = new Vector3(0, 0, -10);
     }
-    public void Setting_in()//환경 설정
+    public void SoundOn()//환경 설정
     {
-        Camera.transform.position = new Vector3(-75, 0, -10);
+        if (soundPanel.gameObject.activeSelf == false)
+        {
+            soundPanel.SetActive(true);
+            isClose = true;
+        }
     }
-    public void Setting_out()
+    public void SoundOff()//환경 설정 x 버튼
     {
-        Camera.transform.position = new Vector3(0, 0, -10);
+        soundPanel.SetActive(false);
     }
+
 
     public void Goto_main()//메인으로가기
     {
@@ -74,7 +80,6 @@ public class Ingame_setting : MonoBehaviour
     }
 
 
-    // Update is called once per frame
     void Update()
     {
         if (isClose == false)
