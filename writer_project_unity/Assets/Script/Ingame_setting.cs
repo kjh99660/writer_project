@@ -12,6 +12,7 @@ public class Ingame_setting : MonoBehaviour
     public GameObject Camera;
     public GameObject Setting_panel;
     public GameObject soundPanel;
+    public GameObject CaseFile;
 
     private Vector3 startPos;
     private Vector3 targetPos;
@@ -44,7 +45,19 @@ public class Ingame_setting : MonoBehaviour
 
 
     //인게임에서 사용
-    public void Save_in()
+    public void Case_file()//사건 파일 열기
+    {
+        CaseFile.SetActive(true);
+        isClose = true;
+    }
+    public void Case_fileCancel()
+    {
+        CaseFile.SetActive(false);
+    }
+
+    /**********************************************/
+
+    public void Save_in()//저장하기
     {
         Camera.transform.position = new Vector3(-25, 0, -10);
     }
@@ -52,6 +65,9 @@ public class Ingame_setting : MonoBehaviour
     {
         Camera.transform.position = new Vector3(0, 0, -10);
     }
+
+    /**********************************************/
+
     public void Import_in()//불러오기
     {
         Camera.transform.position = new Vector3(-50, 0, -10);
@@ -60,6 +76,9 @@ public class Ingame_setting : MonoBehaviour
     {
         Camera.transform.position = new Vector3(0, 0, -10);
     }
+
+    /**********************************************/
+
     public void SoundOn()//환경 설정
     {
         if (soundPanel.gameObject.activeSelf == false)
@@ -72,6 +91,8 @@ public class Ingame_setting : MonoBehaviour
     {
         soundPanel.SetActive(false);
     }
+
+    /**********************************************/
 
 
     public void Goto_main()//메인으로가기
