@@ -13,6 +13,9 @@ public class Ingame_setting : MonoBehaviour
     public GameObject Setting_panel;
     public GameObject soundPanel;
     public GameObject CaseFile;
+    public GameObject MenuArrow;
+
+    private SpriteRenderer Menu_Arrow;
 
     private Vector3 startPos;
     private Vector3 targetPos;
@@ -23,13 +26,23 @@ public class Ingame_setting : MonoBehaviour
     {
         startPos = transform.position;
         targetPos = transform.position;
-        targetPos.x -= 3.4f;
+        targetPos.x -= 2.35f;
+        Menu_Arrow = MenuArrow.GetComponent<SpriteRenderer>();
+
     }
 
     public void Panel_onoff()
     {
-        if (isClose) isClose = false;
-        else isClose = true;
+        if (isClose)//열기
+        {
+            isClose = false;
+            Menu_Arrow.flipX = true;
+        }
+        else//닫기
+        {
+            isClose = true;
+            Menu_Arrow.flipX = false;
+        }
         /*
         if (Setting_panel.activeSelf == false)
         {
@@ -49,6 +62,7 @@ public class Ingame_setting : MonoBehaviour
     {
         CaseFile.SetActive(true);
         isClose = true;
+        Menu_Arrow.flipX = false;
     }
     public void Case_fileCancel()
     {
