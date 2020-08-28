@@ -63,10 +63,13 @@ public class Ingame_setting : MonoBehaviour
         CaseFile.SetActive(true);
         isClose = true;
         Menu_Arrow.flipX = false;
+        Setting_panel.SetActive(false);
     }
-    public void Case_fileCancel()
+    public void Case_fileCancel()//사건 파일 닫기
     {
         CaseFile.SetActive(false);
+        Setting_panel.SetActive(true);
+
     }
 
     /**********************************************/
@@ -99,11 +102,17 @@ public class Ingame_setting : MonoBehaviour
         {
             soundPanel.SetActive(true);
             isClose = true;
+            Menu_Arrow.flipX = true;
+            Setting_panel.SetActive(false);
+
         }
     }
     public void SoundOff()//환경 설정 x 버튼
     {
         soundPanel.SetActive(false);
+        Menu_Arrow.flipX = false;
+        Setting_panel.SetActive(true);
+
     }
 
     /**********************************************/
