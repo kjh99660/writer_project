@@ -26,7 +26,7 @@ public class Ingame_setting : MonoBehaviour
     {
         startPos = transform.position;
         targetPos = transform.position;
-        targetPos.x -= 2.35f;
+        targetPos.x -= 2.3f;
         Menu_Arrow = MenuArrow.GetComponent<SpriteRenderer>();
 
     }
