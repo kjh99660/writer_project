@@ -46,7 +46,7 @@ public class EffectManager : MonoBehaviour
         }
 
     }
-    public void Flash(float speed = 0.1f)
+    public void Flash(float speed = 0.05f)
     {
         StartCoroutine(FlashCouroutine(speed));
         Debug.Log("Flash");
@@ -55,7 +55,7 @@ public class EffectManager : MonoBehaviour
     {
         WhiteOutColor = WhiteEffect.color;
 
-        while (WhiteEffect.color.a < 1f)
+        while (WhiteEffect.color.a < 0.25f)
         {
             WhiteOutColor.a += speed;
             WhiteEffect.color = WhiteOutColor;
