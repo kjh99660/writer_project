@@ -9,6 +9,7 @@ public class Chat_controller : MonoBehaviour
     public Text NameS1;
     public Text TextS1;
     public GameObject Camera;
+    public GameObject Manu;
     private bool Click = true;
     private bool NextChapter = false;
     private int Line = -1;
@@ -41,14 +42,15 @@ public class Chat_controller : MonoBehaviour
     }//대기하는 코루틴
     IEnumerator Texting()
     {//대사 출력하는 곳
-        for(int i = 0; i< 7;i++)//Prologue
+        for(int i = 0; i< 8;i++)//Prologue
         {
+            if (i == 4) Manu.SetActive(true);
             if (NextChapter == true) break;//챕터 넘기기 용
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c1"].ToString(), chapter[Line]["sc1"].ToString()));
         }
         
-        for (int i = 0; i< 39; i++)//1챕터
+        for (int i = 0; i< 40; i++)//1챕터
         {
             if (NextChapter == true) break;
             yield return StartCoroutine(Next());

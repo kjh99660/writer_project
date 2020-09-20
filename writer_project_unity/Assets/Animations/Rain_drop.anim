@@ -8,7 +8,7 @@ AnimationClip:
   m_PrefabAsset: {fileID: 0}
   m_Name: Rain_drop
   serializedVersion: 6
-  m_Legacy: 0
+  m_Legacy: 1
   m_Compressed: 0
   m_UseHighQualityCurve: 1
   m_RotationCurves: []
@@ -53,27 +53,8 @@ AnimationClip:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
-    genericBindings:
-    - serializedVersion: 2
-      path: 0
-      attribute: 0
-      script: {fileID: 0}
-      typeID: 212
-      customType: 23
-      isPPtrCurve: 1
-    pptrCurveMapping:
-    - {fileID: 21300000, guid: 9d9893ee381416b41b3faecfd24e7a14, type: 3}
-    - {fileID: 21300000, guid: bf7c2b9243bb86040af59e60e3826203, type: 3}
-    - {fileID: 21300000, guid: eb90f32a4ba14c6499bf10a7ee3bdbf3, type: 3}
-    - {fileID: 21300000, guid: 151cb6249d12b814d8c8c54e3760ad7b, type: 3}
-    - {fileID: 21300000, guid: 77762dae48c7e564cbdeaa447a1a560b, type: 3}
-    - {fileID: 21300000, guid: 9ec6be1c432f80b478be9169f6163faa, type: 3}
-    - {fileID: 21300000, guid: 1784c878397c5784893bbb5a86a62cb1, type: 3}
-    - {fileID: 21300000, guid: 93314ff09c6fea74d9ec0585e2ffa03c, type: 3}
-    - {fileID: 21300000, guid: ab243b38b81cfe14fa685b63c8a75a51, type: 3}
-    - {fileID: 21300000, guid: 1759a2eea7a06664a823853d0f9b891e, type: 3}
-    - {fileID: 21300000, guid: 1e237ea1dc43d834cb9f382fb3d3040f, type: 3}
-    - {fileID: 21300000, guid: b08858308d2d5ef4fac3c22e1079f784, type: 3}
+    genericBindings: []
+    pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

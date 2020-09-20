@@ -86,5 +86,9 @@ public class EffectManager : MonoBehaviour
             StartCoroutine(FadeCouroutine());
         if (Input.GetKeyDown(KeyCode.F))
             Flash();
+        if (Input.GetKeyDown(KeyCode.F1))
+            FadeIn();
+        if (Input.GetKeyDown(KeyCode.F2))
+            FadeOut();
     }
 }
