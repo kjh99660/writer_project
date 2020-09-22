@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8f1b0343687595d4eaa1d02bd7062b45
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Library: {fileID: 21300000, guid: d68b4d2bf51950c4fbc5135a1d864c2d, type: 3}
+  - Hallway: {fileID: 21300000, guid: 53c275787b0093d469e4879d54d6a993, type: 3}
+  - Hallway_anim: {fileID: 21300000, guid: e65230ccbc2ceb841b28c5a229e18699, type: 3}
+  - Kitchen: {fileID: 21300000, guid: 400b555b8ff2797409845062cec0394f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

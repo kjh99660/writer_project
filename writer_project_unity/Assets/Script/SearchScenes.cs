@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,8 +11,16 @@ public class SearchScenes : MonoBehaviour
     public Text TextS2;
     private bool Click = true;
     private int Line = -1;
-    private List<Dictionary<string, object>> chapter;
+    private List<Dictionary<string, object>> chapter2;
+    private List<Dictionary<string, object>> chapter1;
 
+    //private int chapter1Count = 0;//챕터 1에서 하나씩 찾을 때마다 1씩 오름
+    //모든 물건에 bool 변수를 넣어야함
+    void Start()
+    {
+        chapter2 = CSVfileReader.Read("search_2");
+        chapter1 = CSVfileReader.Read("search_1");
+    }
     public void Click_Text()
     {
         Click = false;
@@ -42,11 +51,11 @@ public class SearchScenes : MonoBehaviour
         NameS2.gameObject.SetActive(true);
         TextS2.gameObject.SetActive(true);
         Line = 3;
-        yield return StartCoroutine(Chatting(TextS2, chapter[Line]["search1"].ToString(), chapter[Line]["search2"].ToString()));
+        yield return StartCoroutine(Chatting(TextS2, chapter2[Line]["search1"].ToString(), chapter2[Line]["search2"].ToString()));
         for (int i = 0; i < 6; i++)
         {
             yield return StartCoroutine(Next());
-            yield return StartCoroutine(Chatting(TextS2, chapter[Line]["search1"].ToString(), chapter[Line]["search2"].ToString()));
+            yield return StartCoroutine(Chatting(TextS2, chapter2[Line]["search1"].ToString(), chapter2[Line]["search2"].ToString()));
         }
         yield return StartCoroutine(Next());
         NameS2.gameObject.SetActive(false);
@@ -58,11 +67,11 @@ public class SearchScenes : MonoBehaviour
         NameS2.gameObject.SetActive(true);
         TextS2.gameObject.SetActive(true);
         Line = 0;
-        yield return StartCoroutine(Chatting(TextS2, chapter[Line]["search1"].ToString(), chapter[Line]["search2"].ToString()));
+        yield return StartCoroutine(Chatting(TextS2, chapter2[Line]["search1"].ToString(), chapter2[Line]["search2"].ToString()));
         for (int i = 0; i < 2; i++)
         {
             yield return StartCoroutine(Next());
-            yield return StartCoroutine(Chatting(TextS2, chapter[Line]["search1"].ToString(), chapter[Line]["search2"].ToString()));
+            yield return StartCoroutine(Chatting(TextS2, chapter2[Line]["search1"].ToString(), chapter2[Line]["search2"].ToString()));
         }
         yield return StartCoroutine(Next());
         NameS2.gameObject.SetActive(false);
@@ -79,10 +88,6 @@ public class SearchScenes : MonoBehaviour
         StartCoroutine(Watch());
     }
 
-    void Start()
-    {
-        chapter = CSVfileReader.Read("search_1");
-    }
     void Update()
     {
         

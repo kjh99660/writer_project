@@ -14,6 +14,30 @@ public class Chat_controller : MonoBehaviour
     private bool NextChapter = false;
     private int Line = -1;
     private List<Dictionary<string, object>> chapter;
+
+    private GameObject GetBackGround;//배경 관련
+    private Background Background;
+
+    private GameObject GetEffect;//이펙트 관련
+    private EffectManager Effect;
+
+    private GameObject GetKid;//아이 이미지
+    private CharacterKid Kid;
+    void Start()
+    {
+        chapter = CSVfileReader.Read("scenario");
+
+        GetBackGround = GameObject.Find("BackGroundImage");
+        GetEffect = GameObject.Find("Effect");
+        GetKid = GameObject.Find("kidStanding");
+
+        Background = GetBackGround.GetComponent<Background>();
+        Effect = GetEffect.GetComponent<EffectManager>();
+        Kid = GetKid.GetComponent<CharacterKid>();
+
+        StartCoroutine(Texting());
+
+    }
     public void Click_Text()
     {
         Click = false;
@@ -44,14 +68,66 @@ public class Chat_controller : MonoBehaviour
     {//대사 출력하는 곳
         for(int i = 0; i< 8;i++)//Prologue
         {
-            if (i == 4) Manu.SetActive(true);
+            if (i == 5) Manu.SetActive(true);
             if (NextChapter == true) break;//챕터 넘기기 용
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c1"].ToString(), chapter[Line]["sc1"].ToString()));
         }
-        
-        for (int i = 0; i< 40; i++)//1챕터
+
+        for (int i = 0; i< 46; i++)//1챕터
         {
+            Debug.Log(i);
+            if (i == 0) Background.ChangeToHallway();
+            if (i == 1)
+            {
+                //CG               
+            }
+            if (i == 2)
+            {
+                Effect.BlackEffect.color = new Color(0f,0f,0f,1f);
+                Effect.FadeIn();
+                Background.ChangeToHallway_anim();
+                Background.Rain_ani.SetActive(true);
+                Kid.ChangeToBasicBasic();
+            }
+            if (i == 3)
+            {
+                Kid.ChangeToNoting();
+                Manu.SetActive(false);
+                Background.Rain_ani.SetActive(false);
+                Effect.FadeOut();
+
+            }
+            if (i == 5)
+            {
+                Manu.SetActive(true);
+                Effect.FadeIn();
+                Background.ChangeToLivingRoom();
+                Kid.ChangeToBasicBasic();
+            }
+            if(i == 6)
+            {
+                //CG
+            }
+            if(i == 16)
+            {
+                Kid.ChangeToCrossDownArm();
+            }
+            if(i == 23)
+            {
+                Effect.FadeOut();
+                Manu.SetActive(false);               
+            }
+            if (i == 24)
+            {
+                //배경 변경해야함
+                Effect.FadeIn();
+            }
+            if(i == 25)
+            {
+                Kid.ChangeToBasicBasic();
+            }
+            if(i == 27) Camera.transform.position = new Vector3(25, 0, -10);//탐색
             if (NextChapter == true) break;
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c1"].ToString(), chapter[Line]["sc1"].ToString()));
@@ -95,12 +171,7 @@ public class Chat_controller : MonoBehaviour
         }
 
     }
-    void Start()
-    {
-        chapter = CSVfileReader.Read("scenario");      
-        StartCoroutine(Texting());
-        
-    }
+
 
     // Update is called once per frame
     void Update()

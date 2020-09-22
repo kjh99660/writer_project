@@ -20,11 +20,29 @@ public class CharacterKid : MonoBehaviour
     void Start()
     {
         SpriteView = gameObject.GetComponent<SpriteRenderer>();
-
+        
         //ChangeToBasicBasic();
         //SpriteView.color = new Color();
     }
+    //위치 변경
+    public void PosToLeft()
+    {
+        
+    }
+    public void PosToRight()
+    {
 
+    }
+    public void PosToCenter()
+    {
+
+    }
+
+    //이미지 변경
+    public void ChangeToNoting()
+    {
+        SpriteView.sprite = null;
+    }
     public void ChangeToBasicBasic()
     {
         SpriteView.sprite = BasicBasic;

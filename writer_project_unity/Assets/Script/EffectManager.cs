@@ -9,7 +9,7 @@ public class EffectManager : MonoBehaviour
     private Color BlackOutColor;//페이드 인 아웃
     private Color WhiteOutColor;//플레시
 
-    private WaitForSeconds waitTime = new WaitForSeconds(0.01f);
+    private readonly WaitForSeconds WaitTime = new WaitForSeconds(0.01f);
 
     public void FadeOut(float speed = 0.02f)
     {
@@ -24,7 +24,7 @@ public class EffectManager : MonoBehaviour
         {
             BlackOutColor.a += speed;
             BlackEffect.color = BlackOutColor;
-            yield return waitTime;
+            yield return WaitTime;
         }
 
     }
@@ -34,7 +34,7 @@ public class EffectManager : MonoBehaviour
         StartCoroutine(FadeInCouroutine(speed));
         Debug.Log("Fade in");
     }
-    IEnumerator FadeInCouroutine(float speed)
+    IEnumerator FadeInCouroutine(float speed)//어두워짐
     {
         BlackOutColor = BlackEffect.color;
 
@@ -42,7 +42,7 @@ public class EffectManager : MonoBehaviour
         {
             BlackOutColor.a -= speed;
             BlackEffect.color = BlackOutColor;
-            yield return waitTime;
+            yield return WaitTime;
         }
 
     }
@@ -59,18 +59,14 @@ public class EffectManager : MonoBehaviour
         {
             WhiteOutColor.a += speed;
             WhiteEffect.color = WhiteOutColor;
-            yield return waitTime;
+            yield return WaitTime;
         }
         while (WhiteEffect.color.a > 0f)
         {
             WhiteOutColor.a -= speed;
             WhiteEffect.color = WhiteOutColor;
-            yield return waitTime;
-        }
-
-        
-
-
+            yield return WaitTime;
+        }      
     }
 
     IEnumerator FadeCouroutine()
@@ -79,6 +75,8 @@ public class EffectManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         FadeIn();
     }
+
+
     // Update is called once per frame
     void Update()
     {
