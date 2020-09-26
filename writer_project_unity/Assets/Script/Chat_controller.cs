@@ -23,6 +23,8 @@ public class Chat_controller : MonoBehaviour
 
     private GameObject GetKid;//아이 이미지
     private CharacterKid Kid;
+
+    private readonly WaitForSeconds NextLetter = new WaitForSeconds(0.04f);
     void Start()
     {
         chapter = CSVfileReader.Read("scenario");
@@ -50,7 +52,7 @@ public class Chat_controller : MonoBehaviour
         {
             writertext += narration[i];
             text.text = writertext;
-            yield return null;
+            yield return NextLetter;          
         }
     }
     IEnumerator Next()
@@ -77,7 +79,10 @@ public class Chat_controller : MonoBehaviour
         for (int i = 0; i< 46; i++)//1챕터
         {
             Debug.Log(i);
-            if (i == 0) Background.ChangeToHallway();
+            if (i == 0)
+            {
+                Background.ChangeToHallway();
+            }
             if (i == 1)
             {
                 //CG               
@@ -127,7 +132,11 @@ public class Chat_controller : MonoBehaviour
             {
                 Kid.ChangeToBasicBasic();
             }
-            if(i == 27) Camera.transform.position = new Vector3(25, 0, -10);//탐색
+            if (i == 27)
+            {
+                GameObject.Find("SearchController").GetComponent<SearchScenes>().ChapterOneEnter();
+                Camera.transform.position = new Vector3(25, 0, -10);//탐색
+            }
             if (NextChapter == true) break;
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c1"].ToString(), chapter[Line]["sc1"].ToString()));

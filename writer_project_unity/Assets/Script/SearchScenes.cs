@@ -14,12 +14,27 @@ public class SearchScenes : MonoBehaviour
     private List<Dictionary<string, object>> chapter2;
     private List<Dictionary<string, object>> chapter1;
 
-    //private int chapter1Count = 0;//챕터 1에서 하나씩 찾을 때마다 1씩 오름
+    private int[] chapter2Check = new int[2] { 0, 0 };
+    private int[] chapter1Check = new int[3] { 0, 0, 0 };
+
+    private Button WatchButton;
+    private Button BlanketButton;
+    private Button LakeButton;
+    private Button LandButton;
+    private Button WillowButton;
+
     //모든 물건에 bool 변수를 넣어야함
     void Start()
     {
         chapter2 = CSVfileReader.Read("search_2");
         chapter1 = CSVfileReader.Read("search_1");
+
+        WatchButton = GameObject.Find("Chapter2Object").transform.GetChild(1).GetComponent<Button>();
+        BlanketButton = GameObject.Find("Chapter2Object").transform.GetChild(0).GetComponent<Button>();
+
+        LakeButton = GameObject.Find("Chapter1Object").transform.GetChild(0).GetComponent<Button>();
+        WillowButton = GameObject.Find("Chapter1Object").transform.GetChild(1).GetComponent<Button>();
+        LandButton = GameObject.Find("Chapter1Object").transform.GetChild(2).GetComponent<Button>();
     }
     public void Click_Text()
     {
@@ -46,8 +61,62 @@ public class SearchScenes : MonoBehaviour
             yield return null;
         }
     }//대기하는 코루틴
+
+    //챕터 1 조사 내용
+    IEnumerator Willow()//버드나무
+    {
+        LakeButton.interactable = false;
+        LandButton.interactable = false;
+        NameS2.gameObject.SetActive(true);
+        TextS2.gameObject.SetActive(true);
+        Line = 0;
+        yield return StartCoroutine(Chatting(TextS2, chapter1[Line]["search1"].ToString(), chapter1[Line]["search2"].ToString()));
+        yield return StartCoroutine(Next());
+        yield return StartCoroutine(Chatting(TextS2, chapter1[Line]["search1"].ToString(), chapter1[Line]["search2"].ToString()));
+        yield return StartCoroutine(Next());
+        NameS2.gameObject.SetActive(false);
+        TextS2.gameObject.SetActive(false);
+        LakeButton.interactable = true;
+        LandButton.interactable = true;
+        chapter1Check[0] = 1;
+    }
+    IEnumerator Lake()
+    {
+        WillowButton.interactable = false;
+        LandButton.interactable = false;
+        NameS2.gameObject.SetActive(true);
+        TextS2.gameObject.SetActive(true);
+        Line = 2;
+        yield return StartCoroutine(Chatting(TextS2, chapter1[Line]["search1"].ToString(), chapter1[Line]["search2"].ToString()));
+        yield return StartCoroutine(Next());
+        NameS2.gameObject.SetActive(false);
+        TextS2.gameObject.SetActive(false);
+        WillowButton.interactable = true;
+        LandButton.interactable = true;
+        chapter1Check[1] = 1;
+    }
+    IEnumerator Land()
+    {
+        WillowButton.interactable = false;
+        LakeButton.interactable = false;
+        NameS2.gameObject.SetActive(true);
+        TextS2.gameObject.SetActive(true);
+        Line = 3;
+        yield return StartCoroutine(Chatting(TextS2, chapter1[Line]["search1"].ToString(), chapter1[Line]["search2"].ToString()));
+        yield return StartCoroutine(Next());
+        yield return StartCoroutine(Chatting(TextS2, chapter1[Line]["search1"].ToString(), chapter1[Line]["search2"].ToString()));
+        yield return StartCoroutine(Next());
+        NameS2.gameObject.SetActive(false);
+        TextS2.gameObject.SetActive(false);
+        WillowButton.interactable = true;
+        LakeButton.interactable = true;
+        chapter1Check[2] = 1;
+    }
+
+    //챕터 2 조사 내용
     IEnumerator Watch()
     {
+        BlanketButton.interactable = false;
         NameS2.gameObject.SetActive(true);
         TextS2.gameObject.SetActive(true);
         Line = 3;
@@ -60,10 +129,12 @@ public class SearchScenes : MonoBehaviour
         yield return StartCoroutine(Next());
         NameS2.gameObject.SetActive(false);
         TextS2.gameObject.SetActive(false);
-        //글씨 지우는 작업 추가 필요
+        BlanketButton.interactable = true;
+        chapter2Check[0] = 1;
     }
     IEnumerator Blanket()
     {
+        WatchButton.interactable = false;
         NameS2.gameObject.SetActive(true);
         TextS2.gameObject.SetActive(true);
         Line = 0;
@@ -76,9 +147,32 @@ public class SearchScenes : MonoBehaviour
         yield return StartCoroutine(Next());
         NameS2.gameObject.SetActive(false);
         TextS2.gameObject.SetActive(false);
-        //글씨 지우는 작업 추가 필요
+        WatchButton.interactable = true;
+        chapter2Check[1] = 1;
     }
-    
+    public void ChapterOneEnter()
+    {
+        LakeButton.gameObject.SetActive(true);
+        WillowButton.gameObject.SetActive(true);
+        LandButton.gameObject.SetActive(true);
+    }
+    public void ChapterTwoEnter()
+    {
+        WatchButton.gameObject.SetActive(true);
+        BlanketButton.gameObject.SetActive(true);
+    }
+    public void ChapterOneOut()
+    {
+
+        LakeButton.gameObject.SetActive(false);
+        WillowButton.gameObject.SetActive(false);
+        LandButton.gameObject.SetActive(false);
+    }
+    public void ChapterTwoOut()
+    {
+        WatchButton.gameObject.SetActive(false);
+        BlanketButton.gameObject.SetActive(false);
+    }
     public void ClickBlanket()
     {
         StartCoroutine(Blanket());
@@ -87,9 +181,37 @@ public class SearchScenes : MonoBehaviour
     {
         StartCoroutine(Watch());
     }
+    public void ClickWillow()
+    {
+        StartCoroutine(Willow());
+    }
+    public void ClickLake()
+    {
+        StartCoroutine(Lake());
+    }
+    public void ClickLand()
+    {
+        StartCoroutine(Land());
+    }
 
     void Update()
     {
-        
+        for (int i = 0; i < chapter2Check.Length; i++)//2chapter search clear
+        {
+            if (chapter2Check[i] == 0) break;
+            if (i == chapter2Check.Length - 1)
+            {
+                //다음으로 넘어가는 대사 출력
+            }
+        }
+
+        for (int i = 0; i< chapter1Check.Length; i++)//1chapter search clear
+        {
+            if (chapter1Check[i] == 0) break;
+            if(i == chapter1Check.Length -1)
+            {
+                GameObject.Find("Main Camera").transform.position = new Vector3(0, 0, -10);
+            }
+        }
     }
 }
