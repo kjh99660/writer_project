@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using System.IO;
 using UnityEngine.Android;
 using System;
+using UnityEngine.Experimental.UIElements;
 
 public class Ingame_setting : MonoBehaviour
 {
@@ -22,12 +23,15 @@ public class Ingame_setting : MonoBehaviour
 
     private bool isClose = true;
 
+    private ChatUI TextBox;
+
     void Start()
     {
         startPos = transform.position;
         targetPos = transform.position;
         targetPos.x -= 2.3f;
         Menu_Arrow = MenuArrow.GetComponent<SpriteRenderer>();
+        TextBox = GameObject.Find("HideButton(ChatUI1)").GetComponent<ChatUI>();
 
     }
 
@@ -37,12 +41,14 @@ public class Ingame_setting : MonoBehaviour
         {
             isClose = false;
             Menu_Arrow.flipX = true;
+            if(!TextBox.ReturnisClose())TextBox.Changeform();
         }
         else//닫기
         {
             isClose = true;
             Menu_Arrow.flipX = false;
         }
+        
         /*
         if (Setting_panel.activeSelf == false)
         {
