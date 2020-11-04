@@ -29,7 +29,7 @@ public class Chat_controller : MonoBehaviour
     {
         chapter = CSVfileReader.Read("scenario");
 
-        GetBackGround = GameObject.Find("BackGroundImage");
+        GetBackGround = GameObject.Find("BackGroundMain");
         GetEffect = GameObject.Find("Effect");
         GetKid = GameObject.Find("kidStanding");
 

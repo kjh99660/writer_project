@@ -24,15 +24,19 @@ public class Ingame_setting : MonoBehaviour
     private bool isClose = true;
 
     private ChatUI TextBox;
+    private GameObject[] Buttons = { null, null, null, null, null };
 
     void Start()
-    {
+    { 
         startPos = transform.position;
         targetPos = transform.position;
         targetPos.x -= 2.3f;
         Menu_Arrow = MenuArrow.GetComponent<SpriteRenderer>();
         TextBox = GameObject.Find("HideButton(ChatUI1)").GetComponent<ChatUI>();
-
+        for (int i = 0; i < 5; i++)
+        {
+            Buttons[i] = Setting_panel.transform.GetChild(i).gameObject;
+        }
     }
 
     public void Panel_onoff()
@@ -42,23 +46,30 @@ public class Ingame_setting : MonoBehaviour
             isClose = false;
             Menu_Arrow.flipX = true;
             if(!TextBox.ReturnisClose())TextBox.Changeform();
+            ButtonOn();
+
         }
         else//닫기
         {
             isClose = true;
             Menu_Arrow.flipX = false;
+            ButtonOff();
         }
-        
-        /*
-        if (Setting_panel.activeSelf == false)
+
+    }
+    public void ButtonOff()
+    {
+        for (int i = 0; i < 5; i++)
         {
-            Setting_panel.SetActive(true);
+            Buttons[i].SetActive(false);
         }
-        else
+    }
+    public void ButtonOn()
+    {
+        for (int i = 0; i < 5; i++)
         {
-            Setting_panel.SetActive(false);
+            Buttons[i].SetActive(true);
         }
-        */
     }
 
 
@@ -135,12 +146,12 @@ public class Ingame_setting : MonoBehaviour
         if (isClose == false)
         {
             Vector3 velo = Vector3.zero;
-            transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velo, 0.1f);
+            transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velo, 0.005f);
         }
         else
         {
             Vector3 velo = Vector3.zero;
-            transform.position = Vector3.SmoothDamp(transform.position, startPos, ref velo, 0.1f);
+            transform.position = Vector3.SmoothDamp(transform.position, startPos, ref velo, 0.005f);
         }
     }
 
