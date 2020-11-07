@@ -10,6 +10,8 @@ public class Background : MonoBehaviour
     public Sprite Hallway_anim;
     public Sprite Kitchen;
     public Sprite LivingRoom;
+    public Sprite Bedroom;
+    public Sprite Fireplace;
 
     public GameObject Rain_ani;
 
@@ -39,6 +41,14 @@ public class Background : MonoBehaviour
     public void ChangeToKitchen()
     {
         SpriteView.sprite = Kitchen;
+    }
+    public void ChangeToFireplace()
+    {
+        SpriteView.sprite = Fireplace;
+    }
+    public void ChangeToBedroom()
+    {
+        SpriteView.sprite = Bedroom;
     }
     // Update is called once per frame
     void Update()

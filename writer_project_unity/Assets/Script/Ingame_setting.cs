@@ -146,12 +146,12 @@ public class Ingame_setting : MonoBehaviour
         if (isClose == false)
         {
             Vector3 velo = Vector3.zero;
-            transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velo, 0.005f);
+            transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velo, 0.05f);
         }
         else
         {
             Vector3 velo = Vector3.zero;
-            transform.position = Vector3.SmoothDamp(transform.position, startPos, ref velo, 0.005f);
+            transform.position = Vector3.SmoothDamp(transform.position, startPos, ref velo, 0.05f);
         }
     }
 

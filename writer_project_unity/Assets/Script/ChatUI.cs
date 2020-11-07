@@ -18,6 +18,7 @@ public class ChatUI : MonoBehaviour
     }
     public void Changeform()
     {
+        Debug.Log("changeform");
         if (isClose) isClose = false;
         else isClose = true;
     }
@@ -31,12 +32,12 @@ public class ChatUI : MonoBehaviour
         if(isClose)
         {
             Vector3 velo = Vector3.zero;
-            transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velo, 0.01f);
+            transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velo, 0.05f);
         }
         else
         {
             Vector3 velo = Vector3.zero;
-            transform.position = Vector3.SmoothDamp(transform.position, startPos, ref velo, 0.01f);
+            transform.position = Vector3.SmoothDamp(transform.position, startPos, ref velo, 0.05f);
         }
 
 
