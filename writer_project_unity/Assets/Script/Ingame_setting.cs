@@ -24,7 +24,7 @@ public class Ingame_setting : MonoBehaviour
     private bool isClose = true;
 
     private ChatUI TextBox;
-    private GameObject[] Buttons = { null, null, null, null, null };
+    private readonly GameObject[] Buttons = { null, null, null, null, null, null };
 
     void Start()
     { 
@@ -33,7 +33,7 @@ public class Ingame_setting : MonoBehaviour
         targetPos.x -= 2.3f;
         Menu_Arrow = MenuArrow.GetComponent<SpriteRenderer>();
         TextBox = GameObject.Find("HideButton(ChatUI1)").GetComponent<ChatUI>();
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 6; i++)
         {
             Buttons[i] = Setting_panel.transform.GetChild(i).gameObject;
         }
@@ -45,7 +45,7 @@ public class Ingame_setting : MonoBehaviour
         {
             isClose = false;
             Menu_Arrow.flipX = true;
-            if(!TextBox.ReturnisClose())TextBox.Changeform();
+            if (!TextBox.ReturnisClose()) TextBox.Changeform();
             ButtonOn();
 
         }
@@ -59,14 +59,14 @@ public class Ingame_setting : MonoBehaviour
     }
     public void ButtonOff()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 6; i++)
         {
             Buttons[i].SetActive(false);
         }
     }
     public void ButtonOn()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 6; i++)
         {
             Buttons[i].SetActive(true);
         }

@@ -68,8 +68,10 @@ public class Chat_controller : MonoBehaviour
     }//대기하는 코루틴
     IEnumerator Texting()
     {//대사 출력하는 곳
-        for(int i = 0; i< 8;i++)//Prologue
+        for (int i = 0; i< 8;i++)//Prologue
         {
+            if (i == 0) Effect.BlackEffect.color = new Color(0f, 0f, 0f, 1f);
+            if (i == 2) Effect.FadeIn();
             if (i == 5) Manu.SetActive(true);
             if (NextChapter == true) break;//챕터 넘기기 용
             yield return StartCoroutine(Next());
@@ -80,7 +82,7 @@ public class Chat_controller : MonoBehaviour
         {
             Debug.Log(i);
             if (i == 0)
-            {
+            {               
                 Background.ChangeToHallway();
             }
             if (i == 1)
@@ -89,7 +91,7 @@ public class Chat_controller : MonoBehaviour
             }
             if (i == 2)
             {
-                Effect.BlackEffect.color = new Color(0f,0f,0f,1f);
+                Effect.BlackEffect.color = new Color(0f, 0f, 0f, 1f);
                 Effect.FadeIn();
                 Background.ChangeToHallway_anim();
                 Background.Rain_ani.SetActive(true);

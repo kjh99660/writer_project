@@ -7,13 +7,15 @@ public class ChatUI : MonoBehaviour
     private Vector3 startPos;
     private Vector3 targetPos;
 
+    public GameObject textUI;
+
     private bool isClose = false;
 
 
     void Start()
     {
-        startPos = transform.position;
-        targetPos = transform.position;
+        startPos = textUI.transform.position;
+        targetPos = textUI.transform.position;
         targetPos.y -= 3.9f;
     }
     public void Changeform()
@@ -32,12 +34,12 @@ public class ChatUI : MonoBehaviour
         if(isClose)
         {
             Vector3 velo = Vector3.zero;
-            transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velo, 0.05f);
+            textUI.transform.position = Vector3.SmoothDamp(textUI.transform.position, targetPos, ref velo, 0.05f);
         }
         else
         {
             Vector3 velo = Vector3.zero;
-            transform.position = Vector3.SmoothDamp(transform.position, startPos, ref velo, 0.05f);
+            textUI.transform.position = Vector3.SmoothDamp(textUI.transform.position, startPos, ref velo, 0.05f);
         }
 
 

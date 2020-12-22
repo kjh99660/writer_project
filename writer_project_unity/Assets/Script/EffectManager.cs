@@ -11,7 +11,7 @@ public class EffectManager : MonoBehaviour
 
     private readonly WaitForSeconds WaitTime = new WaitForSeconds(0.01f);
 
-    public void FadeOut(float speed = 0.02f)
+    public void FadeOut(float speed = 0.02f)//어두워짐
     {
         StartCoroutine(FadeOutCouroutine(speed));
         Debug.Log("Fade out");
@@ -29,12 +29,12 @@ public class EffectManager : MonoBehaviour
 
     }
 
-    public void FadeIn(float speed = 0.02f)
+    public void FadeIn(float speed = 0.02f)//밝아짐
     {
         StartCoroutine(FadeInCouroutine(speed));
         Debug.Log("Fade in");
     }
-    IEnumerator FadeInCouroutine(float speed)//어두워짐
+    IEnumerator FadeInCouroutine(float speed)
     {
         BlackOutColor = BlackEffect.color;
 
