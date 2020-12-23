@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,8 @@ public class Chat_controller : MonoBehaviour
     private bool NextChapter = false;
     private int Line = -1;
     private List<Dictionary<string, object>> chapter;
+
+    private SearchScenes Search;//조사 관련
 
     private GameObject GetBackGround;//배경 관련
     private Background Background;
@@ -36,6 +39,7 @@ public class Chat_controller : MonoBehaviour
         Background = GetBackGround.GetComponent<Background>();
         Effect = GetEffect.GetComponent<EffectManager>();
         Kid = GetKid.GetComponent<CharacterKid>();
+        Search = GameObject.Find("SearchController").GetComponent<SearchScenes>();
 
         StartCoroutine(Texting());
 
@@ -68,21 +72,32 @@ public class Chat_controller : MonoBehaviour
     }//대기하는 코루틴
     IEnumerator Texting()
     {//대사 출력하는 곳
-        for (int i = 0; i< 8;i++)//Prologue
+        for (int i = 0; i< 9;i++)//Prologue
         {
-            if (i == 0) Effect.BlackEffect.color = new Color(0f, 0f, 0f, 1f);
+            Debug.Log(i);
+            //기본 이미지 novel로 시작
+            if (i == 0) Effect.LightOff();
+            if (i == 1) Manu.SetActive(false);
             if (i == 2) Effect.FadeIn();
-            if (i == 5) Manu.SetActive(true);
+            if (i == 5) Effect.LightOff();
+            if (i == 6)
+            {
+                Manu.SetActive(true);
+                Background.ChangeToLibrary();
+                Effect.FadeIn();
+            }
             if (NextChapter == true) break;//챕터 넘기기 용
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c1"].ToString(), chapter[Line]["sc1"].ToString()));
         }
 
-        for (int i = 0; i< 46; i++)//1챕터
+        for (int i = 0; i< 48; i++)//1챕터
         {
             Debug.Log(i);
             if (i == 0)
-            {               
+            {
+                Effect.LightOff();
+                Effect.FadeIn();
                 Background.ChangeToHallway();
             }
             if (i == 1)
@@ -91,7 +106,7 @@ public class Chat_controller : MonoBehaviour
             }
             if (i == 2)
             {
-                Effect.BlackEffect.color = new Color(0f, 0f, 0f, 1f);
+                Effect.LightOff();
                 Effect.FadeIn();
                 Background.ChangeToHallway_anim();
                 Background.Rain_ani.SetActive(true);
@@ -103,7 +118,6 @@ public class Chat_controller : MonoBehaviour
                 Manu.SetActive(false);
                 Background.Rain_ani.SetActive(false);
                 Effect.FadeOut();
-
             }
             if (i == 5)
             {
@@ -127,7 +141,7 @@ public class Chat_controller : MonoBehaviour
             }
             if (i == 24)
             {
-                //배경 변경해야함
+                Background.ChangeToLake();
                 Effect.FadeIn();
             }
             if(i == 25)
@@ -136,8 +150,19 @@ public class Chat_controller : MonoBehaviour
             }
             if (i == 27)
             {
-                GameObject.Find("SearchController").GetComponent<SearchScenes>().ChapterOneEnter();
-                Camera.transform.position = new Vector3(25, 0, -10);//탐색
+                Search.ChapterOneEnter();
+                Camera.transform.position = new Vector3(25, 0, -10);//호수탐색
+            }
+            if(i == 31)
+            {
+                Search.ChangeOne_2Search();//다음 탐색 준비 - 호수 배경 오브젝트와 사람 인영
+                //호수 배경에 나뭇가지 오브젝트와 사람 인영 오브젝트 추가
+            }
+            if(i == 36)
+            {
+                Camera.transform.position = new Vector3(25, 0, -10);
+                //나뭇가지를 탐색하는 내용
+                //호수 전경에 나뭇가지를 눌러야 다음으로 넘어가진다.
             }
             if (NextChapter == true) break;
             yield return StartCoroutine(Next());

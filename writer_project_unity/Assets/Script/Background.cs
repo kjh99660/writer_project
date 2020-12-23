@@ -12,6 +12,8 @@ public class Background : MonoBehaviour
     public Sprite LivingRoom;
     public Sprite Bedroom;
     public Sprite Fireplace;
+    public Sprite Novel;
+    public Sprite Lake;
 
     public GameObject Rain_ani;
 
@@ -20,7 +22,14 @@ public class Background : MonoBehaviour
     void Start()
     {
         SpriteView = gameObject.GetComponent<SpriteRenderer>();
-        ChangeToLibrary();
+    }
+    public void ChangeToLake()
+    {
+        SpriteView.sprite = Lake;
+    }
+    public void ChangeToNovel()
+    {
+        SpriteView.sprite = Novel;
     }
     public void ChangeToLivingRoom()
     {
