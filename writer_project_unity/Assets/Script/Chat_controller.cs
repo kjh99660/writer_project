@@ -26,6 +26,8 @@ public class Chat_controller : MonoBehaviour
 
     private GameObject GetKid;//아이 이미지
     private CharacterKid Kid;
+    private GameObject GetBoy;//소년 이미지
+    private CharacterBoy Boy;
 
     private readonly WaitForSeconds NextLetter = new WaitForSeconds(0.04f);
     void Start()
@@ -35,10 +37,12 @@ public class Chat_controller : MonoBehaviour
         GetBackGround = GameObject.Find("BackGroundMain");
         GetEffect = GameObject.Find("Effect");
         GetKid = GameObject.Find("kidStanding");
+        GetBoy = GameObject.Find("boyStanding");
 
         Background = GetBackGround.GetComponent<Background>();
         Effect = GetEffect.GetComponent<EffectManager>();
         Kid = GetKid.GetComponent<CharacterKid>();
+        Boy = GetBoy.GetComponent<CharacterBoy>();
         Search = GameObject.Find("SearchController").GetComponent<SearchScenes>();
 
         StartCoroutine(Texting());
@@ -91,7 +95,7 @@ public class Chat_controller : MonoBehaviour
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c1"].ToString(), chapter[Line]["sc1"].ToString()));
         }
 
-        for (int i = 0; i< 48; i++)//1챕터
+        for (int i = 0; i< 49; i++)//1챕터
         {
             Debug.Log(i);
             if (i == 0)
@@ -110,11 +114,11 @@ public class Chat_controller : MonoBehaviour
                 Effect.FadeIn();
                 Background.ChangeToHallway_anim();
                 Background.Rain_ani.SetActive(true);
-                Kid.ChangeToBasicBasic();
+                Kid.ChangeToBasicBasic(Kid.GetSpriteView());
             }
             if (i == 3)
             {
-                Kid.ChangeToNoting();
+                Kid.ChangeToNoting(Kid.GetSpriteView());
                 Manu.SetActive(false);
                 Background.Rain_ani.SetActive(false);
                 Effect.FadeOut();
@@ -124,7 +128,7 @@ public class Chat_controller : MonoBehaviour
                 Manu.SetActive(true);
                 Effect.FadeIn();
                 Background.ChangeToLivingRoom();
-                Kid.ChangeToBasicBasic();
+                Kid.ChangeToBasicBasic(Kid.GetSpriteView());
             }
             if(i == 6)
             {
@@ -132,7 +136,7 @@ public class Chat_controller : MonoBehaviour
             }
             if(i == 16)
             {
-                Kid.ChangeToCrossDownArm();
+                Kid.ChangeToCrossDownArm(Kid.GetSpriteView());
             }
             if(i == 23)
             {
@@ -141,12 +145,13 @@ public class Chat_controller : MonoBehaviour
             }
             if (i == 24)
             {
+                Manu.SetActive(true);
                 Background.ChangeToLake();
                 Effect.FadeIn();
             }
             if(i == 25)
             {
-                Kid.ChangeToBasicBasic();
+                Kid.ChangeToBasicBasic(Kid.GetSpriteView());
             }
             if (i == 27)
             {
@@ -164,6 +169,11 @@ public class Chat_controller : MonoBehaviour
                 //나뭇가지를 탐색하는 내용
                 //호수 전경에 나뭇가지를 눌러야 다음으로 넘어가진다.
             }
+            if(i == 48)
+            {
+                Kid.ChangeToNoting(Kid.GetSpriteView());
+                Boy.ChangeToBasicDownArm(Boy.GetSpriteView());
+            }
             if (NextChapter == true) break;
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c1"].ToString(), chapter[Line]["sc1"].ToString()));
@@ -173,8 +183,20 @@ public class Chat_controller : MonoBehaviour
 
         Line = -1;
         chapter = CSVfileReader.Read("scenario_2");
-        for (int i = 0; i<81; i++)//2챕터
+        for (int i = 0; i<82; i++)//2챕터
         {
+            Debug.Log(i);
+            if(i == 0)
+            {
+                if (!Manu.activeSelf) Manu.SetActive(true);
+                Effect.LightOff();
+                Effect.FadeIn();
+                Background.ChangeToFireplace();//별장 난로앞 – 아이 코트, 머그컵 없음
+            }
+            if(i == 3)
+            {
+                Boy.ChangeToBasicBasic(Boy.GetSpriteView());
+            }
             if (NextChapter == true) break;
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c2"].ToString(), chapter[Line]["sc2"].ToString()));

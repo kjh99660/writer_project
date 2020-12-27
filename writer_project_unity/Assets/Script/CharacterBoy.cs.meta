@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: aa886ddaf3929f24da082eaccc7dde3c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - BasicBasic: {fileID: 21300000, guid: 01c3f017efe9e794a801c817a5491624, type: 3}
+  - BasicUpArm: {fileID: 21300000, guid: 338872fc3468a5d4f9efd32d01c19a43, type: 3}
+  - BasicDownArm: {fileID: 21300000, guid: cf7fb23e8580f3642ae8b96dbe417260, type: 3}
+  - CrossBasic: {fileID: 21300000, guid: 96c0b50aaad2bc543807fa408bb90460, type: 3}
+  - CrossUpArm: {fileID: 21300000, guid: 219570380ff7d424a9bf0d625181067d, type: 3}
+  - CrossDownArm: {fileID: 21300000, guid: 55ced89e4b133a34091517690e3ce572, type: 3}
+  - HappyBasic: {fileID: 21300000, guid: 9e403e53abbd8614e95743b11d51948e, type: 3}
+  - HappyUpArm: {fileID: 21300000, guid: 9155b9f9d20554f4d945614b9bdbf23f, type: 3}
+  - HappyDownArm: {fileID: 21300000, guid: 0840051091276f74bae26db6468335a4, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -25,57 +25,50 @@ public class CharacterKid : MonoBehaviour
         //SpriteView.color = new Color();
     }
     //위치 변경
-    public void PosToLeft()
-    {
-        
-    }
-    public void PosToRight()
-    {
 
-    }
-    public void PosToCenter()
+    public virtual SpriteRenderer GetSpriteView()
     {
-
+        return SpriteView;
     }
 
     //이미지 변경
-    public void ChangeToNoting()
+    public virtual void ChangeToNoting(SpriteRenderer SpriteView)
     {
         SpriteView.sprite = null;
     }
-    public void ChangeToBasicBasic()
+    public virtual void ChangeToBasicBasic(SpriteRenderer SpriteView)
     {
         SpriteView.sprite = BasicBasic;
     }
-    public void ChangeToBasicUpArm()
+    public virtual void ChangeToBasicUpArm(SpriteRenderer SpriteView)
     {
         SpriteView.sprite = BasicUpArm;
     }
-    public void ChangeToBasicDownArm()
+    public virtual void ChangeToBasicDownArm(SpriteRenderer SpriteView)
     {
         SpriteView.sprite = BasicDownArm;
     }
-    public void ChangeToCrossBasic()
+    public virtual void ChangeToCrossBasic(SpriteRenderer SpriteView)
     {
         SpriteView.sprite = CrossBasic;
     }
-    public void ChangeToCrossUpArm()
+    public virtual void ChangeToCrossUpArm(SpriteRenderer SpriteView)
     {
         SpriteView.sprite = CrossUpArm;
     }
-    public void ChangeToCrossDownArm()
+    public virtual void ChangeToCrossDownArm(SpriteRenderer SpriteView)
     {
         SpriteView.sprite = CrossDownArm;
     }
-    public void ChangeToHappyBasic()
+    public virtual void ChangeToHappyBasic(SpriteRenderer SpriteView)
     {
         SpriteView.sprite = HappyBasic;
     }
-    public void ChangeToHappyUpArm()
+    public virtual void ChangeToHappyUpArm(SpriteRenderer SpriteView)
     {
         SpriteView.sprite = HappyUpArm;
     }
-    public void ChangeToHappyDownArm()
+    public virtual void ChangeToHappyDownArm(SpriteRenderer SpriteView)
     {
         SpriteView.sprite = HappyDownArm;
     }
