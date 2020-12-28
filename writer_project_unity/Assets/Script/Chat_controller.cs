@@ -78,6 +78,7 @@ public class Chat_controller : MonoBehaviour
     {//대사 출력하는 곳
         for (int i = 0; i< 9;i++)//Prologue
         {
+            if (NextChapter == true) break;//챕터 넘기기 용
             Debug.Log(i);
             //기본 이미지 novel로 시작
             if (i == 0) Effect.LightOff();
@@ -90,13 +91,14 @@ public class Chat_controller : MonoBehaviour
                 Background.ChangeToLibrary();
                 Effect.FadeIn();
             }
-            if (NextChapter == true) break;//챕터 넘기기 용
+            
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c1"].ToString(), chapter[Line]["sc1"].ToString()));
         }
 
         for (int i = 0; i< 49; i++)//1챕터
         {
+            if (NextChapter == true) break;
             Debug.Log(i);
             if (i == 0)
             {
@@ -132,13 +134,23 @@ public class Chat_controller : MonoBehaviour
             }
             if(i == 6)
             {
+                Kid.ChangeToNoting(Kid.GetSpriteView());
                 //CG
             }
             if(i == 16)
             {
                 Kid.ChangeToCrossDownArm(Kid.GetSpriteView());
             }
-            if(i == 23)
+            if(i == 20)
+            {
+                Kid.ChangeToNoting(Kid.GetSpriteView());
+                
+            }
+            if (i == 21)
+            {
+                //cg
+            }
+            if (i == 23)
             {
                 Effect.FadeOut();
                 Manu.SetActive(false);               
@@ -152,6 +164,10 @@ public class Chat_controller : MonoBehaviour
             if(i == 25)
             {
                 Kid.ChangeToBasicBasic(Kid.GetSpriteView());
+            }
+            if(i == 26)
+            {
+                Kid.ChangeToNoting(Kid.GetSpriteView());
             }
             if (i == 27)
             {
@@ -169,12 +185,16 @@ public class Chat_controller : MonoBehaviour
                 //나뭇가지를 탐색하는 내용
                 //호수 전경에 나뭇가지를 눌러야 다음으로 넘어가진다.
             }
-            if(i == 48)
+            if(i == 47)
             {
+                Search.ChapterTwoEnter();
                 Kid.ChangeToNoting(Kid.GetSpriteView());
                 Boy.ChangeToBasicDownArm(Boy.GetSpriteView());
             }
-            if (NextChapter == true) break;
+            if(i == 48)
+            {
+                Effect.LightOff();
+            }            
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c1"].ToString(), chapter[Line]["sc1"].ToString()));
         }
@@ -183,21 +203,103 @@ public class Chat_controller : MonoBehaviour
 
         Line = -1;
         chapter = CSVfileReader.Read("scenario_2");
-        for (int i = 0; i<82; i++)//2챕터
+        for (int i = 0; i<83; i++)//2챕터
         {
+            if (NextChapter == true) break;
             Debug.Log(i);
             if(i == 0)
             {
-                if (!Manu.activeSelf) Manu.SetActive(true);
                 Effect.LightOff();
-                Effect.FadeIn();
+                if (!Manu.activeSelf) Manu.SetActive(true);
                 Background.ChangeToFireplace();//별장 난로앞 – 아이 코트, 머그컵 없음
+            }
+            if(i == 2)
+            {
+                Effect.FadeIn();
             }
             if(i == 3)
             {
                 Boy.ChangeToBasicBasic(Boy.GetSpriteView());
             }
-            if (NextChapter == true) break;
+            if(i == 4)
+            {
+                Boy.ChangeToNoting(Boy.GetSpriteView());
+            }
+            if(i == 6)
+            {
+                Boy.ChangeToBasicUpArm(Boy.GetSpriteView());
+            }
+            if(i == 10)
+            {
+                Boy.ChangeToHappyBasic(Boy.GetSpriteView());
+            }
+            if(i == 16)
+            {
+                Boy.ChangeToCrossDownArm(Boy.GetSpriteView());
+            }
+            if(i == 19)
+            {
+                Boy.ChangeToBasicUpArm(Boy.GetSpriteView());
+            }
+            if(i == 20)
+            {
+                Boy.ChangeToNoting(Boy.GetSpriteView());
+                Kid.ChangeToBasicUpArm(Kid.GetSpriteView());
+            }
+            if(i == 24)
+            {
+                Kid.ChangeToNoting(Kid.GetSpriteView());
+                Boy.ChangeToCrossDownArm(Boy.GetSpriteView());
+            }
+            if(i == 27)
+            {
+                Boy.ChangeToNoting(Boy.GetSpriteView());
+                Kid.ChangeToBasicDownArm(Kid.GetSpriteView());
+            }
+            if(i == 29)
+            {
+                Kid.ChangeToNoting(Kid.GetSpriteView());
+                Boy.ChangeToCrossDownArm(Boy.GetSpriteView());
+            }
+            if(i == 32)
+            {
+                Boy.ChangeToNoting(Boy.GetSpriteView());
+                Kid.ChangeToCrossDownArm(Kid.GetSpriteView());
+            }
+            if(i == 33)
+            {
+                Kid.ChangeToNoting(Kid.GetSpriteView());
+                Boy.ChangeToCrossDownArm(Boy.GetSpriteView());
+            }
+            if(i == 34)
+            {
+                Boy.ChangeToNoting(Boy.GetSpriteView());
+            }
+            if(i == 36)
+            {
+                //[별장 난로 앞 배경 – 머그컵 추가]
+            }
+            if(i == 37)
+            {
+                Boy.ChangeToBasicBasic(Boy.GetSpriteView());
+            }
+            if(i == 38)
+            {
+                Boy.ChangeToNoting(Boy.GetSpriteView());
+            }
+            if(i == 40)
+            {
+                Boy.ChangeToHappyBasic(Boy.GetSpriteView());
+            }
+            if(i == 41)
+            {
+                Boy.ChangeToNoting(Boy.GetSpriteView());
+            }
+            if(i == 43)
+            {
+                Camera.transform.position = new Vector3(25, 0, -10);//별장 탐색
+            }
+            
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c2"].ToString(), chapter[Line]["sc2"].ToString()));
         }
