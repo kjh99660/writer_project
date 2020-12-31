@@ -1,11 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.IO;
-using UnityEngine.Android;
-using System;
-using UnityEngine.Experimental.UIElements;
+using UnityEngine.EventSystems;
+
 
 public class Ingame_setting : MonoBehaviour
 {
@@ -13,7 +9,11 @@ public class Ingame_setting : MonoBehaviour
     public GameObject Camera;
     public GameObject Setting_panel;
     public GameObject soundPanel;
+
     public GameObject CaseFile;
+    public GameObject Clue;
+    public GameObject Suspect;
+
     public GameObject MenuArrow;
 
     private SpriteRenderer Menu_Arrow;
@@ -87,6 +87,24 @@ public class Ingame_setting : MonoBehaviour
         CaseFile.SetActive(false);
         Setting_panel.SetActive(true);
 
+    }
+    public void Case_fileSuspect()//용의자 버튼
+    {
+        Clue.SetActive(false);
+        Suspect.SetActive(true);
+    }
+    public void Case_fileClue()//단서 버튼
+    {
+        Clue.SetActive(true);
+        Suspect.SetActive(false);
+    }
+    public void ClueClick()//증거 클릭
+    {
+        EventSystem.current.currentSelectedGameObject.transform.GetChild(2).gameObject.SetActive(true);
+    }
+    public void ClueCancel()//증거 닫기
+    {
+        EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.SetActive(false);
     }
 
     /**********************************************/

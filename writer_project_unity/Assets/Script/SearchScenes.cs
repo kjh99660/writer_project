@@ -22,25 +22,46 @@ public class SearchScenes : MonoBehaviour
 
     private Button WatchButton;
     private Button BlanketButton;
+
     private Button LakeButton;
     private Button LandButton;
     private Button WillowButton;
     private Button BranchButton;
 
+    private Button FrameButton;
+    private Button FirePlaceButton;
+    private Button CupButton;
+    private Button CoatButton;
+
+    private GameObject Chapter1Object;
+    private GameObject Chapter2Object;
+    private GameObject Chapter3Object;
+
+    private readonly WaitForSeconds NextLetter = new WaitForSeconds(0.04f);
     //모든 물건에 bool 변수를 넣어야함 -> 17,18 line
     void Start()
     {
         Camera = GameObject.Find("Main Camera");
         chapter3 = CSVfileReader.Read("search_3");
+        chapter2 = CSVfileReader.Read("search_2");
         chapter1 = CSVfileReader.Read("search_1");
 
-        WatchButton = GameObject.Find("Chapter2Object").transform.GetChild(1).GetComponent<Button>();
-        BlanketButton = GameObject.Find("Chapter2Object").transform.GetChild(0).GetComponent<Button>();
+        Chapter1Object = GameObject.Find("Chapter1Object");
+        Chapter2Object = GameObject.Find("Chapter2Object");
+        Chapter3Object = GameObject.Find("Chapter3Object");
 
-        LakeButton = GameObject.Find("Chapter1Object").transform.GetChild(0).GetComponent<Button>();
-        WillowButton = GameObject.Find("Chapter1Object").transform.GetChild(1).GetComponent<Button>();
-        LandButton = GameObject.Find("Chapter1Object").transform.GetChild(2).GetComponent<Button>();
-        BranchButton = GameObject.Find("Chapter1Object").transform.GetChild(3).GetComponent<Button>();
+        WatchButton = Chapter3Object.transform.GetChild(1).GetComponent<Button>();
+        BlanketButton = Chapter3Object.transform.GetChild(0).GetComponent<Button>();
+
+        FirePlaceButton = Chapter2Object.transform.GetChild(0).GetComponent<Button>();
+        FrameButton = Chapter2Object.transform.GetChild(1).GetComponent<Button>();       
+        CoatButton = Chapter2Object.transform.GetChild(2).GetComponent<Button>();
+        CupButton = Chapter2Object.transform.GetChild(3).GetComponent<Button>();
+
+        LakeButton = Chapter1Object.transform.GetChild(0).GetComponent<Button>();
+        WillowButton = Chapter1Object.transform.GetChild(1).GetComponent<Button>();
+        LandButton = Chapter1Object.transform.GetChild(2).GetComponent<Button>();
+        BranchButton = Chapter1Object.transform.GetChild(3).GetComponent<Button>();
     }
     public void Click_Text()
     {
@@ -54,7 +75,7 @@ public class SearchScenes : MonoBehaviour
         {
             writertext += narration[i];
             text.text = writertext;
-            yield return null;
+            yield return null;//NextLetter
         }
     }
     IEnumerator Next()
@@ -141,7 +162,47 @@ public class SearchScenes : MonoBehaviour
         TextS2.gameObject.SetActive(false);
     }
     //챕터 2 조사 내용
-
+    IEnumerator Coat()
+    {
+        NameS2.gameObject.SetActive(true);
+        TextS2.gameObject.SetActive(true);
+        Line = 3;
+        yield return StartCoroutine(Chatting(TextS2, chapter2[Line]["search1"].ToString(), chapter2[Line]["search2"].ToString()));
+        yield return StartCoroutine(Next());
+        NameS2.gameObject.SetActive(false);
+        TextS2.gameObject.SetActive(false);
+        Camera.transform.position = new Vector3(0, 0, -10);
+    }
+    IEnumerator Cup()
+    {
+        NameS2.gameObject.SetActive(true);
+        TextS2.gameObject.SetActive(true);
+        Line = 2;
+        yield return StartCoroutine(Chatting(TextS2, chapter2[Line]["search1"].ToString(), chapter2[Line]["search2"].ToString()));
+        yield return StartCoroutine(Next());
+        NameS2.gameObject.SetActive(false);
+        TextS2.gameObject.SetActive(false);
+    }
+    IEnumerator Frame()
+    {
+        NameS2.gameObject.SetActive(true);
+        TextS2.gameObject.SetActive(true);
+        Line = 1;
+        yield return StartCoroutine(Chatting(TextS2, chapter2[Line]["search1"].ToString(), chapter2[Line]["search2"].ToString()));
+        yield return StartCoroutine(Next());
+        NameS2.gameObject.SetActive(false);
+        TextS2.gameObject.SetActive(false);
+    }
+    IEnumerator FirePlace()
+    {
+        NameS2.gameObject.SetActive(true);
+        TextS2.gameObject.SetActive(true);
+        Line = 0;
+        yield return StartCoroutine(Chatting(TextS2, chapter2[Line]["search1"].ToString(), chapter2[Line]["search2"].ToString()));
+        yield return StartCoroutine(Next());
+        NameS2.gameObject.SetActive(false);
+        TextS2.gameObject.SetActive(false);
+    }
     //챕터 3 조사 내용
     IEnumerator Watch()
     {
@@ -191,7 +252,6 @@ public class SearchScenes : MonoBehaviour
     {
         //나뭇가지 및 배경 활성화
         BranchButton.gameObject.SetActive(true);
-
     }
     public void ChapterTwoEnter()
     {
@@ -200,9 +260,10 @@ public class SearchScenes : MonoBehaviour
         LandButton.gameObject.SetActive(false);
         BranchButton.gameObject.SetActive(false);
         //배경 활성화
-
-
-
+        CoatButton.gameObject.SetActive(true);
+        FrameButton.gameObject.SetActive(true);
+        CupButton.gameObject.SetActive(true);
+        FirePlaceButton.gameObject.SetActive(true);
     }
     public void ChapterThreeEnter()
     {
@@ -236,19 +297,17 @@ public class SearchScenes : MonoBehaviour
         }
         else StartCoroutine(Land());
     }
-    public void ClickBranch()
-    {
-        StartCoroutine(Branch());
-    }
+    public void ClickBranch() => StartCoroutine(Branch());
+
+    //챕터 2
+    public void ClickCoat() => StartCoroutine(Coat());
+    public void ClickCup() => StartCoroutine(Cup());
+    public void ClickFirePlace() => StartCoroutine(FirePlace());
+    public void ClickFrame() => StartCoroutine(Frame());
+
     //챕터 3
-    public void ClickBlanket()
-    {
-        StartCoroutine(Blanket());
-    }
-    public void ClickWatch()
-    {
-        StartCoroutine(Watch());
-    }
+    public void ClickBlanket() => StartCoroutine(Blanket());
+    public void ClickWatch() => StartCoroutine(Watch());
 
     //챕터 클리어 
     public void ChapterOneSearchClear()
@@ -274,6 +333,5 @@ public class SearchScenes : MonoBehaviour
             }
         }
         ChapterOneSearchClear();
-
     }
 }

@@ -60,7 +60,7 @@ public class Chat_controller : MonoBehaviour
         {
             writertext += narration[i];
             text.text = writertext;
-            yield return NextLetter;          
+            yield return null;// NextLetter;          
         }
     }
     IEnumerator Next()
@@ -96,7 +96,7 @@ public class Chat_controller : MonoBehaviour
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c1"].ToString(), chapter[Line]["sc1"].ToString()));
         }
 
-        for (int i = 0; i< 49; i++)//1챕터
+        for (int i = 0; i< 49; i++)//1챕터 + 프롤로그 초반
         {
             if (NextChapter == true) break;
             Debug.Log(i);
@@ -108,24 +108,22 @@ public class Chat_controller : MonoBehaviour
             }
             if (i == 1)
             {
-                //CG               
-            }
-            if (i == 2)
-            {
                 Effect.LightOff();
                 Effect.FadeIn();
                 Background.ChangeToHallway_anim();
                 Background.Rain_ani.SetActive(true);
-                Kid.ChangeToBasicBasic(Kid.GetSpriteView());
+            }
+            if (i == 2)
+            {
+                Background.Rain_ani.SetActive(false);
+                //CG1               
             }
             if (i == 3)
             {
-                Kid.ChangeToNoting(Kid.GetSpriteView());
-                Manu.SetActive(false);
-                Background.Rain_ani.SetActive(false);
+                Manu.SetActive(false);                
                 Effect.FadeOut();
             }
-            if (i == 5)
+            if (i == 5)//1장 시작
             {
                 Manu.SetActive(true);
                 Effect.FadeIn();
@@ -185,16 +183,15 @@ public class Chat_controller : MonoBehaviour
                 //나뭇가지를 탐색하는 내용
                 //호수 전경에 나뭇가지를 눌러야 다음으로 넘어가진다.
             }
-            if(i == 47)
-            {
-                Search.ChapterTwoEnter();
-                Kid.ChangeToNoting(Kid.GetSpriteView());
-                Boy.ChangeToBasicDownArm(Boy.GetSpriteView());
-            }
             if(i == 48)
             {
+                Boy.ChangeToBasicDownArm(Boy.GetSpriteView());
                 Effect.LightOff();
-            }            
+            }
+            if(i == 49)
+            {
+                Boy.ChangeToNoting(Boy.GetSpriteView());
+            }
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c1"].ToString(), chapter[Line]["sc1"].ToString()));
         }
@@ -279,26 +276,38 @@ public class Chat_controller : MonoBehaviour
             {
                 //[별장 난로 앞 배경 – 머그컵 추가]
             }
-            if(i == 37)
-            {
-                Boy.ChangeToBasicBasic(Boy.GetSpriteView());
-            }
-            if(i == 38)
-            {
-                Boy.ChangeToNoting(Boy.GetSpriteView());
-            }
-            if(i == 40)
-            {
-                Boy.ChangeToHappyBasic(Boy.GetSpriteView());
-            }
-            if(i == 41)
-            {
-                Boy.ChangeToNoting(Boy.GetSpriteView());
-            }
+            if (i == 37) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
+            
+            if (i == 38) Boy.ChangeToNoting(Boy.GetSpriteView());
+            
+            if (i == 40) Boy.ChangeToHappyBasic(Boy.GetSpriteView());
+            
+            if( i == 41 )Boy.ChangeToNoting(Boy.GetSpriteView());
+            
             if(i == 43)
             {
+                Search.ChapterTwoEnter();
                 Camera.transform.position = new Vector3(25, 0, -10);//별장 탐색
             }
+            if (i == 45) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());           
+            if (i == 47) Boy.ChangeToBasicUpArm(Boy.GetSpriteView());           
+            if (i == 48) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
+            if (i == 49) Boy.ChangeToNoting(Boy.GetSpriteView());
+            if(i == 51)
+            {
+                //CG
+            }
+            if(i == 52)
+            {
+                Effect.Flash();
+            }
+            if(i == 53)
+            {
+                //도움말
+                //아이 코드 사라짐
+            }
+            if (i == 55) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
+            if (i == 57) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
             
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c2"].ToString(), chapter[Line]["sc2"].ToString()));
