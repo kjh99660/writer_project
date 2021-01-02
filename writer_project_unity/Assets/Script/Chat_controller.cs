@@ -308,7 +308,8 @@ public class Chat_controller : MonoBehaviour
             }
             if (i == 55) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
             if (i == 57) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
-            
+            if (i == 59) Camera.transform.position = new Vector3(25, 0, -10);//별장 탐색
+
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c2"].ToString(), chapter[Line]["sc2"].ToString()));
         }

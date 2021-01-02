@@ -19,6 +19,7 @@ public class SearchScenes : MonoBehaviour
     private int[] chapter3Check = new int[2] { 0, 0 };
     private int[] chapter1Check = new int[3] { 0, 0, 0 };
     private bool ChapterOneHalf = false;
+    private bool ChapterTwoHalf = false;
 
     private Button WatchButton;
     private Button BlanketButton;
@@ -54,7 +55,7 @@ public class SearchScenes : MonoBehaviour
         BlanketButton = Chapter3Object.transform.GetChild(0).GetComponent<Button>();
 
         FirePlaceButton = Chapter2Object.transform.GetChild(0).GetComponent<Button>();
-        FrameButton = Chapter2Object.transform.GetChild(1).GetComponent<Button>();       
+        FrameButton = Chapter2Object.transform.GetChild(1).GetComponent<Button>();
         CoatButton = Chapter2Object.transform.GetChild(2).GetComponent<Button>();
         CupButton = Chapter2Object.transform.GetChild(3).GetComponent<Button>();
 
@@ -88,21 +89,27 @@ public class SearchScenes : MonoBehaviour
             yield return null;
         }
     }//대기하는 코루틴
+    IEnumerator Texting(List<Dictionary<string, object>> TextFile, int LineNumber, int LoopTime)
+    {
+        NameS2.gameObject.SetActive(true);
+        TextS2.gameObject.SetActive(true);
+        Line = LineNumber;
+        for (int i = 0; i < LoopTime; i++)
+        {
+            yield return StartCoroutine(Chatting(TextS2, TextFile[Line]["search1"].ToString(), TextFile[Line]["search2"].ToString()));
+            yield return StartCoroutine(Next());
+        }
+        NameS2.gameObject.SetActive(false);
+        TextS2.gameObject.SetActive(false);
+
+    }
 
     //챕터 1 조사 내용
     IEnumerator Willow()//버드나무
     {
         LakeButton.interactable = false;
         LandButton.interactable = false;
-        NameS2.gameObject.SetActive(true);
-        TextS2.gameObject.SetActive(true);
-        Line = 0;
-        yield return StartCoroutine(Chatting(TextS2, chapter1[Line]["search1"].ToString(), chapter1[Line]["search2"].ToString()));
-        yield return StartCoroutine(Next());
-        yield return StartCoroutine(Chatting(TextS2, chapter1[Line]["search1"].ToString(), chapter1[Line]["search2"].ToString()));
-        yield return StartCoroutine(Next());
-        NameS2.gameObject.SetActive(false);
-        TextS2.gameObject.SetActive(false);
+        yield return StartCoroutine(Texting(chapter1, 0, 1));
         LakeButton.interactable = true;
         LandButton.interactable = true;
         chapter1Check[0] = 1;
@@ -111,132 +118,73 @@ public class SearchScenes : MonoBehaviour
     {
         WillowButton.interactable = false;
         LandButton.interactable = false;
-        NameS2.gameObject.SetActive(true);
-        TextS2.gameObject.SetActive(true);
-        Line = 2;
-        yield return StartCoroutine(Chatting(TextS2, chapter1[Line]["search1"].ToString(), chapter1[Line]["search2"].ToString()));
-        yield return StartCoroutine(Next());
-        NameS2.gameObject.SetActive(false);
-        TextS2.gameObject.SetActive(false);
+        yield return StartCoroutine(Texting(chapter1, 2, 1));
         WillowButton.interactable = true;
         LandButton.interactable = true;
         chapter1Check[1] = 1;
     }
     IEnumerator Land()
     {
-        WillowButton.interactable = false;
         LakeButton.interactable = false;
-        NameS2.gameObject.SetActive(true);
-        TextS2.gameObject.SetActive(true);
-        Line = 3;
-        yield return StartCoroutine(Chatting(TextS2, chapter1[Line]["search1"].ToString(), chapter1[Line]["search2"].ToString()));
-        yield return StartCoroutine(Next());
-        yield return StartCoroutine(Chatting(TextS2, chapter1[Line]["search1"].ToString(), chapter1[Line]["search2"].ToString()));
-        yield return StartCoroutine(Next());
-        NameS2.gameObject.SetActive(false);
-        TextS2.gameObject.SetActive(false);
-        WillowButton.interactable = true;
+        WillowButton.interactable = false;
+        yield return StartCoroutine(Texting(chapter1, 3, 1));
         LakeButton.interactable = true;
+        WillowButton.interactable = true;
         chapter1Check[2] = 1;
     }
+    
     //챕터 1 두번째 조사 내용
     IEnumerator Branch()
     {
-        NameS2.gameObject.SetActive(true);
-        TextS2.gameObject.SetActive(true);
-        Line = 5;
-        yield return StartCoroutine(Chatting(TextS2, chapter1[Line]["search1"].ToString(), chapter1[Line]["search2"].ToString()));
-        yield return StartCoroutine(Next());
-        NameS2.gameObject.SetActive(false);
-        TextS2.gameObject.SetActive(false);
+        yield return StartCoroutine(Texting(chapter1, 5, 1));
         Camera.transform.position = new Vector3(0, 0, -10);
     }
     IEnumerator NotUse()
     {
-        NameS2.gameObject.SetActive(true);
-        TextS2.gameObject.SetActive(true);
-        Line = 6;
-        yield return StartCoroutine(Chatting(TextS2, chapter1[Line]["search1"].ToString(), chapter1[Line]["search2"].ToString()));
-        yield return StartCoroutine(Next());
-        NameS2.gameObject.SetActive(false);
-        TextS2.gameObject.SetActive(false);
+        yield return StartCoroutine(Texting(chapter1, 6, 1));
     }
     //챕터 2 조사 내용
     IEnumerator Coat()
     {
-        NameS2.gameObject.SetActive(true);
-        TextS2.gameObject.SetActive(true);
-        Line = 3;
-        yield return StartCoroutine(Chatting(TextS2, chapter2[Line]["search1"].ToString(), chapter2[Line]["search2"].ToString()));
-        yield return StartCoroutine(Next());
-        NameS2.gameObject.SetActive(false);
-        TextS2.gameObject.SetActive(false);
+        yield return StartCoroutine(Texting(chapter2, 3, 1));
         Camera.transform.position = new Vector3(0, 0, -10);
     }
     IEnumerator Cup()
     {
-        NameS2.gameObject.SetActive(true);
-        TextS2.gameObject.SetActive(true);
-        Line = 2;
-        yield return StartCoroutine(Chatting(TextS2, chapter2[Line]["search1"].ToString(), chapter2[Line]["search2"].ToString()));
-        yield return StartCoroutine(Next());
-        NameS2.gameObject.SetActive(false);
-        TextS2.gameObject.SetActive(false);
+        yield return StartCoroutine(Texting(chapter2, 2, 1));
     }
     IEnumerator Frame()
     {
-        NameS2.gameObject.SetActive(true);
-        TextS2.gameObject.SetActive(true);
-        Line = 1;
-        yield return StartCoroutine(Chatting(TextS2, chapter2[Line]["search1"].ToString(), chapter2[Line]["search2"].ToString()));
-        yield return StartCoroutine(Next());
-        NameS2.gameObject.SetActive(false);
-        TextS2.gameObject.SetActive(false);
+        yield return StartCoroutine(Texting(chapter2, 1, 1));
     }
     IEnumerator FirePlace()
     {
-        NameS2.gameObject.SetActive(true);
-        TextS2.gameObject.SetActive(true);
-        Line = 0;
-        yield return StartCoroutine(Chatting(TextS2, chapter2[Line]["search1"].ToString(), chapter2[Line]["search2"].ToString()));
-        yield return StartCoroutine(Next());
-        NameS2.gameObject.SetActive(false);
-        TextS2.gameObject.SetActive(false);
+        yield return StartCoroutine(Texting(chapter2, 0, 1));
+    }
+    IEnumerator Noting()
+    {
+        yield return StartCoroutine(Texting(chapter2, 4, 1));
+    }
+    IEnumerator GasRange()
+    {
+        yield return StartCoroutine(Texting(chapter2, 5, 1));
+    }
+    IEnumerator Sink()
+    {
+        yield return StartCoroutine(Texting(chapter2, 6, 1));
     }
     //챕터 3 조사 내용
     IEnumerator Watch()
     {
         BlanketButton.interactable = false;
-        NameS2.gameObject.SetActive(true);
-        TextS2.gameObject.SetActive(true);
-        Line = 3;
-        yield return StartCoroutine(Chatting(TextS2, chapter3[Line]["search1"].ToString(), chapter3[Line]["search2"].ToString()));
-        for (int i = 0; i < 6; i++)
-        {
-            yield return StartCoroutine(Next());
-            yield return StartCoroutine(Chatting(TextS2, chapter3[Line]["search1"].ToString(), chapter3[Line]["search2"].ToString()));
-        }
-        yield return StartCoroutine(Next());
-        NameS2.gameObject.SetActive(false);
-        TextS2.gameObject.SetActive(false);
+        yield return StartCoroutine(Texting(chapter3, 3, 6));
         BlanketButton.interactable = true;
         chapter3Check[0] = 1;
     }
     IEnumerator Blanket()
     {
         WatchButton.interactable = false;
-        NameS2.gameObject.SetActive(true);
-        TextS2.gameObject.SetActive(true);
-        Line = 0;
-        yield return StartCoroutine(Chatting(TextS2, chapter3[Line]["search1"].ToString(), chapter3[Line]["search2"].ToString()));
-        for (int i = 0; i < 2; i++)
-        {
-            yield return StartCoroutine(Next());
-            yield return StartCoroutine(Chatting(TextS2, chapter3[Line]["search1"].ToString(), chapter3[Line]["search2"].ToString()));
-        }
-        yield return StartCoroutine(Next());
-        NameS2.gameObject.SetActive(false);
-        TextS2.gameObject.SetActive(false);
+        yield return StartCoroutine(Texting(chapter3, 0, 2));
         WatchButton.interactable = true;
         chapter3Check[1] = 1;
     }
@@ -265,6 +213,12 @@ public class SearchScenes : MonoBehaviour
         CupButton.gameObject.SetActive(true);
         FirePlaceButton.gameObject.SetActive(true);
     }
+    public void ChapterTwoHalfEnter()
+    {
+        ChapterTwoHalf = true;
+        //좌우 이동 가능한 배경 , 아이 코트 사라짐
+        //새로운 오브젝트 추가
+    }
     public void ChapterThreeEnter()
     {
         BranchButton.gameObject.SetActive(true);
@@ -275,7 +229,7 @@ public class SearchScenes : MonoBehaviour
     //챕터 1
     public void ClickWillow()
     {
-        if(ChapterOneHalf)
+        if (ChapterOneHalf)
         {
             StartCoroutine(NotUse());
         }
@@ -300,10 +254,40 @@ public class SearchScenes : MonoBehaviour
     public void ClickBranch() => StartCoroutine(Branch());
 
     //챕터 2
-    public void ClickCoat() => StartCoroutine(Coat());
-    public void ClickCup() => StartCoroutine(Cup());
-    public void ClickFirePlace() => StartCoroutine(FirePlace());
-    public void ClickFrame() => StartCoroutine(Frame());
+    public void ClickCoat()
+    {
+        if(ChapterTwoHalf)
+        {
+            StartCoroutine(Noting());
+        }
+        else StartCoroutine(Coat());
+    }
+    public void ClickCup()
+    {
+        if (ChapterTwoHalf)
+        {
+            StartCoroutine(Noting());
+        }
+        else StartCoroutine(Cup());
+    }
+    public void ClickFirePlace()
+    {
+        if (ChapterTwoHalf)
+        {
+            StartCoroutine(Noting());
+        }
+        else StartCoroutine(FirePlace());
+    }
+    public void ClickFrame()
+    {
+        if (ChapterTwoHalf)
+        {
+            StartCoroutine(Noting());
+        }
+        else StartCoroutine(Frame());
+    }
+    //[별장 주방] - 왼쪽
+    //public void GasRange() => StartCoroutine(GasRange());
 
     //챕터 3
     public void ClickBlanket() => StartCoroutine(Blanket());
