@@ -16,29 +16,32 @@ public class EffectManager : MonoBehaviour
     {
         BlackEffect.color = lightOff;
     }
-
     public void FadeOut(float speed = 0.02f)//어두워짐
     {
         StartCoroutine(FadeOutCouroutine(speed));
         Debug.Log("Fade out");
     }
+    public void FadeIn(float speed = 0.02f)//밝아짐
+    {
+        StartCoroutine(FadeInCouroutine(speed));
+        Debug.Log("Fade in");
+    }
+    public void Flash(float speed = 0.05f)//플래쉬
+    {
+        StartCoroutine(FlashCouroutine(speed));
+        Debug.Log("Flash");
+    }
     IEnumerator FadeOutCouroutine(float speed)
     {
         BlackOutColor = BlackEffect.color;
 
-        while(BlackEffect.color.a < 1f)
+        while (BlackEffect.color.a < 1f)
         {
             BlackOutColor.a += speed;
             BlackEffect.color = BlackOutColor;
             yield return WaitTime;
         }
 
-    }
-
-    public void FadeIn(float speed = 0.02f)//밝아짐
-    {
-        StartCoroutine(FadeInCouroutine(speed));
-        Debug.Log("Fade in");
     }
     IEnumerator FadeInCouroutine(float speed)
     {
@@ -51,11 +54,6 @@ public class EffectManager : MonoBehaviour
             yield return WaitTime;
         }
 
-    }
-    public void Flash(float speed = 0.05f)
-    {
-        StartCoroutine(FlashCouroutine(speed));
-        Debug.Log("Flash");
     }
     IEnumerator FlashCouroutine(float speed)
     {

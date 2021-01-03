@@ -12,6 +12,8 @@ public class SearchScenes : MonoBehaviour
     private bool Click = true;
     private int Line = -1;
     private GameObject Camera;
+    private Background BackGround;//배경 관련
+    private EffectManager Effect;//이펙트 관련
     private List<Dictionary<string, object>> chapter3;
     private List<Dictionary<string, object>> chapter2;
     private List<Dictionary<string, object>> chapter1;
@@ -21,6 +23,11 @@ public class SearchScenes : MonoBehaviour
     private bool ChapterOneHalf = false;
     private bool ChapterTwoHalf = false;
 
+    //장소 이동 버튼
+    public Button LeftButton;
+    public Button RightButton;
+
+    //조사 물품
     private Button WatchButton;
     private Button BlanketButton;
 
@@ -33,19 +40,28 @@ public class SearchScenes : MonoBehaviour
     private Button FirePlaceButton;
     private Button CupButton;
     private Button CoatButton;
+    private Button GasRangeButton;
+    private Button SinkButton;
+    private Button CubBoardButton;
+    private Button TableAndChairButton;
+    private Button CabinetButton;
+    private Button DrawerButton;
+    private Button SleepingBagButton;
+    private Button BeadHeadButton;
 
+    //오브젝트 목록
     private GameObject Chapter1Object;
     private GameObject Chapter2Object;
     private GameObject Chapter3Object;
 
-    private readonly WaitForSeconds NextLetter = new WaitForSeconds(0.04f);
-    //모든 물건에 bool 변수를 넣어야함 -> 17,18 line
+    private readonly WaitForSeconds NextLetter = new WaitForSeconds(0.04f);//빌드시 대사 간격 추가한 후 빌드
+
     void Start()
     {
         Camera = GameObject.Find("Main Camera");
-        chapter3 = CSVfileReader.Read("search_3");
-        chapter2 = CSVfileReader.Read("search_2");
         chapter1 = CSVfileReader.Read("search_1");
+        BackGround = GameObject.Find("BackGroundSearch").GetComponent<Background>();
+        Effect = GameObject.Find("Effect").GetComponent<EffectManager>();
 
         Chapter1Object = GameObject.Find("Chapter1Object");
         Chapter2Object = GameObject.Find("Chapter2Object");
@@ -58,11 +74,20 @@ public class SearchScenes : MonoBehaviour
         FrameButton = Chapter2Object.transform.GetChild(1).GetComponent<Button>();
         CoatButton = Chapter2Object.transform.GetChild(2).GetComponent<Button>();
         CupButton = Chapter2Object.transform.GetChild(3).GetComponent<Button>();
+        GasRangeButton = Chapter2Object.transform.GetChild(4).GetComponent<Button>();
+        SinkButton = Chapter2Object.transform.GetChild(5).GetComponent<Button>();
+        CubBoardButton = Chapter2Object.transform.GetChild(6).GetComponent<Button>();
+        TableAndChairButton = Chapter2Object.transform.GetChild(7).GetComponent<Button>();
+        CabinetButton = Chapter2Object.transform.GetChild(8).GetComponent<Button>();
+        DrawerButton = Chapter2Object.transform.GetChild(9).GetComponent<Button>();
+        SleepingBagButton = Chapter2Object.transform.GetChild(10).GetComponent<Button>();
+        BeadHeadButton = Chapter2Object.transform.GetChild(11).GetComponent<Button>();
 
         LakeButton = Chapter1Object.transform.GetChild(0).GetComponent<Button>();
         WillowButton = Chapter1Object.transform.GetChild(1).GetComponent<Button>();
         LandButton = Chapter1Object.transform.GetChild(2).GetComponent<Button>();
         BranchButton = Chapter1Object.transform.GetChild(3).GetComponent<Button>();
+        //챕터 3 이후부터는 나중에 연결
     }
     public void Click_Text()
     {
@@ -101,7 +126,6 @@ public class SearchScenes : MonoBehaviour
         }
         NameS2.gameObject.SetActive(false);
         TextS2.gameObject.SetActive(false);
-
     }
 
     //챕터 1 조사 내용
@@ -173,6 +197,31 @@ public class SearchScenes : MonoBehaviour
     {
         yield return StartCoroutine(Texting(chapter2, 6, 1));
     }
+    IEnumerator CupBoard()
+    {
+        yield return StartCoroutine(Texting(chapter2, 7, 1));
+    }
+    IEnumerator TableAndChair()
+    {
+        yield return StartCoroutine(Texting(chapter2, 8, 1));
+    }
+    IEnumerator Cabinet()
+    {
+        yield return StartCoroutine(Texting(chapter2, 9, 1));
+    }
+    IEnumerator Drawer()
+    {
+        yield return StartCoroutine(Texting(chapter2, 10, 1));
+    }
+    IEnumerator SleepingBag()
+    {
+        yield return StartCoroutine(Texting(chapter2, 11, 1));
+    }
+    IEnumerator BedHead()
+    {
+        //다른 버튼 못 누르게 하는 작업 해야함
+        yield return StartCoroutine(Texting(chapter2, 12, 3));
+    }
     //챕터 3 조사 내용
     IEnumerator Watch()
     {
@@ -203,11 +252,13 @@ public class SearchScenes : MonoBehaviour
     }
     public void ChapterTwoEnter()
     {
+        //배경 활성화 -> 챗 컨트롤러
+        chapter2 = CSVfileReader.Read("search_2");
         LakeButton.gameObject.SetActive(false);
         WillowButton.gameObject.SetActive(false);
         LandButton.gameObject.SetActive(false);
         BranchButton.gameObject.SetActive(false);
-        //배경 활성화
+        
         CoatButton.gameObject.SetActive(true);
         FrameButton.gameObject.SetActive(true);
         CupButton.gameObject.SetActive(true);
@@ -221,12 +272,25 @@ public class SearchScenes : MonoBehaviour
     }
     public void ChapterThreeEnter()
     {
+        chapter3 = CSVfileReader.Read("search_3");
         BranchButton.gameObject.SetActive(true);
         WatchButton.gameObject.SetActive(true);
         BlanketButton.gameObject.SetActive(true);
     }
-    //물건 코루틴
-    //챕터 1
+    //버튼 관련 메서드
+    public void ClickLeftButton()
+    {
+        Effect.LightOff();
+        Effect.FadeIn();
+        //배경을 바꾸는 내용 - 챕터마다 다름
+    }
+    public void ClickRightButton()
+    {
+        Effect.LightOff();
+        Effect.FadeIn();
+        //배경을 바꾸는 내용 - 챕터마다 다름
+    }
+    //#챕터 1
     public void ClickWillow()
     {
         if (ChapterOneHalf)
@@ -253,7 +317,7 @@ public class SearchScenes : MonoBehaviour
     }
     public void ClickBranch() => StartCoroutine(Branch());
 
-    //챕터 2
+    //#챕터 2
     public void ClickCoat()
     {
         if(ChapterTwoHalf)
@@ -287,7 +351,15 @@ public class SearchScenes : MonoBehaviour
         else StartCoroutine(Frame());
     }
     //[별장 주방] - 왼쪽
-    //public void GasRange() => StartCoroutine(GasRange());
+    public void ClickGasRange() => StartCoroutine(GasRange());
+    public void ClickSink() => StartCoroutine(Sink());
+    public void ClickCupBoard() => StartCoroutine(CupBoard());
+    public void ClickTableAndChair() => StartCoroutine(TableAndChair());
+    public void ClickCabinet() => StartCoroutine(Cabinet());
+    public void ClickDrawer() => StartCoroutine(Drawer());
+    public void ClickSleepingBag() => StartCoroutine(SleepingBag());
+    public void ClickBedHead() => StartCoroutine(BedHead());
+
 
     //챕터 3
     public void ClickBlanket() => StartCoroutine(Blanket());

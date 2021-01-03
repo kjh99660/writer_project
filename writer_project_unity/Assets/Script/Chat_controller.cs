@@ -18,35 +18,23 @@ public class Chat_controller : MonoBehaviour
 
     private SearchScenes Search;//조사 관련
 
-    private GameObject GetBackGround;//배경 관련
-    private Background Background;
-
-    private GameObject GetEffect;//이펙트 관련
-    private EffectManager Effect;
-
-    private GameObject GetKid;//아이 이미지
-    private CharacterKid Kid;
-    private GameObject GetBoy;//소년 이미지
-    private CharacterBoy Boy;
+    private Background Background;//배경 관련
+    private EffectManager Effect;//이펙트 관련
+    private CharacterKid Kid;//아이 이미지
+    private CharacterBoy Boy;//소년 이미지
 
     private readonly WaitForSeconds NextLetter = new WaitForSeconds(0.04f);
     void Start()
     {
         chapter = CSVfileReader.Read("scenario");
 
-        GetBackGround = GameObject.Find("BackGroundMain");
-        GetEffect = GameObject.Find("Effect");
-        GetKid = GameObject.Find("kidStanding");
-        GetBoy = GameObject.Find("boyStanding");
-
-        Background = GetBackGround.GetComponent<Background>();
-        Effect = GetEffect.GetComponent<EffectManager>();
-        Kid = GetKid.GetComponent<CharacterKid>();
-        Boy = GetBoy.GetComponent<CharacterBoy>();
+        Background = GameObject.Find("BackGroundMain").GetComponent<Background>();
+        Effect = GameObject.Find("Effect").GetComponent<EffectManager>();
+        Kid = GameObject.Find("kidStanding").GetComponent<CharacterKid>();
+        Boy = GameObject.Find("boyStanding").GetComponent<CharacterBoy>();
         Search = GameObject.Find("SearchController").GetComponent<SearchScenes>();
 
         StartCoroutine(Texting());
-
     }
     public void Click_Text()
     {
@@ -135,15 +123,8 @@ public class Chat_controller : MonoBehaviour
                 Kid.ChangeToNoting(Kid.GetSpriteView());
                 //CG
             }
-            if(i == 16)
-            {
-                Kid.ChangeToCrossDownArm(Kid.GetSpriteView());
-            }
-            if(i == 20)
-            {
-                Kid.ChangeToNoting(Kid.GetSpriteView());
-                
-            }
+            if (i == 16) Kid.ChangeToCrossDownArm(Kid.GetSpriteView());
+            if (i == 20) Kid.ChangeToNoting(Kid.GetSpriteView());
             if (i == 21)
             {
                 //cg
@@ -159,14 +140,8 @@ public class Chat_controller : MonoBehaviour
                 Background.ChangeToLake();
                 Effect.FadeIn();
             }
-            if(i == 25)
-            {
-                Kid.ChangeToBasicBasic(Kid.GetSpriteView());
-            }
-            if(i == 26)
-            {
-                Kid.ChangeToNoting(Kid.GetSpriteView());
-            }
+            if (i == 25) Kid.ChangeToBasicBasic(Kid.GetSpriteView());
+            if (i == 26) Kid.ChangeToNoting(Kid.GetSpriteView());
             if (i == 27)
             {
                 Search.ChapterOneEnter();
@@ -188,10 +163,8 @@ public class Chat_controller : MonoBehaviour
                 Boy.ChangeToBasicDownArm(Boy.GetSpriteView());
                 Effect.LightOff();
             }
-            if(i == 49)
-            {
-                Boy.ChangeToNoting(Boy.GetSpriteView());
-            }
+            if (i == 49) Boy.ChangeToNoting(Boy.GetSpriteView());
+
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c1"].ToString(), chapter[Line]["sc1"].ToString()));
         }
@@ -200,7 +173,7 @@ public class Chat_controller : MonoBehaviour
 
         Line = -1;
         chapter = CSVfileReader.Read("scenario_2");
-        for (int i = 0; i<83; i++)//2챕터
+        for (int i = 0; i<84; i++)//2챕터
         {
             if (NextChapter == true) break;
             Debug.Log(i);
@@ -210,35 +183,14 @@ public class Chat_controller : MonoBehaviour
                 if (!Manu.activeSelf) Manu.SetActive(true);
                 Background.ChangeToFireplace();//별장 난로앞 – 아이 코트, 머그컵 없음
             }
-            if(i == 2)
-            {
-                Effect.FadeIn();
-            }
-            if(i == 3)
-            {
-                Boy.ChangeToBasicBasic(Boy.GetSpriteView());
-            }
-            if(i == 4)
-            {
-                Boy.ChangeToNoting(Boy.GetSpriteView());
-            }
-            if(i == 6)
-            {
-                Boy.ChangeToBasicUpArm(Boy.GetSpriteView());
-            }
-            if(i == 10)
-            {
-                Boy.ChangeToHappyBasic(Boy.GetSpriteView());
-            }
-            if(i == 16)
-            {
-                Boy.ChangeToCrossDownArm(Boy.GetSpriteView());
-            }
-            if(i == 19)
-            {
-                Boy.ChangeToBasicUpArm(Boy.GetSpriteView());
-            }
-            if(i == 20)
+            if (i == 2) Effect.FadeIn();
+            if (i == 3) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
+            if (i == 4) Boy.ChangeToNoting(Boy.GetSpriteView());
+            if (i == 6) Boy.ChangeToBasicUpArm(Boy.GetSpriteView());
+            if (i == 10) Boy.ChangeToHappyBasic(Boy.GetSpriteView());
+            if (i == 16) Boy.ChangeToCrossDownArm(Boy.GetSpriteView());
+            if (i == 19) Boy.ChangeToBasicUpArm(Boy.GetSpriteView());
+            if (i == 20)
             {
                 Boy.ChangeToNoting(Boy.GetSpriteView());
                 Kid.ChangeToBasicUpArm(Kid.GetSpriteView());
@@ -268,22 +220,15 @@ public class Chat_controller : MonoBehaviour
                 Kid.ChangeToNoting(Kid.GetSpriteView());
                 Boy.ChangeToCrossDownArm(Boy.GetSpriteView());
             }
-            if(i == 34)
-            {
-                Boy.ChangeToNoting(Boy.GetSpriteView());
-            }
-            if(i == 36)
+            if (i == 34) Boy.ChangeToNoting(Boy.GetSpriteView());
+            if (i == 36)
             {
                 //[별장 난로 앞 배경 – 머그컵 추가]
             }
-            if (i == 37) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
-            
-            if (i == 38) Boy.ChangeToNoting(Boy.GetSpriteView());
-            
-            if (i == 40) Boy.ChangeToHappyBasic(Boy.GetSpriteView());
-            
-            if( i == 41 )Boy.ChangeToNoting(Boy.GetSpriteView());
-            
+            if (i == 37) Boy.ChangeToBasicBasic(Boy.GetSpriteView());            
+            if (i == 38) Boy.ChangeToNoting(Boy.GetSpriteView());            
+            if (i == 40) Boy.ChangeToHappyBasic(Boy.GetSpriteView());           
+            if( i == 41 )Boy.ChangeToNoting(Boy.GetSpriteView());            
             if(i == 43)
             {
                 Search.ChapterTwoEnter();
