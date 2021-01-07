@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterKid : MonoBehaviour
 {
@@ -15,61 +16,70 @@ public class CharacterKid : MonoBehaviour
     public Sprite HappyUpArm;
     public Sprite HappyDownArm;
 
-    private SpriteRenderer SpriteView;
+    private Image SpriteView;
+    protected Color On;
+    protected Color Off;
 
     void Start()
     {
-        SpriteView = gameObject.GetComponent<SpriteRenderer>();
-        
-        //ChangeToBasicBasic();
-        //SpriteView.color = new Color();
+        SpriteView = gameObject.GetComponent<Image>();
+        On = new Color(1f, 1f, 1f, 0f);
+        Off = new Color(1f, 1f, 1f, 1f);
     }
-    //위치 변경
 
-    public virtual SpriteRenderer GetSpriteView()
+    public virtual Image GetSpriteView()
     {
         return SpriteView;
     }
 
     //이미지 변경
-    public virtual void ChangeToNoting(SpriteRenderer SpriteView)
+    public virtual void ChangeToNoting(Image SpriteView)
     {
-        SpriteView.sprite = null;
+        SpriteView.color = On;
     }
-    public virtual void ChangeToBasicBasic(SpriteRenderer SpriteView)
+    public virtual void ChangeToBasicBasic(Image SpriteView)
     {
+        SpriteView.color = Off;
         SpriteView.sprite = BasicBasic;
     }
-    public virtual void ChangeToBasicUpArm(SpriteRenderer SpriteView)
+    public virtual void ChangeToBasicUpArm(Image SpriteView)
     {
+        SpriteView.color = Off;
         SpriteView.sprite = BasicUpArm;
     }
-    public virtual void ChangeToBasicDownArm(SpriteRenderer SpriteView)
+    public virtual void ChangeToBasicDownArm(Image SpriteView)
     {
+        SpriteView.color = Off;
         SpriteView.sprite = BasicDownArm;
     }
-    public virtual void ChangeToCrossBasic(SpriteRenderer SpriteView)
+    public virtual void ChangeToCrossBasic(Image SpriteView)
     {
+        SpriteView.color = Off;
         SpriteView.sprite = CrossBasic;
     }
-    public virtual void ChangeToCrossUpArm(SpriteRenderer SpriteView)
+    public virtual void ChangeToCrossUpArm(Image SpriteView)
     {
+        SpriteView.color = Off;
         SpriteView.sprite = CrossUpArm;
     }
-    public virtual void ChangeToCrossDownArm(SpriteRenderer SpriteView)
+    public virtual void ChangeToCrossDownArm(Image SpriteView)
     {
+        SpriteView.color = Off;
         SpriteView.sprite = CrossDownArm;
     }
-    public virtual void ChangeToHappyBasic(SpriteRenderer SpriteView)
+    public virtual void ChangeToHappyBasic(Image SpriteView)
     {
+        SpriteView.color = Off;
         SpriteView.sprite = HappyBasic;
     }
-    public virtual void ChangeToHappyUpArm(SpriteRenderer SpriteView)
+    public virtual void ChangeToHappyUpArm(Image SpriteView)
     {
+        SpriteView.color = Off;
         SpriteView.sprite = HappyUpArm;
     }
-    public virtual void ChangeToHappyDownArm(SpriteRenderer SpriteView)
+    public virtual void ChangeToHappyDownArm(Image SpriteView)
     {
+        SpriteView.color = Off;
         SpriteView.sprite = HappyDownArm;
     }
     // Update is called once per frame

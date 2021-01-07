@@ -7,12 +7,23 @@ using UnityEngine.UI;
 public class SearchScenes : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Text NameS2;
-    public Text TextS2;
+    [SerializeField]   
+    private Text NameS2;
+    [SerializeField]
+    private Text TextS2;
+    [SerializeField]
+    private Text NameS2Down;
+    [SerializeField]
+    private Text TextS2Down;
+    [SerializeField]
+    private Text NameS2Up;
+    [SerializeField]
+    private Text TextS2Up;
+    
     private bool Click = true;
     private int Line = -1;
     private GameObject Camera;
-    private Background BackGround;//배경 관련
+    //private Background BackGround;//배경 관련
     private EffectManager Effect;//이펙트 관련
     private List<Dictionary<string, object>> chapter3;
     private List<Dictionary<string, object>> chapter2;
@@ -22,6 +33,7 @@ public class SearchScenes : MonoBehaviour
     private int[] chapter1Check = new int[3] { 0, 0, 0 };
     private bool ChapterOneHalf = false;
     private bool ChapterTwoHalf = false;
+    private bool ChapterTwoLast = false;
 
     //장소 이동 버튼
     public Button LeftButton;
@@ -42,12 +54,12 @@ public class SearchScenes : MonoBehaviour
     private Button CoatButton;
     private Button GasRangeButton;
     private Button SinkButton;
-    private Button CubBoardButton;
+    private Button CupBoardButton;
     private Button TableAndChairButton;
     private Button CabinetButton;
     private Button DrawerButton;
     private Button SleepingBagButton;
-    private Button BeadHeadButton;
+    private Button BedHeadButton;
 
     //오브젝트 목록
     private GameObject Chapter1Object;
@@ -60,7 +72,7 @@ public class SearchScenes : MonoBehaviour
     {
         Camera = GameObject.Find("Main Camera");
         chapter1 = CSVfileReader.Read("search_1");
-        BackGround = GameObject.Find("BackGroundSearch").GetComponent<Background>();
+        //BackGround = GameObject.Find("BackGroundSearch").GetComponent<Background>();
         Effect = GameObject.Find("Effect").GetComponent<EffectManager>();
 
         Chapter1Object = GameObject.Find("Chapter1Object");
@@ -74,14 +86,15 @@ public class SearchScenes : MonoBehaviour
         FrameButton = Chapter2Object.transform.GetChild(1).GetComponent<Button>();
         CoatButton = Chapter2Object.transform.GetChild(2).GetComponent<Button>();
         CupButton = Chapter2Object.transform.GetChild(3).GetComponent<Button>();
+
         GasRangeButton = Chapter2Object.transform.GetChild(4).GetComponent<Button>();
         SinkButton = Chapter2Object.transform.GetChild(5).GetComponent<Button>();
-        CubBoardButton = Chapter2Object.transform.GetChild(6).GetComponent<Button>();
+        CupBoardButton = Chapter2Object.transform.GetChild(6).GetComponent<Button>();
         TableAndChairButton = Chapter2Object.transform.GetChild(7).GetComponent<Button>();
         CabinetButton = Chapter2Object.transform.GetChild(8).GetComponent<Button>();
         DrawerButton = Chapter2Object.transform.GetChild(9).GetComponent<Button>();
         SleepingBagButton = Chapter2Object.transform.GetChild(10).GetComponent<Button>();
-        BeadHeadButton = Chapter2Object.transform.GetChild(11).GetComponent<Button>();
+        BedHeadButton = Chapter2Object.transform.GetChild(11).GetComponent<Button>();
 
         LakeButton = Chapter1Object.transform.GetChild(0).GetComponent<Button>();
         WillowButton = Chapter1Object.transform.GetChild(1).GetComponent<Button>();
@@ -93,9 +106,9 @@ public class SearchScenes : MonoBehaviour
     {
         Click = false;
     }
-    IEnumerator Chatting(Text text, string narrator, string narration)//채팅 진행 코루틴 , 한 프레임마다 한 글자씩 생성
+    IEnumerator Chatting(Text name, Text text, string narrator, string narration)//채팅 진행 코루틴 , 한 프레임마다 한 글자씩 생성
     {
-        NameS2.text = narrator;
+        name.text = narrator;
         string writertext = "";
         for (int i = 0; i < narration.Length; i++)
         {
@@ -114,18 +127,18 @@ public class SearchScenes : MonoBehaviour
             yield return null;
         }
     }//대기하는 코루틴
-    IEnumerator Texting(List<Dictionary<string, object>> TextFile, int LineNumber, int LoopTime)
+    IEnumerator Texting(List<Dictionary<string, object>> TextFile, int LineNumber, int LoopTime, Text Name, Text Text)
     {
-        NameS2.gameObject.SetActive(true);
-        TextS2.gameObject.SetActive(true);
+        Name.gameObject.SetActive(true);
+        Text.gameObject.SetActive(true);
         Line = LineNumber;
         for (int i = 0; i < LoopTime; i++)
         {
-            yield return StartCoroutine(Chatting(TextS2, TextFile[Line]["search1"].ToString(), TextFile[Line]["search2"].ToString()));
+            yield return StartCoroutine(Chatting(Name, Text, TextFile[Line]["search1"].ToString(), TextFile[Line]["search2"].ToString()));
             yield return StartCoroutine(Next());
         }
-        NameS2.gameObject.SetActive(false);
-        TextS2.gameObject.SetActive(false);
+        Name.gameObject.SetActive(false);
+        Text.gameObject.SetActive(false);
     }
 
     //챕터 1 조사 내용
@@ -133,7 +146,7 @@ public class SearchScenes : MonoBehaviour
     {
         LakeButton.interactable = false;
         LandButton.interactable = false;
-        yield return StartCoroutine(Texting(chapter1, 0, 1));
+        yield return StartCoroutine(Texting(chapter1, 0, 1, NameS2, TextS2));
         LakeButton.interactable = true;
         LandButton.interactable = true;
         chapter1Check[0] = 1;
@@ -142,7 +155,7 @@ public class SearchScenes : MonoBehaviour
     {
         WillowButton.interactable = false;
         LandButton.interactable = false;
-        yield return StartCoroutine(Texting(chapter1, 2, 1));
+        yield return StartCoroutine(Texting(chapter1, 2, 1, NameS2, TextS2));
         WillowButton.interactable = true;
         LandButton.interactable = true;
         chapter1Check[1] = 1;
@@ -151,7 +164,7 @@ public class SearchScenes : MonoBehaviour
     {
         LakeButton.interactable = false;
         WillowButton.interactable = false;
-        yield return StartCoroutine(Texting(chapter1, 3, 1));
+        yield return StartCoroutine(Texting(chapter1, 3, 1, NameS2, TextS2));
         LakeButton.interactable = true;
         WillowButton.interactable = true;
         chapter1Check[2] = 1;
@@ -160,80 +173,97 @@ public class SearchScenes : MonoBehaviour
     //챕터 1 두번째 조사 내용
     IEnumerator Branch()
     {
-        yield return StartCoroutine(Texting(chapter1, 5, 1));
+        yield return StartCoroutine(Texting(chapter1, 5, 1, NameS2, TextS2));
         Camera.transform.position = new Vector3(0, 0, -10);
     }
     IEnumerator NotUse()
     {
-        yield return StartCoroutine(Texting(chapter1, 6, 1));
+        yield return StartCoroutine(Texting(chapter1, 6, 1, NameS2, TextS2));
     }
     //챕터 2 조사 내용
     IEnumerator Coat()
     {
-        yield return StartCoroutine(Texting(chapter2, 3, 1));
+        yield return StartCoroutine(Texting(chapter2, 3, 1, NameS2, TextS2));
         Camera.transform.position = new Vector3(0, 0, -10);
     }
     IEnumerator Cup()
     {
-        yield return StartCoroutine(Texting(chapter2, 2, 1));
+        yield return StartCoroutine(Texting(chapter2, 2, 1, NameS2, TextS2));
     }
     IEnumerator Frame()
     {
-        yield return StartCoroutine(Texting(chapter2, 1, 1));
+        yield return StartCoroutine(Texting(chapter2, 1, 1, NameS2, TextS2));
     }
     IEnumerator FirePlace()
     {
-        yield return StartCoroutine(Texting(chapter2, 0, 1));
+        yield return StartCoroutine(Texting(chapter2, 0, 1, NameS2, TextS2));
     }
     IEnumerator Noting()
     {
-        yield return StartCoroutine(Texting(chapter2, 4, 1));
+        yield return StartCoroutine(Texting(chapter2, 4, 1, NameS2, TextS2));
     }
     IEnumerator GasRange()
     {
-        yield return StartCoroutine(Texting(chapter2, 5, 1));
+        yield return StartCoroutine(Texting(chapter2, 5, 1, NameS2Up, TextS2Up));
     }
     IEnumerator Sink()
     {
-        yield return StartCoroutine(Texting(chapter2, 6, 1));
+        yield return StartCoroutine(Texting(chapter2, 6, 1, NameS2Up, TextS2Up));
     }
     IEnumerator CupBoard()
     {
-        yield return StartCoroutine(Texting(chapter2, 7, 1));
+        if (ChapterTwoLast) yield return StartCoroutine(Texting(chapter2, 16, 1, NameS2Up, TextS2Up));
+        else yield return StartCoroutine(Texting(chapter2, 7, 1, NameS2Up, TextS2Up));
     }
     IEnumerator TableAndChair()
     {
-        yield return StartCoroutine(Texting(chapter2, 8, 1));
+        yield return StartCoroutine(Texting(chapter2, 8, 1, NameS2Up, TextS2Up));
     }
     IEnumerator Cabinet()
     {
-        yield return StartCoroutine(Texting(chapter2, 9, 1));
+        if (ChapterTwoLast)
+        {
+            yield return StartCoroutine(Texting(chapter2, 19, 1, NameS2Down, TextS2Down));
+            Camera.transform.position = new Vector3(0, 0, -10);
+        }
+        else yield return StartCoroutine(Texting(chapter2, 9, 1, NameS2Down, TextS2Down));
     }
     IEnumerator Drawer()
     {
-        yield return StartCoroutine(Texting(chapter2, 10, 1));
+        yield return StartCoroutine(Texting(chapter2, 10, 1, NameS2Down, TextS2Down));
     }
     IEnumerator SleepingBag()
     {
-        yield return StartCoroutine(Texting(chapter2, 11, 1));
-    }
+        if (ChapterTwoLast) yield return StartCoroutine(Texting(chapter2, 17, 2, NameS2Down, TextS2Down));
+        else yield return StartCoroutine(Texting(chapter2, 11, 1, NameS2Down, TextS2Down));
+    }   
     IEnumerator BedHead()
     {
-        //다른 버튼 못 누르게 하는 작업 해야함
-        yield return StartCoroutine(Texting(chapter2, 12, 3));
+        CabinetButton.interactable = false;
+        DrawerButton.interactable = false;
+        SleepingBagButton.interactable = false;
+        yield return StartCoroutine(Texting(chapter2, 12, 4, NameS2Down, TextS2Down));
+        CabinetButton.interactable = true;
+        DrawerButton.interactable = true;
+        SleepingBagButton.interactable = true;
+        Camera.transform.position = new Vector3(0, 0, -10);
+    }
+    IEnumerator Nothing(Text name, Text text)
+    {
+        yield return StartCoroutine(Texting(chapter2, 20, 1, name, text));
     }
     //챕터 3 조사 내용
     IEnumerator Watch()
     {
         BlanketButton.interactable = false;
-        yield return StartCoroutine(Texting(chapter3, 3, 6));
+        yield return StartCoroutine(Texting(chapter3, 3, 6, NameS2, TextS2));
         BlanketButton.interactable = true;
         chapter3Check[0] = 1;
     }
     IEnumerator Blanket()
     {
         WatchButton.interactable = false;
-        yield return StartCoroutine(Texting(chapter3, 0, 2));
+        yield return StartCoroutine(Texting(chapter3, 0, 2, NameS2, TextS2));
         WatchButton.interactable = true;
         chapter3Check[1] = 1;
     }
@@ -267,8 +297,26 @@ public class SearchScenes : MonoBehaviour
     public void ChapterTwoHalfEnter()
     {
         ChapterTwoHalf = true;
+        LeftButton.gameObject.SetActive(true);
+        RightButton.gameObject.SetActive(true);
+
+        GasRangeButton.gameObject.SetActive(true);
+        SinkButton.gameObject.SetActive(true);
+        CupBoardButton.gameObject.SetActive(true);
+        TableAndChairButton.gameObject.SetActive(true);
+        //주방
+        CabinetButton.gameObject.SetActive(true);
+        DrawerButton.gameObject.SetActive(true);
+        SleepingBagButton.gameObject.SetActive(true);
+        BedHeadButton.gameObject.SetActive(true);
+        //침실
         //좌우 이동 가능한 배경 , 아이 코트 사라짐
         //새로운 오브젝트 추가
+    }
+    public void ChapterTwoLastEnter()
+    {
+        ChapterTwoHalf = false;
+        ChapterTwoLast = true;
     }
     public void ChapterThreeEnter()
     {
@@ -280,23 +328,22 @@ public class SearchScenes : MonoBehaviour
     //버튼 관련 메서드
     public void ClickLeftButton()
     {
+        //배경을 바꾸는 내용 - 챕터마다 다름    
         Effect.LightOff();
-        Effect.FadeIn();
-        //배경을 바꾸는 내용 - 챕터마다 다름
+        Camera.transform.position = new Vector3(25, Camera.transform.position.y + 10, -10);    
+        Effect.FadeIn();        
     }
     public void ClickRightButton()
     {
+        //배경을 바꾸는 내용 - 챕터마다 다름 > Chat Controller에서 하기
         Effect.LightOff();
+        Camera.transform.position = new Vector3(25, Camera.transform.position.y - 10, -10);
         Effect.FadeIn();
-        //배경을 바꾸는 내용 - 챕터마다 다름
     }
     //#챕터 1
     public void ClickWillow()
     {
-        if (ChapterOneHalf)
-        {
-            StartCoroutine(NotUse());
-        }
+        if (ChapterOneHalf) StartCoroutine(NotUse());
         else StartCoroutine(Willow());
     }
     public void ClickLake()
@@ -320,46 +367,57 @@ public class SearchScenes : MonoBehaviour
     //#챕터 2
     public void ClickCoat()
     {
-        if(ChapterTwoHalf)
-        {
-            StartCoroutine(Noting());
-        }
+        if (ChapterTwoHalf) StartCoroutine(Noting());//이미 조사한 것 같다.
+        else if (ChapterTwoLast) StartCoroutine(Nothing(NameS2, TextS2));
         else StartCoroutine(Coat());
     }
     public void ClickCup()
     {
-        if (ChapterTwoHalf)
-        {
-            StartCoroutine(Noting());
-        }
+        if (ChapterTwoHalf) StartCoroutine(Noting());
+        else if (ChapterTwoLast) StartCoroutine(Nothing(NameS2, TextS2));
         else StartCoroutine(Cup());
     }
     public void ClickFirePlace()
     {
-        if (ChapterTwoHalf)
-        {
-            StartCoroutine(Noting());
-        }
+        if (ChapterTwoHalf) StartCoroutine(Noting());
+        else if (ChapterTwoLast) StartCoroutine(Nothing(NameS2, TextS2));
         else StartCoroutine(FirePlace());
     }
     public void ClickFrame()
     {
-        if (ChapterTwoHalf)
-        {
-            StartCoroutine(Noting());
-        }
+        if (ChapterTwoHalf) StartCoroutine(Noting());
+        else if (ChapterTwoLast) StartCoroutine(Nothing(NameS2, TextS2));
         else StartCoroutine(Frame());
     }
     //[별장 주방] - 왼쪽
-    public void ClickGasRange() => StartCoroutine(GasRange());
-    public void ClickSink() => StartCoroutine(Sink());
+    public void ClickGasRange()
+    {
+        if (ChapterTwoHalf) StartCoroutine(GasRange());
+        else StartCoroutine(Nothing(NameS2Up, TextS2Up));
+    }
+    public void ClickSink()
+    {       
+        if (ChapterTwoHalf) StartCoroutine(Sink());
+        else StartCoroutine(Nothing(NameS2Up, TextS2Up));       
+    }
     public void ClickCupBoard() => StartCoroutine(CupBoard());
-    public void ClickTableAndChair() => StartCoroutine(TableAndChair());
+    public void ClickTableAndChair()
+    {
+        if (ChapterTwoHalf) StartCoroutine(TableAndChair());
+        else StartCoroutine(Nothing(NameS2Up, TextS2Up));
+    }
     public void ClickCabinet() => StartCoroutine(Cabinet());
-    public void ClickDrawer() => StartCoroutine(Drawer());
+    public void ClickDrawer()
+    {
+        if (ChapterTwoHalf) StartCoroutine(Drawer());
+        else StartCoroutine(Nothing(NameS2Down, TextS2Down));
+    }
     public void ClickSleepingBag() => StartCoroutine(SleepingBag());
-    public void ClickBedHead() => StartCoroutine(BedHead());
-
+    public void ClickBedHead()
+    {
+        if (ChapterTwoHalf) StartCoroutine(BedHead());
+        else StartCoroutine(Nothing(NameS2Down, TextS2Down));
+    }
 
     //챕터 3
     public void ClickBlanket() => StartCoroutine(Blanket());

@@ -11,13 +11,14 @@ public class Chat_controller : MonoBehaviour
     public Text TextS1;
     public GameObject Camera;
     public GameObject Manu;
+    public GameObject HelpPanel;
     private bool Click = true;
     private bool NextChapter = false;
     private int Line = -1;
     private List<Dictionary<string, object>> chapter;
 
     private SearchScenes Search;//조사 관련
-
+    private Help HelpUI;//도움말 관련
     private Background Background;//배경 관련
     private EffectManager Effect;//이펙트 관련
     private CharacterKid Kid;//아이 이미지
@@ -28,10 +29,11 @@ public class Chat_controller : MonoBehaviour
     {
         chapter = CSVfileReader.Read("scenario");
 
+        HelpUI = GameObject.Find("Helps").GetComponent<Help>();
         Background = GameObject.Find("BackGroundMain").GetComponent<Background>();
         Effect = GameObject.Find("Effect").GetComponent<EffectManager>();
-        Kid = GameObject.Find("kidStanding").GetComponent<CharacterKid>();
-        Boy = GameObject.Find("boyStanding").GetComponent<CharacterBoy>();
+        Kid = GameObject.Find("Standing").transform.GetChild(0).GetComponent<CharacterKid>();
+        Boy = GameObject.Find("Standing").transform.GetChild(1).GetComponent<CharacterBoy>();
         Search = GameObject.Find("SearchController").GetComponent<SearchScenes>();
 
         StartCoroutine(Texting());
@@ -69,22 +71,33 @@ public class Chat_controller : MonoBehaviour
             if (NextChapter == true) break;//챕터 넘기기 용
             Debug.Log(i);
             //기본 이미지 novel로 시작
-            if (i == 0) Effect.LightOff();
-            if (i == 1) Manu.SetActive(false);
+            if (i == 0)
+            {
+                Manu.SetActive(false);
+                Effect.LightOff();
+            }
             if (i == 2) Effect.FadeIn();
             if (i == 5) Effect.LightOff();
             if (i == 6)
             {
-                Manu.SetActive(true);
                 Background.ChangeToLibrary();
                 Effect.FadeIn();
             }
-            
+            if (i == 7)
+            {
+                HelpUI.HelpImageOn();
+            }
+            if (i == 8)
+            {
+                Manu.SetActive(true);
+                Background.ChangeToLibrary();
+            }
+
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c1"].ToString(), chapter[Line]["sc1"].ToString()));
         }
 
-        for (int i = 0; i< 49; i++)//1챕터 + 프롤로그 초반
+        for (int i = 0; i< 50; i++)//1챕터 + 프롤로그 초반
         {
             if (NextChapter == true) break;
             Debug.Log(i);
@@ -161,9 +174,9 @@ public class Chat_controller : MonoBehaviour
             if(i == 48)
             {
                 Boy.ChangeToBasicDownArm(Boy.GetSpriteView());
-                Effect.LightOff();
+                
             }
-            if (i == 49) Boy.ChangeToNoting(Boy.GetSpriteView());
+            if (i == 49) Effect.LightOff();
 
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c1"].ToString(), chapter[Line]["sc1"].ToString()));
@@ -173,7 +186,7 @@ public class Chat_controller : MonoBehaviour
 
         Line = -1;
         chapter = CSVfileReader.Read("scenario_2");
-        for (int i = 0; i<84; i++)//2챕터
+        for (int i = 0; i<92; i++)//2챕터
         {
             if (NextChapter == true) break;
             Debug.Log(i);
@@ -248,13 +261,58 @@ public class Chat_controller : MonoBehaviour
             }
             if(i == 53)
             {
-                //도움말
+                HelpPanel.SetActive(true);
                 //아이 코드 사라짐
             }
             if (i == 55) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
             if (i == 57) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
-            if (i == 59) Camera.transform.position = new Vector3(25, 0, -10);//별장 탐색
-
+            if (i == 59)
+            {
+                Search.ChapterTwoHalfEnter();
+                Camera.transform.position = new Vector3(25, 0, -10);//별장 탐색
+                Boy.ChangeToNoting(Boy.GetSpriteView());
+                Background.ChangeToBedroom();
+            }
+            if (i == 60) Effect.Flash();
+            if (i == 61)
+            {
+                HelpUI.ChangeText();
+                HelpPanel.SetActive(true);
+            }
+            if (i == 63) Kid.ChangeToBasicUpArm(Kid.GetSpriteView());
+            if (i == 64) Kid.ChangeToNoting(Kid.GetSpriteView());
+            if (i == 65)//손목 클로즈업 배경
+            if (i == 67) Kid.ChangeToCrossDownArm(Kid.GetSpriteView());
+            if (i == 69) Kid.ChangeToNoting(Kid.GetSpriteView());
+            if (i == 76)
+            {
+                Search.ChapterTwoLastEnter();
+                Camera.transform.position = new Vector3(25, 0, -10);
+            }
+            if (i == 77) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
+            if (i == 78) Boy.ChangeToBasicUpArm(Boy.GetSpriteView());
+            if (i == 80) Boy.ChangeToNoting(Boy.GetSpriteView());
+            if (i == 81) Background.ChangeToCabinet();
+            if (i == 82) Background.ChangeToCabinetOpen();
+            if (i == 85) 
+            {
+                Effect.LightOff();
+                Manu.SetActive(false);
+                Background.ChangeToCabinet();
+            }
+            if (i == 86) Effect.FadeIn();
+            if (i == 88) Background.ChangeToCabinetOpen();
+            //if (i == 89) [캐비닛 앞, 칼에 이미 피가 묻어있는 장면] -> 작업중(흑백)
+            if (i == 90)
+            {
+                Background.ChangeToBedroom();
+                Kid.ChangeToCrossDownArm(Kid.GetSpriteView());
+            }
+            if (i == 91)
+            {
+                Kid.ChangeToNoting(Kid.GetSpriteView());
+                Effect.FadeOut();
+            }
             yield return StartCoroutine(Next());
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c2"].ToString(), chapter[Line]["sc2"].ToString()));
         }
