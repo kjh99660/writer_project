@@ -19,7 +19,13 @@ public class SearchScenes : MonoBehaviour
     private Text NameS2Up;
     [SerializeField]
     private Text TextS2Up;
-    
+    [SerializeField]
+    private GameObject UpText;
+    [SerializeField]
+    private GameObject MiddleText;
+    [SerializeField]
+    private GameObject DownText;
+
     private bool Click = true;
     private int Line = -1;
     private GameObject Camera;
@@ -115,7 +121,7 @@ public class SearchScenes : MonoBehaviour
         {
             writertext += narration[i];
             text.text = writertext;
-            yield return NextLetter;//null
+            yield return null;
         }
     }
     IEnumerator Next()
@@ -145,101 +151,136 @@ public class SearchScenes : MonoBehaviour
     //챕터 1 조사 내용
     IEnumerator Willow()//버드나무
     {
+        MiddleText.SetActive(true);
         LakeButton.interactable = false;
         LandButton.interactable = false;
         yield return StartCoroutine(Texting(chapter1, 0, 1, NameS2, TextS2));
         LakeButton.interactable = true;
         LandButton.interactable = true;
         chapter1Check[0] = 1;
+        MiddleText.SetActive(false);
     }
     IEnumerator Lake()
     {
+        MiddleText.SetActive(true);
         WillowButton.interactable = false;
         LandButton.interactable = false;
         yield return StartCoroutine(Texting(chapter1, 2, 1, NameS2, TextS2));
         WillowButton.interactable = true;
         LandButton.interactable = true;
         chapter1Check[1] = 1;
+        MiddleText.SetActive(false);
     }
     IEnumerator Land()
     {
+        MiddleText.SetActive(true);
         LakeButton.interactable = false;
         WillowButton.interactable = false;
         yield return StartCoroutine(Texting(chapter1, 3, 1, NameS2, TextS2));
         LakeButton.interactable = true;
         WillowButton.interactable = true;
         chapter1Check[2] = 1;
+        MiddleText.SetActive(false);
     }
     
     //챕터 1 두번째 조사 내용
     IEnumerator Branch()
     {
+        MiddleText.SetActive(true);
         yield return StartCoroutine(Texting(chapter1, 5, 1, NameS2, TextS2));
         Camera.transform.position = new Vector3(0, 0, -10);
+        MiddleText.SetActive(false);
     }
     IEnumerator NotUse()
     {
+        MiddleText.SetActive(true);
         yield return StartCoroutine(Texting(chapter1, 6, 1, NameS2, TextS2));
+        MiddleText.SetActive(false);
     }
     //챕터 2 조사 내용
     IEnumerator Coat()
     {
+        MiddleText.SetActive(true);
         yield return StartCoroutine(Texting(chapter2, 3, 1, NameS2, TextS2));
         Camera.transform.position = new Vector3(0, 0, -10);
+        MiddleText.SetActive(false);
     }
     IEnumerator Cup()
     {
+        MiddleText.SetActive(true);
         yield return StartCoroutine(Texting(chapter2, 2, 1, NameS2, TextS2));
+        MiddleText.SetActive(false);
     }
     IEnumerator Frame()
     {
+        MiddleText.SetActive(true);
         yield return StartCoroutine(Texting(chapter2, 1, 1, NameS2, TextS2));
+        MiddleText.SetActive(false);
     }
     IEnumerator FirePlace()
     {
+        MiddleText.SetActive(true);
         yield return StartCoroutine(Texting(chapter2, 0, 1, NameS2, TextS2));
+        MiddleText.SetActive(false);
     }
     IEnumerator Noting()
     {
+        MiddleText.SetActive(true);
         yield return StartCoroutine(Texting(chapter2, 4, 1, NameS2, TextS2));
+        MiddleText.SetActive(false);
     }
     IEnumerator GasRange()
     {
+        UpText.SetActive(true);
         yield return StartCoroutine(Texting(chapter2, 5, 1, NameS2Up, TextS2Up));
+        UpText.SetActive(false);
     }
     IEnumerator Sink()
     {
+        UpText.SetActive(true);
         yield return StartCoroutine(Texting(chapter2, 6, 1, NameS2Up, TextS2Up));
+        UpText.SetActive(false);
     }
     IEnumerator CupBoard()
     {
+        UpText.SetActive(true);
         if (ChapterTwoLast) yield return StartCoroutine(Texting(chapter2, 16, 1, NameS2Up, TextS2Up));
         else yield return StartCoroutine(Texting(chapter2, 7, 1, NameS2Up, TextS2Up));
+        UpText.SetActive(false);
     }
     IEnumerator TableAndChair()
     {
+        UpText.SetActive(true);
         yield return StartCoroutine(Texting(chapter2, 8, 1, NameS2Up, TextS2Up));
+        UpText.SetActive(false);
     }
     IEnumerator Cabinet()
     {
+        DownText.SetActive(true);
         if (ChapterTwoLast)
         {
             yield return StartCoroutine(Texting(chapter2, 19, 1, NameS2Down, TextS2Down));
             Camera.transform.position = new Vector3(0, 0, -10);
         }
         else yield return StartCoroutine(Texting(chapter2, 9, 1, NameS2Down, TextS2Down));
+        DownText.SetActive(false);
     }
     IEnumerator Drawer()
     {
+        DownText.SetActive(true);
         yield return StartCoroutine(Texting(chapter2, 10, 1, NameS2Down, TextS2Down));
+        DownText.SetActive(false);
     }
     IEnumerator SleepingBag()
     {
+        DownText.SetActive(true);
         if (ChapterTwoLast) yield return StartCoroutine(Texting(chapter2, 17, 2, NameS2Down, TextS2Down));
         else yield return StartCoroutine(Texting(chapter2, 11, 1, NameS2Down, TextS2Down));
+        DownText.SetActive(false);
     }   
     IEnumerator BedHead()
     {
+        DownText.SetActive(true);
         CabinetButton.interactable = false;
         DrawerButton.interactable = false;
         SleepingBagButton.interactable = false;
@@ -248,19 +289,29 @@ public class SearchScenes : MonoBehaviour
         DrawerButton.interactable = true;
         SleepingBagButton.interactable = true;
         Camera.transform.position = new Vector3(0, 0, -10);
+        DownText.SetActive(false);
     }
     IEnumerator Nothing(List<Dictionary<string, object>> TextFile, Text name, Text text, int Line)
     {
+        UpText.SetActive(true);
+        MiddleText.SetActive(true);
+        DownText.SetActive(true);
         yield return StartCoroutine(Texting(TextFile, Line, 1, name, text));
+        UpText.SetActive(false);
+        MiddleText.SetActive(false);
+        DownText.SetActive(false);
     }
     //챕터 3 조사 내용
     IEnumerator Watch()
     {
+        DownText.SetActive(true);
         yield return StartCoroutine(Texting(chapter3, 5, 1, NameS2Down, TextS2Down));
         chapter3Check[0] = 1;
+        DownText.SetActive(false);
     }
     IEnumerator Blanket()//+스티커
     {
+        MiddleText.SetActive(true);
         CoatButton.interactable = false;
         FirePlaceButton.interactable = false;
         FrameButton.interactable = false;
@@ -271,6 +322,7 @@ public class SearchScenes : MonoBehaviour
         FrameButton.interactable = true;
         CupButton.interactable = true;
         chapter3Check[1] = 1;
+        MiddleText.SetActive(false);
     }
     //조사 변경 함수
     public void ChapterOneEnter()
@@ -288,6 +340,7 @@ public class SearchScenes : MonoBehaviour
         //배경 활성화 -> 챗 컨트롤러
         chapter2 = CSVfileReader.Read("search_2");
         TurnChapterOneItem(false);
+        BranchButton.gameObject.SetActive(false);
         TurnChapterTwoItem(true);
     }
     public void ChapterTwoHalfEnter()
