@@ -71,7 +71,7 @@ public class EffectManager : MonoBehaviour
             WhiteOutColor.a -= speed;
             WhiteEffect.color = WhiteOutColor;
             yield return WaitTime;
-        }      
+        }
     }
 
     IEnumerator FadeCouroutine()

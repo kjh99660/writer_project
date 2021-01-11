@@ -31,6 +31,7 @@ public class SearchScenes : MonoBehaviour
     private GameObject Camera;
     //private Background BackGround;//배경 관련
     private EffectManager Effect;//이펙트 관련
+    private Ingame_setting Ingame_Setting;//인 게임 세팅 변화
     private List<Dictionary<string, object>> chapter3;
     private List<Dictionary<string, object>> chapter2;
     private List<Dictionary<string, object>> chapter1;
@@ -81,6 +82,7 @@ public class SearchScenes : MonoBehaviour
         chapter1 = CSVfileReader.Read("search_1");
         //BackGround = GameObject.Find("BackGroundSearch").GetComponent<Background>();
         Effect = GameObject.Find("Effect").GetComponent<EffectManager>();
+        Ingame_Setting = GameObject.Find("Canvas").transform.Find("Setting").GetComponent<Ingame_setting>();
 
         Chapter1Object = GameObject.Find("Chapter1Object");
         Chapter2Object = GameObject.Find("Chapter2Object");
@@ -261,6 +263,7 @@ public class SearchScenes : MonoBehaviour
         {
             yield return StartCoroutine(Texting(chapter2, 19, 1, NameS2Down, TextS2Down));
             Camera.transform.position = new Vector3(0, 0, -10);
+            //Ingame_Setting.GetClue();
         }
         else yield return StartCoroutine(Texting(chapter2, 9, 1, NameS2Down, TextS2Down));
         DownText.SetActive(false);
@@ -306,6 +309,8 @@ public class SearchScenes : MonoBehaviour
     {
         DownText.SetActive(true);
         yield return StartCoroutine(Texting(chapter3, 5, 1, NameS2Down, TextS2Down));
+        Effect.Flash();
+        Ingame_Setting.GetClue(0);//시계
         chapter3Check[0] = 1;
         DownText.SetActive(false);
     }
@@ -316,7 +321,20 @@ public class SearchScenes : MonoBehaviour
         FirePlaceButton.interactable = false;
         FrameButton.interactable = false;
         CupButton.interactable = false;
-        yield return StartCoroutine(Texting(chapter3, 0, 5, NameS2, TextS2));
+
+        NameS2.gameObject.SetActive(true);
+        TextS2.gameObject.SetActive(true);
+        Line = 0;
+        for (int i = 0; i < 5; i++)
+        {
+            if (i == 3) Effect.Flash();
+            yield return StartCoroutine(Chatting(NameS2, TextS2, chapter3[Line]["search1"].ToString(), chapter3[Line]["search2"].ToString()));
+            yield return StartCoroutine(Next());
+        }
+        NameS2.gameObject.SetActive(false);
+        TextS2.gameObject.SetActive(false);
+
+        Ingame_Setting.GetClue(1);//스티커
         CoatButton.interactable = true;
         FirePlaceButton.interactable = true;
         FrameButton.interactable = true;

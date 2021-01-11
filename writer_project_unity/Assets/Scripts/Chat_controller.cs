@@ -22,7 +22,7 @@ public class Chat_controller : MonoBehaviour
     private Background Background;//배경 관련
     private EffectManager Effect;//이펙트 관련
     private CharacterKid Kid;//아이 이미지
-    private CharacterBoy Boy;//소년 이미지
+    private CharacterBoy Boy;//소년 이미지    
 
     private readonly WaitForSeconds NextLetter = new WaitForSeconds(0.04f);
     void Start()
@@ -255,10 +255,7 @@ public class Chat_controller : MonoBehaviour
             {
                 //CG
             }
-            if(i == 52)
-            {
-                Effect.Flash();
-            }
+            if(i == 52) Effect.Flash();
             if(i == 53)
             {
                 HelpPanel.SetActive(true);

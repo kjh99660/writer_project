@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-
+using UnityEngine.UI;
 
 public class Ingame_setting : MonoBehaviour
 {
     // Start is called before the first frame update
+
     public GameObject Camera;
     public GameObject Setting_panel;
     public GameObject soundPanel;
@@ -24,7 +25,10 @@ public class Ingame_setting : MonoBehaviour
     private bool isClose = true;
 
     private ChatUI TextBox;
-    private readonly GameObject[] Buttons = { null, null, null, null, null, null };
+    private readonly GameObject[] Buttons = new GameObject[6] { null, null, null, null, null, null};
+    private readonly GameObject[] CluePhotos = new GameObject[8] {null, null, null, null, null, null, null, null};
+    [SerializeField]
+    private Sprite[] Sprites = new Sprite[8];
 
     void Start()
     { 
@@ -33,10 +37,10 @@ public class Ingame_setting : MonoBehaviour
         targetPos.x -= 2.3f;
         Menu_Arrow = MenuArrow.GetComponent<SpriteRenderer>();
         TextBox = GameObject.Find("HideButton(ChatUI1)").GetComponent<ChatUI>();
-        for (int i = 0; i < 6; i++)
-        {
-            Buttons[i] = Setting_panel.transform.GetChild(i).gameObject;
-        }
+        for (int i = 0; i < 6; i++) Buttons[i] = Setting_panel.transform.GetChild(i).gameObject;
+        for (int i = 0; i < 8; i++) CluePhotos[i] = GameObject.Find("Canvas").transform.Find("caseFile").transform.
+                Find("Clue").transform.Find("CaseFilePhotos").GetChild(i).gameObject;//8로 수정 해야함
+
     }
 
     public void Panel_onoff()
@@ -59,17 +63,11 @@ public class Ingame_setting : MonoBehaviour
     }
     public void ButtonOff()
     {
-        for (int i = 0; i < 6; i++)
-        {
-            Buttons[i].SetActive(false);
-        }
+        for (int i = 0; i < 6; i++) Buttons[i].GetComponent<Button>().interactable = false;
     }
     public void ButtonOn()
     {
-        for (int i = 0; i < 6; i++)
-        {
-            Buttons[i].SetActive(true);
-        }
+        for (int i = 0; i < 6; i++) Buttons[i].GetComponent<Button>().interactable = true;
     }
 
 
@@ -86,7 +84,6 @@ public class Ingame_setting : MonoBehaviour
     {
         CaseFile.SetActive(false);
         Setting_panel.SetActive(true);
-
     }
     public void Case_fileSuspect()//용의자 버튼
     {
@@ -100,11 +97,16 @@ public class Ingame_setting : MonoBehaviour
     }
     public void ClueClick()//증거 클릭
     {
-        EventSystem.current.currentSelectedGameObject.transform.GetChild(2).gameObject.SetActive(true);
+        EventSystem.current.currentSelectedGameObject.transform.GetChild(1).gameObject.SetActive(true);
     }
     public void ClueCancel()//증거 닫기
     {
         EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.SetActive(false);
+    }
+    public void GetClue(int ClueNumber)//증거 찾음
+    {
+        CluePhotos[ClueNumber].transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Sprites[ClueNumber];
+        CluePhotos[ClueNumber].GetComponent<Button>().interactable = true;    
     }
 
     /**********************************************/
