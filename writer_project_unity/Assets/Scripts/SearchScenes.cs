@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SearchScenes : MonoBehaviour
+public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하지 말것
 {
     // Start is called before the first frame update
     [SerializeField]   
@@ -29,6 +29,7 @@ public class SearchScenes : MonoBehaviour
     private bool Click = true;
     private int Line = -1;
     private GameObject Camera;
+    private Help Help;
     //private Background BackGround;//배경 관련
     private EffectManager Effect;//이펙트 관련
     private Ingame_setting Ingame_Setting;//인 게임 세팅 변화
@@ -82,6 +83,7 @@ public class SearchScenes : MonoBehaviour
         chapter1 = CSVfileReader.Read("search_1");
         //BackGround = GameObject.Find("BackGroundSearch").GetComponent<Background>();
         Effect = GameObject.Find("Effect").GetComponent<EffectManager>();
+        Help = GameObject.Find("Helps").GetComponent<Help>();
         Ingame_Setting = GameObject.Find("Canvas").transform.Find("Setting").GetComponent<Ingame_setting>();
 
         Chapter1Object = GameObject.Find("Chapter1Object");
@@ -281,13 +283,14 @@ public class SearchScenes : MonoBehaviour
         else yield return StartCoroutine(Texting(chapter2, 11, 1, NameS2Down, TextS2Down));
         DownText.SetActive(false);
     }   
-    IEnumerator BedHead()
+    IEnumerator BedHead()//증거물품
     {
         DownText.SetActive(true);
         CabinetButton.interactable = false;
         DrawerButton.interactable = false;
         SleepingBagButton.interactable = false;
         yield return StartCoroutine(Texting(chapter2, 12, 4, NameS2Down, TextS2Down));
+
         CabinetButton.interactable = true;
         DrawerButton.interactable = true;
         SleepingBagButton.interactable = true;
@@ -305,16 +308,24 @@ public class SearchScenes : MonoBehaviour
         DownText.SetActive(false);
     }
     //챕터 3 조사 내용
-    IEnumerator Watch()
+    IEnumerator Watch()//증거물품
     {
         DownText.SetActive(true);
         yield return StartCoroutine(Texting(chapter3, 5, 1, NameS2Down, TextS2Down));
         Effect.Flash();
         Ingame_Setting.GetClue(0);//시계
+        Help.ChangeText(2);
+        Help.ImformationPanelOnOff();
+        NameS2Down.gameObject.SetActive(true);
+        TextS2Down.gameObject.SetActive(true);
+        yield return StartCoroutine(Next());
+        NameS2Down.gameObject.SetActive(false);
+        TextS2Down.gameObject.SetActive(false);
+        Help.ImformationPanelOnOff();
         chapter3Check[0] = 1;
         DownText.SetActive(false);
     }
-    IEnumerator Blanket()//+스티커
+    IEnumerator Blanket()//+스티커 (증거물품)
     {
         MiddleText.SetActive(true);
         CoatButton.interactable = false;
@@ -328,9 +339,16 @@ public class SearchScenes : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             if (i == 3) Effect.Flash();
+            if (i == 4)
+            {
+                Help.ChangeText(1);
+                Help.ImformationPanelOnOff();
+            }
             yield return StartCoroutine(Chatting(NameS2, TextS2, chapter3[Line]["search1"].ToString(), chapter3[Line]["search2"].ToString()));
             yield return StartCoroutine(Next());
         }
+        Help.ImformationPanelOnOff();
+        //getclue 넣어야함
         NameS2.gameObject.SetActive(false);
         TextS2.gameObject.SetActive(false);
 

@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class ChatUI : MonoBehaviour
@@ -8,9 +10,12 @@ public class ChatUI : MonoBehaviour
     private Vector3 targetPos;
 
     public GameObject textUI;
+    public GameObject Manu;
+    public GameObject UIOn;
 
-    private bool isClose = false;
-
+    
+    [SerializeField]
+    private bool IsClose { get; set; } = false;
 
     void Start()
     {
@@ -18,25 +23,27 @@ public class ChatUI : MonoBehaviour
         targetPos = textUI.transform.position;
         targetPos.y -= 3.9f;
     }
-    public void Changeform()
+    public void Changeform()//false => 열기
     {
-        Debug.Log("changeform");
-        if (isClose) isClose = false;
-        else isClose = true;
+        //무조건 누르면 닫아야함
+        IsClose = true;
+        Manu.SetActive(false);
+        UIOn.SetActive(true);
+        Debug.Log(IsClose);
     }
-    public bool ReturnisClose()
+    public bool GetIsClose() => IsClose;
+    public void SetISClose(bool ISClose)
     {
-        return isClose;
+        this.IsClose = ISClose;
     }
-
     void Update()
     {
-        if(isClose)
+        if(IsClose)
         {
             Vector3 velo = Vector3.zero;
             textUI.transform.position = Vector3.SmoothDamp(textUI.transform.position, targetPos, ref velo, 0.05f);
         }
-        else
+        else//열기
         {
             Vector3 velo = Vector3.zero;
             textUI.transform.position = Vector3.SmoothDamp(textUI.transform.position, startPos, ref velo, 0.05f);

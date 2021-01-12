@@ -10,7 +10,7 @@ public class Ingame_setting : MonoBehaviour
     public GameObject Camera;
     public GameObject Setting_panel;
     public GameObject soundPanel;
-
+    public GameObject UIOn;
     public GameObject CaseFile;
     public GameObject Clue;
     public GameObject Suspect;
@@ -49,7 +49,7 @@ public class Ingame_setting : MonoBehaviour
         {
             isClose = false;
             Menu_Arrow.flipX = true;
-            if (!TextBox.ReturnisClose()) TextBox.Changeform();
+            if (!TextBox.GetIsClose()) TextBox.SetISClose(true);
             ButtonOn();
 
         }
@@ -73,6 +73,14 @@ public class Ingame_setting : MonoBehaviour
 
 
     //인게임에서 사용
+    public void UIOnButton()
+    {
+        TextBox.SetISClose(false);//열기
+        Panel_onoff();
+        this.gameObject.SetActive(true);//다시 만들기
+        UIOn.SetActive(false);
+        Debug.Log("UION");
+    }
     public void Case_file()//사건 파일 열기
     {
         CaseFile.SetActive(true);
