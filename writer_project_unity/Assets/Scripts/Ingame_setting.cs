@@ -39,7 +39,7 @@ public class Ingame_setting : MonoBehaviour
         TextBox = GameObject.Find("HideButton(ChatUI1)").GetComponent<ChatUI>();
         for (int i = 0; i < 6; i++) Buttons[i] = Setting_panel.transform.GetChild(i).gameObject;
         for (int i = 0; i < 8; i++) CluePhotos[i] = GameObject.Find("Canvas").transform.Find("caseFile").transform.
-                Find("Clue").transform.Find("CaseFilePhotos").GetChild(i).gameObject;//8로 수정 해야함
+        Find("Clue").transform.Find("CaseFilePhotos").GetChild(i).gameObject;//8로 수정 해야함
 
     }
 
@@ -49,7 +49,7 @@ public class Ingame_setting : MonoBehaviour
         {
             isClose = false;
             Menu_Arrow.flipX = true;
-            if (!TextBox.GetIsClose()) TextBox.SetISClose(true);
+            TextBox.SetISClose(true);
             ButtonOn();
 
         }
@@ -58,6 +58,7 @@ public class Ingame_setting : MonoBehaviour
             isClose = true;
             Menu_Arrow.flipX = false;
             ButtonOff();
+            TextBox.SetISClose(false);
         }
 
     }
