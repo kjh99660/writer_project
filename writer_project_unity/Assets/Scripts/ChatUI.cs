@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChatUI : MonoBehaviour
 {
@@ -10,12 +11,14 @@ public class ChatUI : MonoBehaviour
     private Vector3 targetPos;
 
     public GameObject textUI;
+    public Text CenterText;
     public GameObject Manu;
     public GameObject UIOn;
 
-    
+
     [SerializeField]
     private bool IsClose { get; set; } = false;
+    private readonly string[] TextCenter = new string[] { " ","<프롤로그>","<1장.만남>", "<2장. 오래된 별장>", "<3장. 조사>" };
 
     void Start()
     {
@@ -23,6 +26,7 @@ public class ChatUI : MonoBehaviour
         targetPos = textUI.transform.position;
         targetPos.y -= 3.9f;
     }
+    public void CenterTextChange(int chapter) => CenterText.text = TextCenter[chapter];
     public void Changeform()//false => 열기
     {
         //무조건 누르면 닫아야함
