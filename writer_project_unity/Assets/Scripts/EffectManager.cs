@@ -15,6 +15,7 @@ public class EffectManager : MonoBehaviour
 
     public void LightOff()//암전
     {
+        BlackEffect.gameObject.SetActive(true);
         BlackEffect.color = lightOff;
     }
     public void FadeOut(float speed = 0.02f)//어두워짐
@@ -34,6 +35,7 @@ public class EffectManager : MonoBehaviour
     }
     IEnumerator FadeOutCouroutine(float speed)
     {
+        BlackEffect.gameObject.SetActive(true);
         BlackOutColor = BlackEffect.color;
 
         while (BlackEffect.color.a < 1f)
@@ -54,10 +56,12 @@ public class EffectManager : MonoBehaviour
             BlackEffect.color = BlackOutColor;
             yield return WaitTime;
         }
+        BlackEffect.gameObject.SetActive(false);
 
     }
     IEnumerator FlashCouroutine(float speed)
     {
+        WhiteEffect.gameObject.SetActive(true);
         WhiteOutColor = WhiteEffect.color;
 
         while (WhiteEffect.color.a < 0.25f)
@@ -72,6 +76,7 @@ public class EffectManager : MonoBehaviour
             WhiteEffect.color = WhiteOutColor;
             yield return WaitTime;
         }
+        WhiteEffect.gameObject.SetActive(false);
     }
 
     IEnumerator FadeCouroutine()

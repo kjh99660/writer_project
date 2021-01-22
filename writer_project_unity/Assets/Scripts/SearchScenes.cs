@@ -37,7 +37,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     private List<Dictionary<string, object>> chapter2;
     private List<Dictionary<string, object>> chapter1;
 
-    private int[] chapter3Check = new int[2] { 0, 0 };
+    private int[] chapter3Check = new int[3] { 0, 0, 0 };
     private int[] chapter1Check = new int[3] { 0, 0, 0 };
     private bool ChapterOneHalf = false;
     private bool ChapterTwoHalf = false;
@@ -51,6 +51,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     //조사 물품
     private Button WatchButton;
     private Button BlanketButton;
+    private Button TowelButton;
 
     private Button LakeButton;
     private Button LandButton;
@@ -90,8 +91,9 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         Chapter2Object = GameObject.Find("Chapter2Object");
         Chapter3Object = GameObject.Find("Chapter3Object");
 
-        WatchButton = Chapter3Object.transform.GetChild(1).GetComponent<Button>();
         BlanketButton = Chapter3Object.transform.GetChild(0).GetComponent<Button>();
+        WatchButton = Chapter3Object.transform.GetChild(1).GetComponent<Button>();
+        TowelButton = Chapter3Object.transform.GetChild(2).GetComponent<Button>();
 
         FirePlaceButton = Chapter2Object.transform.GetChild(0).GetComponent<Button>();
         FrameButton = Chapter2Object.transform.GetChild(1).GetComponent<Button>();
@@ -308,56 +310,88 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         DownText.SetActive(false);
     }
     //챕터 3 조사 내용
+    IEnumerator Towel()
+    {
+        DownText.SetActive(true);
+        if(chapter3Check[2] == 1)
+        {
+            yield return StartCoroutine(Texting(chapter3, 16, 1, NameS2Down, TextS2Down));
+        }
+        else
+        {
+            yield return StartCoroutine(Texting(chapter3, 11, 2, NameS2Down, TextS2Down));
+            Effect.Flash();
+            yield return StartCoroutine(Texting(chapter3, 13, 3, NameS2Down, TextS2Down));
+            Help.ChangeText(3);
+            Help.ImformationPanelOnOff(true);
+            chapter3Check[2] = 1;
+        }
+        DownText.SetActive(false);
+        yield return new WaitForSeconds(1.5f);
+        Help.ImformationPanelOnOff(false);
+    }
     IEnumerator Watch()//증거물품
     {
         DownText.SetActive(true);
-        yield return StartCoroutine(Texting(chapter3, 5, 1, NameS2Down, TextS2Down));
-        Effect.Flash();
-        Ingame_Setting.GetClue(0);//시계
-        Help.ChangeText(2);
-        Help.ImformationPanelOnOff();
-        NameS2Down.gameObject.SetActive(true);
-        TextS2Down.gameObject.SetActive(true);
-        yield return StartCoroutine(Next());
-        NameS2Down.gameObject.SetActive(false);
-        TextS2Down.gameObject.SetActive(false);
-        Help.ImformationPanelOnOff();
-        chapter3Check[0] = 1;
+        if (chapter3Check[0] == 1)
+        {
+            yield return StartCoroutine(Texting(chapter3, 16, 1, NameS2Down, TextS2Down));
+        }
+        else 
+        {          
+            yield return StartCoroutine(Texting(chapter3, 5, 3, NameS2Down, TextS2Down));
+            Effect.Flash();
+            Ingame_Setting.GetClue(0);//시계
+            Help.ChangeText(2);
+            Help.ImformationPanelOnOff(true);
+            yield return StartCoroutine(Texting(chapter3, 8, 1, NameS2Down, TextS2Down));
+            NameS2Down.gameObject.SetActive(true);
+            TextS2Down.gameObject.SetActive(true);
+            yield return StartCoroutine(Next());
+            NameS2Down.gameObject.SetActive(false);
+            TextS2Down.gameObject.SetActive(false);
+            Help.ImformationPanelOnOff(false);
+            chapter3Check[0] = 1;           
+        }
         DownText.SetActive(false);
     }
     IEnumerator Blanket()//+스티커 (증거물품)
     {
         MiddleText.SetActive(true);
-        CoatButton.interactable = false;
-        FirePlaceButton.interactable = false;
-        FrameButton.interactable = false;
-        CupButton.interactable = false;
-
-        NameS2.gameObject.SetActive(true);
-        TextS2.gameObject.SetActive(true);
-        Line = 0;
-        for (int i = 0; i < 5; i++)
+        if(chapter3Check[1] == 1)
         {
-            if (i == 3) Effect.Flash();
-            if (i == 4)
-            {
-                Help.ChangeText(1);
-                Help.ImformationPanelOnOff();
-            }
-            yield return StartCoroutine(Chatting(NameS2, TextS2, chapter3[Line]["search1"].ToString(), chapter3[Line]["search2"].ToString()));
-            yield return StartCoroutine(Next());
+            yield return StartCoroutine(Texting(chapter3, 16, 1, NameS2, TextS2));
         }
-        Help.ImformationPanelOnOff();
-        //getclue 넣어야함
-        NameS2.gameObject.SetActive(false);
-        TextS2.gameObject.SetActive(false);
-
-        Ingame_Setting.GetClue(1);//스티커
-        CoatButton.interactable = true;
-        FirePlaceButton.interactable = true;
-        FrameButton.interactable = true;
-        CupButton.interactable = true;
-        chapter3Check[1] = 1;
+        else
+        {
+            CoatButton.interactable = false;
+            FirePlaceButton.interactable = false;
+            FrameButton.interactable = false;
+            CupButton.interactable = false;
+            NameS2.gameObject.SetActive(true);
+            TextS2.gameObject.SetActive(true);
+            Line = 0;
+            for (int i = 0; i < 5; i++)
+            {
+                if (i == 3) Effect.Flash();
+                if (i == 4)
+                {
+                    Help.ChangeText(1);
+                    Help.ImformationPanelOnOff(true);
+                }
+                yield return StartCoroutine(Chatting(NameS2, TextS2, chapter3[Line]["search1"].ToString(), chapter3[Line]["search2"].ToString()));
+                yield return StartCoroutine(Next());
+            }
+            Help.ImformationPanelOnOff(false);
+            NameS2.gameObject.SetActive(false);
+            TextS2.gameObject.SetActive(false);
+            Ingame_Setting.GetClue(1);//스티커
+            CoatButton.interactable = true;
+            FirePlaceButton.interactable = true;
+            FrameButton.interactable = true;
+            CupButton.interactable = true;
+            chapter3Check[1] = 1;            
+        }
         MiddleText.SetActive(false);
     }
     //조사 변경 함수
@@ -471,28 +505,28 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     {
         if (ChapterTwoHalf) StartCoroutine(Noting());//이미 조사한 것 같다.
         else if (ChapterTwoLast) StartCoroutine(Nothing(chapter2, NameS2, TextS2, 20));//2쳅터는 20라인에서 시작
-        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2, TextS2, 6));
+        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2, TextS2, 15));
         else StartCoroutine(Coat());
     }
     public void ClickCup()
     {
         if (ChapterTwoHalf) StartCoroutine(Noting());
         else if (ChapterTwoLast) StartCoroutine(Nothing(chapter2, NameS2, TextS2, 20));
-        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2, TextS2, 6));
+        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2, TextS2, 9));
         else StartCoroutine(Cup());
     }
     public void ClickFirePlace()
     {
         if (ChapterTwoHalf) StartCoroutine(Noting());
         else if (ChapterTwoLast) StartCoroutine(Nothing(chapter2, NameS2, TextS2, 20));
-        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2, TextS2, 6));
+        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2, TextS2, 9));
         else StartCoroutine(FirePlace());
     }
     public void ClickFrame()
     {
         if (ChapterTwoHalf) StartCoroutine(Noting());
         else if (ChapterTwoLast) StartCoroutine(Nothing(chapter2, NameS2, TextS2, 20));
-        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2, TextS2, 6));
+        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2, TextS2, 9));
         else StartCoroutine(Frame());
     }
     //[별장 주방] - 왼쪽
@@ -500,55 +534,57 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     {
         if (ChapterTwoHalf) StartCoroutine(GasRange());
         else if (ChapterTwoLast) StartCoroutine(Nothing(chapter2, NameS2Up, TextS2Up, 20));
-        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2Up, TextS2Up, 6));
+        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2Up, TextS2Up, 9));
     }
     public void ClickSink()
     {       
         if (ChapterTwoHalf) StartCoroutine(Sink());
         else if (ChapterTwoLast) StartCoroutine(Nothing(chapter2, NameS2Up, TextS2Up, 20));
-        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2Up, TextS2Up, 6));
+        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2Up, TextS2Up, 9));
     }
     public void ClickCupBoard()
     {
-        if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2Up, TextS2Up, 6));
+        if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2Up, TextS2Up, 9));
         else StartCoroutine(CupBoard());
     }
     public void ClickTableAndChair()
     {
         if (ChapterTwoHalf) StartCoroutine(TableAndChair());
         else if (ChapterTwoLast) StartCoroutine(Nothing(chapter2, NameS2Up, TextS2Up, 20));
-        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2Up, TextS2Up, 6));
+        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2Up, TextS2Up, 9));
     }
     public void ClickCabinet()
     {
-        if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2Down, TextS2Down, 6));
+        if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2Down, TextS2Down, 9));
         else StartCoroutine(Cabinet());
     }
     public void ClickDrawer()
     {
         if (ChapterTwoHalf) StartCoroutine(Drawer());
         else if (ChapterTwoLast) StartCoroutine(Nothing(chapter2, NameS2Down, TextS2Down, 20));
-        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2Down, TextS2Down, 6));
+        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2Down, TextS2Down, 9));
     }
     public void ClickSleepingBag()
     {
-        if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2Down, TextS2Down, 6));
+        if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2Down, TextS2Down, 9));
         else StartCoroutine(SleepingBag());
     }
     public void ClickBedHead()
     {
         if (ChapterTwoHalf) StartCoroutine(BedHead());
         else if (ChapterTwoLast) StartCoroutine(Nothing(chapter2, NameS2Down, TextS2Down, 20));
-        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2Down, TextS2Down, 6));
+        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2Down, TextS2Down, 9));
     }
     //챕터 3
     public void TurnChapterThreeItem(bool OnOff)
     {
         BlanketButton.gameObject.SetActive(OnOff);
         WatchButton.gameObject.SetActive(OnOff);
+        TowelButton.gameObject.SetActive(OnOff);
     }
     public void ClickBlanket() => StartCoroutine(Blanket());
     public void ClickWatch() => StartCoroutine(Watch());
+    public void ClickTowel() => StartCoroutine(Towel());
 
     //챕터 클리어 
     public void ChapterOneSearchClear()
