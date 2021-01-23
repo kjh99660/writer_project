@@ -14,6 +14,7 @@ public class Ingame_setting : MonoBehaviour
     public GameObject CaseFile;
     public GameObject Clue;
     public GameObject Suspect;
+    public GameObject SuspectButton;
 
     public GameObject MenuArrow;
 
@@ -38,7 +39,7 @@ public class Ingame_setting : MonoBehaviour
         Menu_Arrow = MenuArrow.GetComponent<SpriteRenderer>();
         TextBox = GameObject.Find("HideButton(ChatUI1)").GetComponent<ChatUI>();
         for (int i = 0; i < 6; i++) Buttons[i] = Setting_panel.transform.GetChild(i).gameObject;
-        for (int i = 0; i < 8; i++) CluePhotos[i] = GameObject.Find("Canvas").transform.Find("caseFile").transform.
+        for (int i = 0; i < 8; i++) CluePhotos[i] = GameObject.Find("Canvas").transform.Find("CaseFile").transform.
         Find("Clue").transform.Find("CaseFilePhotos").GetChild(i).gameObject;//8로 수정 해야함
 
     }
@@ -51,7 +52,6 @@ public class Ingame_setting : MonoBehaviour
             Menu_Arrow.flipX = true;
             TextBox.SetISClose(true);
             ButtonOn();
-
         }
         else//닫기
         {
@@ -60,7 +60,6 @@ public class Ingame_setting : MonoBehaviour
             ButtonOff();
             TextBox.SetISClose(false);
         }
-
     }
     public void ButtonOff()
     {
@@ -70,7 +69,6 @@ public class Ingame_setting : MonoBehaviour
     {
         for (int i = 0; i < 6; i++) Buttons[i].GetComponent<Button>().interactable = true;
     }
-
 
 
     //인게임에서 사용
@@ -103,7 +101,8 @@ public class Ingame_setting : MonoBehaviour
     {
         Clue.SetActive(true);
         Suspect.SetActive(false);
-    }
+    }    
+    public void ClearSuspectPart() => SuspectButton.SetActive(true);
     public void ClueClick()//증거 클릭
     {
         EventSystem.current.currentSelectedGameObject.transform.GetChild(1).gameObject.SetActive(true);

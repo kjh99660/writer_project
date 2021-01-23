@@ -30,7 +30,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     private int Line = -1;
     private GameObject Camera;
     private Help Help;
-    //private Background BackGround;//배경 관련
+    private Background BackGround;//배경 관련
     private EffectManager Effect;//이펙트 관련
     private Ingame_setting Ingame_Setting;//인 게임 세팅 변화
     private List<Dictionary<string, object>> chapter3;
@@ -82,7 +82,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     {
         Camera = GameObject.Find("Main Camera");
         chapter1 = CSVfileReader.Read("search_1");
-        //BackGround = GameObject.Find("BackGroundSearch").GetComponent<Background>();
+        BackGround = GameObject.Find("BackGroundMain").GetComponent<Background>();
         Effect = GameObject.Find("Effect").GetComponent<EffectManager>();
         Help = GameObject.Find("Helps").GetComponent<Help>();
         Ingame_Setting = GameObject.Find("Canvas").transform.Find("Setting").GetComponent<Ingame_setting>();
@@ -310,7 +310,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         DownText.SetActive(false);
     }
     //챕터 3 조사 내용
-    IEnumerator Towel()
+    IEnumerator Towel()//증거물품
     {
         DownText.SetActive(true);
         if(chapter3Check[2] == 1)
@@ -319,12 +319,14 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         }
         else
         {
+            TurnChapterTwoItem(false);
             yield return StartCoroutine(Texting(chapter3, 11, 2, NameS2Down, TextS2Down));
             Effect.Flash();
             yield return StartCoroutine(Texting(chapter3, 13, 3, NameS2Down, TextS2Down));
             Help.ChangeText(3);
             Help.ImformationPanelOnOff(true);
             chapter3Check[2] = 1;
+            TurnChapterTwoItem(true);
         }
         DownText.SetActive(false);
         yield return new WaitForSeconds(1.5f);
@@ -338,8 +340,11 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
             yield return StartCoroutine(Texting(chapter3, 16, 1, NameS2Down, TextS2Down));
         }
         else 
-        {          
+        {
+            TurnChapterTwoItem(false);
             yield return StartCoroutine(Texting(chapter3, 5, 3, NameS2Down, TextS2Down));
+
+            BackGround.ChangeToClueWatch(BackGround.spriteViewSearchRight);
             Effect.Flash();
             Ingame_Setting.GetClue(0);//시계
             Help.ChangeText(2);
@@ -351,7 +356,9 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
             NameS2Down.gameObject.SetActive(false);
             TextS2Down.gameObject.SetActive(false);
             Help.ImformationPanelOnOff(false);
-            chapter3Check[0] = 1;           
+            chapter3Check[0] = 1;
+            BackGround.ChangeToBedroom(BackGround.spriteViewSearchRight);
+            TurnChapterTwoItem(true);
         }
         DownText.SetActive(false);
     }
@@ -364,15 +371,11 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         }
         else
         {
-            CoatButton.interactable = false;
-            FirePlaceButton.interactable = false;
-            FrameButton.interactable = false;
-            CupButton.interactable = false;
-            NameS2.gameObject.SetActive(true);
-            TextS2.gameObject.SetActive(true);
+            TurnChapterTwoItem(false);
             Line = 0;
             for (int i = 0; i < 5; i++)
             {
+                if (i == 2) BackGround.ChangeToClueSticker(BackGround.spriteViewSearch);
                 if (i == 3) Effect.Flash();
                 if (i == 4)
                 {
@@ -383,14 +386,10 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
                 yield return StartCoroutine(Next());
             }
             Help.ImformationPanelOnOff(false);
-            NameS2.gameObject.SetActive(false);
-            TextS2.gameObject.SetActive(false);
             Ingame_Setting.GetClue(1);//스티커
-            CoatButton.interactable = true;
-            FirePlaceButton.interactable = true;
-            FrameButton.interactable = true;
-            CupButton.interactable = true;
-            chapter3Check[1] = 1;            
+            TurnChapterTwoItem(true);
+            chapter3Check[1] = 1;
+            BackGround.ChangeToFireplace(BackGround.spriteViewSearch);
         }
         MiddleText.SetActive(false);
     }
