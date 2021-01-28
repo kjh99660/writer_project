@@ -11,7 +11,7 @@ public class Chat_controller : MonoBehaviour
     public Text TextS1;
     public GameObject Camera;
     public GameObject Manu;
-    public GameObject HelpPanel;
+    public GameObject[] HelpPanel = new GameObject[2];
     private bool Click = true;
     private bool NextChapter = false;
     private int Line = 0;
@@ -24,7 +24,8 @@ public class Chat_controller : MonoBehaviour
     private EffectManager Effect;//이펙트 관련
     private PopUp PopUp;//팝업관련
     private CharacterKid Kid;//아이 이미지
-    private CharacterBoy Boy;//소년 이미지    
+    private CharacterBoy Boy;//소년 이미지  
+    private CharacterOther Character;//다른 등장인물 이미지
     private Ingame_setting IngameSetting;//인게임 UI기능 관련
 
     private readonly WaitForSeconds NextLetter = new WaitForSeconds(0.04f);
@@ -38,6 +39,7 @@ public class Chat_controller : MonoBehaviour
         Effect = GameObject.Find("Effect").GetComponent<EffectManager>();
         Kid = GameObject.Find("Standing").transform.GetChild(0).GetComponent<CharacterKid>();
         Boy = GameObject.Find("Standing").transform.GetChild(1).GetComponent<CharacterBoy>();
+        Character = GameObject.Find("Standing").transform.GetChild(2).GetComponent<CharacterOther>();
         Search = GameObject.Find("SearchController").GetComponent<SearchScenes>();
         PopUp = GameObject.Find("PopUp").GetComponent<PopUp>();
         IngameSetting = GameObject.Find("Canvas").transform.Find("Setting").GetComponent<Ingame_setting>();
@@ -276,7 +278,7 @@ public class Chat_controller : MonoBehaviour
             if(i == 63) Effect.Flash();
             if(i == 64)
             {
-                HelpPanel.SetActive(true);
+                HelpPanel[0].SetActive(true);
                 //아이 코트 사라짐
             }
             if (i == 66) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
@@ -427,11 +429,55 @@ public class Chat_controller : MonoBehaviour
         NextChapter = false;
 
         Line = 0;
-        //chapter = CSVfileReader.Read("scenario_4");
-        for(int i = 0; i < 70; i++)
+        chapter = CSVfileReader.Read("scenario_4");
+        for(int i = 0; i < 32; i++)
         {
             Debug.Log(i);
             if (NextChapter == true) break;
+            if (i == 0)
+            {
+                CenterText.CenterTextChange(5);
+                Effect.LightOff();
+                Background.ChangeToAmberHouse(Background.spriteView);
+            }
+            if (i == 1)
+            {
+                Effect.FadeIn();
+                CenterText.CenterTextChange(0);
+            }
+            if (i == 2) Character.ChangeToAmber(Character.GetSpriteView());
+            if (i == 3) Character.ChangeToNoting(Character.GetSpriteView());
+            if(i == 7)
+            {
+                Search.ChapterFourEnter();
+                HelpPanel[1].SetActive(true);                
+            }
+            if (i == 8)
+            {
+                Camera.transform.position = new Vector3(25, 0, -10);
+                Character.ChangeToAmber(Character.GetSpriteView());
+            }
+            if(i == 11)
+            {
+                Character.ChangeToNoting(Character.GetSpriteView());
+                Background.ChangeToStreet(Background.spriteView);                
+            }
+            //if(i == 13)아데린 실종 포스터 팝업
+            if(i == 18)
+            {
+                Search.ChapterFourSecondEnter();
+                Background.ChangeToFlowerShop(Background.spriteView);
+                Character.ChangeToLilly(Character.GetSpriteView());
+                HelpUI.ChangeHelpPanelText(1, 1);
+            }
+            if (i == 21) Character.ChangeToNoting(Character.GetSpriteView());
+            if (i == 22) Camera.transform.position = new Vector3(25, 0, -10);
+            if (i == 23) Character.ChangeToLilly(Character.GetSpriteView());
+            if (i == 29) Character.ChangeToNoting(Character.GetSpriteView());
+            if (i == 31) Background.ChangeToLibrary(Background.spriteView);
+
+            yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c4"].ToString(), chapter[Line]["sc4"].ToString()));
+            yield return StartCoroutine(Next());
         }
     }
 

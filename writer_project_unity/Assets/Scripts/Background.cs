@@ -25,6 +25,12 @@ public class Background : MonoBehaviour
     [SerializeField]
     private Sprite Lake;
     [SerializeField]
+    private Sprite AmberHouse;
+    [SerializeField]
+    private Sprite Street;
+    [SerializeField]
+    private Sprite FlowerShop;
+    [SerializeField]
     private Sprite Cabinet;
     [SerializeField]
     private Sprite CabinetOpen;
@@ -81,6 +87,9 @@ public class Background : MonoBehaviour
     public void ChangeToClueWatch(Image background) => background.sprite = ClueWatch;
     public void ChangeToClueSticker(Image backgtound) => backgtound.sprite = ClueSticker;
     public void ChangeToClueNoSticker(Image background) => background.sprite = ClueNoSticker;
+    public void ChangeToAmberHouse(Image background) => background.sprite = AmberHouse;
+    public void ChangeToStreet(Image background) => background.sprite = Street;
+    public void ChangeToFlowerShop(Image background) => background.sprite = FlowerShop;
     /***********************/
     // Update is called once per frame
     void Update()

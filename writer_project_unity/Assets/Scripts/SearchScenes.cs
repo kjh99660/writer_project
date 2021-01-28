@@ -33,12 +33,16 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     private Background BackGround;//배경 관련
     private EffectManager Effect;//이펙트 관련
     private Ingame_setting Ingame_Setting;//인 게임 세팅 변화
+    private CharacterOther Character;//다른 등장인물 이미지
+    private List<Dictionary<string, object>> chapter4;
     private List<Dictionary<string, object>> chapter3;
     private List<Dictionary<string, object>> chapter2;
     private List<Dictionary<string, object>> chapter1;
 
     private int[] chapter3Check = new int[3] { 0, 0, 0 };
     private int[] chapter1Check = new int[3] { 0, 0, 0 };
+    private int[] chapter4Check = new int[5] {0, 0, 0, 0, 0 };
+    private int[] chapter4CheckSecond = new int[6] { 0, 0, 0, 0, 0, 0 };
     private bool ChapterOneHalf = false;
     private bool ChapterTwoHalf = false;
     private bool ChapterTwoLast = false;
@@ -71,10 +75,24 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     private Button SleepingBagButton;
     private Button BedHeadButton;
 
+    private Button AmberBedButton;
+    private Button AmberFrameButton;
+    private Button AmberDeskButton;
+    private Button AmberRabbitButton;
+    private Button AmberPosterButton;
+
+    private Button LillyCounterButton;
+    private Button LillyFlowerPotButton;
+    private Button LillyMarieGoldButton;
+    private Button LillyRoseButton;
+    private Button LillyRoseMarieButton;
+    private Button LillyHydrangeaButton;
+
     //오브젝트 목록
     private GameObject Chapter1Object;
     private GameObject Chapter2Object;
     private GameObject Chapter3Object;
+    private GameObject Chapter4Object;
 
     private readonly WaitForSeconds NextLetter = new WaitForSeconds(0.04f);//빌드시 대사 간격 추가한 후 빌드
 
@@ -86,10 +104,12 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         Effect = GameObject.Find("Effect").GetComponent<EffectManager>();
         Help = GameObject.Find("Helps").GetComponent<Help>();
         Ingame_Setting = GameObject.Find("Canvas").transform.Find("Setting").GetComponent<Ingame_setting>();
+        Character = GameObject.Find("Standing").transform.GetChild(3).GetComponent<CharacterOther>();
 
         Chapter1Object = GameObject.Find("Chapter1Object");
         Chapter2Object = GameObject.Find("Chapter2Object");
         Chapter3Object = GameObject.Find("Chapter3Object");
+        Chapter4Object = GameObject.Find("Chapter4Object");
 
         BlanketButton = Chapter3Object.transform.GetChild(0).GetComponent<Button>();
         WatchButton = Chapter3Object.transform.GetChild(1).GetComponent<Button>();
@@ -154,7 +174,11 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         Text.gameObject.SetActive(false);
     }
 
-    //챕터 1 조사 내용
+
+    /**************************************************************************************************/
+    //조사 물품 코루틴
+
+    //#챕터 1 조사 내용
     IEnumerator Willow()//버드나무
     {
         MiddleText.SetActive(true);
@@ -189,7 +213,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         MiddleText.SetActive(false);
     }
     
-    //챕터 1 두번째 조사 내용
+    //#챕터 1 두번째 조사 내용
     IEnumerator Branch()
     {
         MiddleText.SetActive(true);
@@ -203,7 +227,8 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         yield return StartCoroutine(Texting(chapter1, 6, 1, NameS2, TextS2));
         MiddleText.SetActive(false);
     }
-    //챕터 2 조사 내용
+
+    //#챕터 2 조사 내용
     IEnumerator Coat()
     {
         MiddleText.SetActive(true);
@@ -309,7 +334,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         MiddleText.SetActive(false);
         DownText.SetActive(false);
     }
-    //챕터 3 조사 내용
+    //#챕터 3 조사 내용
     IEnumerator Towel()//증거물품
     {
         DownText.SetActive(true);
@@ -393,7 +418,100 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         }
         MiddleText.SetActive(false);
     }
-    //조사 변경 함수
+    //#챕터 4 조사 내용
+    IEnumerator AmberPoster()
+    {
+        MiddleText.SetActive(true);
+        Character.ChangeToAmber(Character.GetSpriteView());
+        yield return StartCoroutine(Texting(chapter4, 1, 3, NameS2, TextS2));
+        Character.ChangeToNoting(Character.GetSpriteView());
+        chapter4Check[0] = 1;
+        MiddleText.SetActive(false);
+    }
+    IEnumerator AmberFrame()
+    {
+        MiddleText.SetActive(true);
+        Character.ChangeToAmber(Character.GetSpriteView());
+        yield return StartCoroutine(Texting(chapter4, 4, 3, NameS2, TextS2));
+        Character.ChangeToNoting(Character.GetSpriteView());
+        chapter4Check[1] = 1;
+        MiddleText.SetActive(false);
+    }
+    IEnumerator AmberRabbit()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter4, 7, 1, NameS2, TextS2));
+        Character.ChangeToAmber(Character.GetSpriteView());
+        yield return StartCoroutine(Texting(chapter4, 8, 1, NameS2, TextS2));
+        Character.ChangeToNoting(Character.GetSpriteView());
+        chapter4Check[2] = 1;
+        MiddleText.SetActive(false);
+    }
+    IEnumerator AmberDesk()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter4, 9, 1, NameS2, TextS2));
+        chapter4Check[3] = 1;
+        MiddleText.SetActive(false);
+    }
+    IEnumerator AmberBed()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter4, 10, 1, NameS2, TextS2));
+        chapter4Check[4] = 1;
+        MiddleText.SetActive(false);
+    }
+    IEnumerator LillyMarieGold()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter4, 13, 1, NameS2, TextS2));
+        MiddleText.SetActive(false);
+        chapter4CheckSecond[0] = 1;
+    }
+    IEnumerator LillyCounter()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter4, 12, 1, NameS2, TextS2));
+        MiddleText.SetActive(false);
+        chapter4CheckSecond[1] = 1;
+    }
+    IEnumerator LillyRoseMarie()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter4, 14, 1, NameS2, TextS2));
+        MiddleText.SetActive(false);
+        chapter4CheckSecond[2] = 1;
+    }
+    IEnumerator LillyRose()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter4, 15, 1, NameS2, TextS2));
+        MiddleText.SetActive(false);
+        chapter4CheckSecond[3] = 1;
+    }
+    IEnumerator LillyHydrangea()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter4, 16, 1, NameS2, TextS2));
+        Character.ChangeToLilly(Character.GetSpriteView());
+        yield return StartCoroutine(Texting(chapter4, 17, 4, NameS2, TextS2));
+        Character.ChangeToNoting(Character.GetSpriteView());
+        MiddleText.SetActive(false);
+        chapter4CheckSecond[4] = 1;
+    }
+    IEnumerator LillyFlowerPot()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter4, 21, 1, NameS2, TextS2));
+        Character.ChangeToLilly(Character.GetSpriteView());
+        yield return StartCoroutine(Texting(chapter4, 22, 2, NameS2, TextS2));
+        Character.ChangeToNoting(Character.GetSpriteView());
+        MiddleText.SetActive(false);
+        chapter4CheckSecond[5] = 1;
+    }
+
+    /********************************************************************/
+    //챕터 변경 함수
     public void ChapterOneEnter()
     {
         //첫 배경 활성화
@@ -406,7 +524,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     }
     public void ChapterTwoEnter()
     {
-        //배경 활성화 -> 챗 컨트롤러
+        //배경 활성화
         chapter2 = CSVfileReader.Read("search_2");
         TurnChapterOneItem(false);
         BranchButton.gameObject.SetActive(false);
@@ -436,6 +554,83 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         chapter3 = CSVfileReader.Read("search_3");
         TurnChapterThreeItem(true);
     }
+    public void ChapterFourEnter()
+    {
+        chapter4 = CSVfileReader.Read("search_4");
+        BackGround.ChangeToAmberHouse(BackGround.spriteViewSearch);
+        AmberBedButton = Chapter4Object.transform.GetChild(0).GetComponent<Button>();
+        AmberPosterButton = Chapter4Object.transform.GetChild(1).GetComponent<Button>();
+        AmberFrameButton = Chapter4Object.transform.GetChild(2).GetComponent<Button>();
+        AmberDeskButton = Chapter4Object.transform.GetChild(3).GetComponent<Button>();
+        AmberRabbitButton = Chapter4Object.transform.GetChild(4).GetComponent<Button>();
+        ChapterThree = false;
+        LeftButton.gameObject.SetActive(false);
+        RightButton.gameObject.SetActive(false);
+        TurnChapterTwoItem(false);
+        TurnChapterThreeItem(false);
+        TurnChapterFourItemFirst(true);
+    }
+    public void ChapterFourSecondEnter()
+    {
+        BackGround.ChangeToFlowerShop(BackGround.spriteViewSearch);
+        LillyCounterButton = Chapter4Object.transform.GetChild(5).GetComponent<Button>();
+        LillyFlowerPotButton = Chapter4Object.transform.GetChild(6).GetComponent<Button>();
+        LillyMarieGoldButton = Chapter4Object.transform.GetChild(7).GetComponent<Button>();
+        LillyHydrangeaButton = Chapter4Object.transform.GetChild(8).GetComponent<Button>();
+        LillyRoseMarieButton = Chapter4Object.transform.GetChild(9).GetComponent<Button>();
+        LillyRoseButton = Chapter4Object.transform.GetChild(10).GetComponent<Button>();
+        TurnChapterFourItemFirst(false);
+        TurnChapterFourItemSecond(true);
+    }
+    public void TurnChapterOneItem(bool OnOff)
+    {
+        LakeButton.gameObject.SetActive(OnOff);
+        WillowButton.gameObject.SetActive(OnOff);
+        LandButton.gameObject.SetActive(OnOff);
+    }
+    public void TurnChapterTwoItem(bool OnOff)
+    {
+        CoatButton.gameObject.SetActive(OnOff);
+        FrameButton.gameObject.SetActive(OnOff);
+        CupButton.gameObject.SetActive(OnOff);
+        FirePlaceButton.gameObject.SetActive(OnOff);
+        //거실
+        GasRangeButton.gameObject.SetActive(OnOff);
+        SinkButton.gameObject.SetActive(OnOff);
+        CupBoardButton.gameObject.SetActive(OnOff);
+        TableAndChairButton.gameObject.SetActive(OnOff);
+        //주방
+        CabinetButton.gameObject.SetActive(OnOff);
+        DrawerButton.gameObject.SetActive(OnOff);
+        SleepingBagButton.gameObject.SetActive(OnOff);
+        BedHeadButton.gameObject.SetActive(OnOff);
+        //침실
+    }
+    public void TurnChapterThreeItem(bool OnOff)
+    {
+        BlanketButton.gameObject.SetActive(OnOff);
+        WatchButton.gameObject.SetActive(OnOff);
+        TowelButton.gameObject.SetActive(OnOff);
+    }
+    public void TurnChapterFourItemFirst(bool OnOff)
+    {
+        AmberBedButton.gameObject.SetActive(OnOff);
+        AmberDeskButton.gameObject.SetActive(OnOff);
+        AmberPosterButton.gameObject.SetActive(OnOff);
+        AmberRabbitButton.gameObject.SetActive(OnOff);
+        AmberFrameButton.gameObject.SetActive(OnOff);
+    }
+    public void TurnChapterFourItemSecond(bool OnOff)
+    {
+        LillyHydrangeaButton.gameObject.SetActive(OnOff);
+        LillyMarieGoldButton.gameObject.SetActive(OnOff);
+        LillyRoseButton.gameObject.SetActive(OnOff);
+        LillyRoseMarieButton.gameObject.SetActive(OnOff);
+        LillyFlowerPotButton.gameObject.SetActive(OnOff);
+        LillyCounterButton.gameObject.SetActive(OnOff);
+    }
+
+    /*************************************************************************/
     //버튼 관련 메서드
     public void ClickLeftButton()
     {
@@ -452,12 +647,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         Effect.FadeIn();
     }
     //#챕터 1
-    public void TurnChapterOneItem(bool OnOff)
-    {
-        LakeButton.gameObject.SetActive(OnOff);
-        WillowButton.gameObject.SetActive(OnOff);
-        LandButton.gameObject.SetActive(OnOff);
-    }
+
     public void ClickWillow()
     {
         if (ChapterOneHalf) StartCoroutine(NotUse());
@@ -480,26 +670,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         else StartCoroutine(Land());
     }
     public void ClickBranch() => StartCoroutine(Branch());
-
     //#챕터 2
-    public void TurnChapterTwoItem(bool OnOff)
-    {
-        CoatButton.gameObject.SetActive(OnOff);
-        FrameButton.gameObject.SetActive(OnOff);
-        CupButton.gameObject.SetActive(OnOff);
-        FirePlaceButton.gameObject.SetActive(OnOff);
-        //거실
-        GasRangeButton.gameObject.SetActive(OnOff);
-        SinkButton.gameObject.SetActive(OnOff);
-        CupBoardButton.gameObject.SetActive(OnOff);
-        TableAndChairButton.gameObject.SetActive(OnOff);
-        //주방
-        CabinetButton.gameObject.SetActive(OnOff);
-        DrawerButton.gameObject.SetActive(OnOff);
-        SleepingBagButton.gameObject.SetActive(OnOff);
-        BedHeadButton.gameObject.SetActive(OnOff);
-        //침실
-    }
     public void ClickCoat()
     {
         if (ChapterTwoHalf) StartCoroutine(Noting());//이미 조사한 것 같다.
@@ -574,18 +745,25 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         else if (ChapterTwoLast) StartCoroutine(Nothing(chapter2, NameS2Down, TextS2Down, 20));
         else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2Down, TextS2Down, 9));
     }
-    //챕터 3
-    public void TurnChapterThreeItem(bool OnOff)
-    {
-        BlanketButton.gameObject.SetActive(OnOff);
-        WatchButton.gameObject.SetActive(OnOff);
-        TowelButton.gameObject.SetActive(OnOff);
-    }
+    //#챕터 3
     public void ClickBlanket() => StartCoroutine(Blanket());
     public void ClickWatch() => StartCoroutine(Watch());
     public void ClickTowel() => StartCoroutine(Towel());
+    //#챕터 4
+    public void ClickAmberPoster() => StartCoroutine(AmberPoster());
+    public void ClickAmberFrame() => StartCoroutine(AmberFrame());
+    public void ClickAmberBed() => StartCoroutine(AmberBed());
+    public void ClickAmberDesk() => StartCoroutine(AmberDesk());
+    public void ClickAmberRabbit() => StartCoroutine(AmberRabbit());
+    public void ClickLillyCounter() => StartCoroutine(LillyCounter());
+    public void ClickLillyFlowerPot() => StartCoroutine(LillyFlowerPot());
+    public void ClickLillyMarieGold() => StartCoroutine(LillyMarieGold());
+    public void ClickLillyHydrangea() => StartCoroutine(LillyHydrangea());
+    public void ClickLillyRose() => StartCoroutine(LillyRose());
+    public void ClickLillyRoseMarie() => StartCoroutine(LillyRoseMarie());
 
-    //챕터 클리어 
+    /***********************************************************************/
+    //챕터 클리어 조건 관련 함수 => 업데이트 
     public void ChapterOneSearchClear()
     {
         for (int i = 0; i < chapter1Check.Length; i++) if (chapter1Check[i] == 0) return;//1chapter search clear
@@ -594,7 +772,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         ChapterOneHalf = true;
         return;
     }
-    public void ChapterThreeSeachClear()
+    public void ChapterThreeSearchClear()
     {
         for (int i = 0; i < chapter3Check.Length; i++) if (chapter3Check[i] == 0) return;//3chapter search clear
         foreach (int check in chapter3Check) chapter3Check[check] = 0;
@@ -602,10 +780,28 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         ChapterThree = false;
         return;
     }
+    public void ChapterFourSearchClear()
+    {
+        int temp = 0;
+        for (int i = 0; i < chapter4Check.Length; i++) if (chapter4Check[i] == 1) temp++;//4chapter search clear
+        if(temp >= 3)
+        {
+            foreach (int check in chapter4Check) chapter4Check[check] = 0;
+            Camera.transform.position = new Vector3(0, 0, -10);
+        }
+    }
+    public void ChapterFourSecondSearchClear()
+    {
+        for (int i = 0; i < chapter4CheckSecond.Length; i++) if (chapter4CheckSecond[i] == 0) return;//4chapter second search clear
+        foreach (int check in chapter4CheckSecond) chapter4CheckSecond[check] = 0;
+        Camera.transform.position = new Vector3(0, 0, -10);
+    }
 
     void Update()
     {
         ChapterOneSearchClear();
-        ChapterThreeSeachClear();
+        ChapterThreeSearchClear();
+        ChapterFourSearchClear();
+        ChapterFourSecondSearchClear();
     }
 }
