@@ -8147,6 +8147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Amber: {fileID: 21300000, guid: 9aa34d48a91b97844b2bb42ef7bf0033, type: 3}
   Lilly: {fileID: 21300000, guid: 49ae10c752a6bc2439dbbb8367d853ea, type: 3}
+  Olivia: {fileID: 21300000, guid: 35547218f7d73c64cb8e025ebae0abd6, type: 3}
+  Abigail: {fileID: 21300000, guid: bbe5da076386d16418345eb2c06258f0, type: 3}
 --- !u!114 &841668832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12887,6 +12889,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Amber: {fileID: 21300000, guid: 9aa34d48a91b97844b2bb42ef7bf0033, type: 3}
   Lilly: {fileID: 21300000, guid: 49ae10c752a6bc2439dbbb8367d853ea, type: 3}
+  Olivia: {fileID: 0}
+  Abigail: {fileID: 0}
 --- !u!114 &1318538166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14972,9 +14976,11 @@ MonoBehaviour:
   FlowerShop: {fileID: 0}
   Cabinet: {fileID: 21300000, guid: 0a76e4e952c601342bda5262edf8c700, type: 3}
   CabinetOpen: {fileID: 21300000, guid: 72d3a8ef1c5411f41a2b202aa568adf6, type: 3}
-  ClueWatch: {fileID: 21300000, guid: c37f2d9136c5ba948a94621ed216cdde, type: 3}
   ClueSticker: {fileID: 21300000, guid: 1ba6b8be197b2804896a2b9c3855a7d5, type: 3}
   ClueNoSticker: {fileID: 21300000, guid: 4f168becaf509194996db9c904ccbf09, type: 3}
+  ClueWatch: {fileID: 21300000, guid: c37f2d9136c5ba948a94621ed216cdde, type: 3}
+  AbigailHouse: {fileID: 0}
+  Bus: {fileID: 0}
   Rain_ani: {fileID: 1866848033}
 --- !u!222 &1515952661
 CanvasRenderer:

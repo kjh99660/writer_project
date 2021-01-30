@@ -369,7 +369,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
             TurnChapterTwoItem(false);
             yield return StartCoroutine(Texting(chapter3, 5, 3, NameS2Down, TextS2Down));
 
-            BackGround.ChangeToClueWatch(BackGround.spriteViewSearchRight);
+            BackGround.ChangeToClueWatch(BackGround.SpriteViewSearchRight);
             Effect.Flash();
             Ingame_Setting.GetClue(0);//시계
             Help.ChangeText(2);
@@ -382,7 +382,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
             TextS2Down.gameObject.SetActive(false);
             Help.ImformationPanelOnOff(false);
             chapter3Check[0] = 1;
-            BackGround.ChangeToBedroom(BackGround.spriteViewSearchRight);
+            BackGround.ChangeToBedroom(BackGround.SpriteViewSearchRight);
             TurnChapterTwoItem(true);
         }
         DownText.SetActive(false);
@@ -400,7 +400,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
             Line = 0;
             for (int i = 0; i < 5; i++)
             {
-                if (i == 2) BackGround.ChangeToClueSticker(BackGround.spriteViewSearch);
+                if (i == 2) BackGround.ChangeToClueSticker(BackGround.SpriteViewSearch);
                 if (i == 3) Effect.Flash();
                 if (i == 4)
                 {
@@ -414,7 +414,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
             Ingame_Setting.GetClue(1);//스티커
             TurnChapterTwoItem(true);
             chapter3Check[1] = 1;
-            BackGround.ChangeToFireplace(BackGround.spriteViewSearch);
+            BackGround.ChangeToFireplace(BackGround.SpriteViewSearch);
         }
         MiddleText.SetActive(false);
     }
@@ -557,7 +557,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     public void ChapterFourEnter()
     {
         chapter4 = CSVfileReader.Read("search_4");
-        BackGround.ChangeToAmberHouse(BackGround.spriteViewSearch);
+        BackGround.ChangeToAmberHouse(BackGround.SpriteViewSearch);
         AmberBedButton = Chapter4Object.transform.GetChild(0).GetComponent<Button>();
         AmberPosterButton = Chapter4Object.transform.GetChild(1).GetComponent<Button>();
         AmberFrameButton = Chapter4Object.transform.GetChild(2).GetComponent<Button>();
@@ -572,7 +572,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     }
     public void ChapterFourSecondEnter()
     {
-        BackGround.ChangeToFlowerShop(BackGround.spriteViewSearch);
+        BackGround.ChangeToFlowerShop(BackGround.SpriteViewSearch);
         LillyCounterButton = Chapter4Object.transform.GetChild(5).GetComponent<Button>();
         LillyFlowerPotButton = Chapter4Object.transform.GetChild(6).GetComponent<Button>();
         LillyMarieGoldButton = Chapter4Object.transform.GetChild(7).GetComponent<Button>();

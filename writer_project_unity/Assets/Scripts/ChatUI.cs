@@ -18,7 +18,7 @@ public class ChatUI : MonoBehaviour
 
     [SerializeField]
     private bool IsClose { get; set; } = false;
-    private readonly string[] TextCenter = new string[] { " ","<프롤로그>","<1장.만남>", "<2장. 오래된 별장>", "<3장. 조사>","<4장. 알리바이>" };
+    private readonly string[] TextCenter = new string[] { " ","<프롤로그>","<1장.만남>", "<2장. 오래된 별장>", "<3장. 조사>","<4장. 알리바이>","<5장. 심화>"};
 
     void Start()
     {

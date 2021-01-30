@@ -7,6 +7,8 @@ public class CharacterOther : MonoBehaviour
 {
     public Sprite Amber;
     public Sprite Lilly;
+    public Sprite Olivia;
+    public Sprite Abigail;
     private Image SpriteView;
     private Color On;
     private Color Off;
@@ -34,6 +36,16 @@ public class CharacterOther : MonoBehaviour
     {
         SpriteView.color = Off;
         SpriteView.sprite = Lilly;
+    }
+    public void ChangeToOlivia(Image SpriteView)
+    {
+        SpriteView.color = Off;
+        SpriteView.sprite = Olivia;
+    }
+    public void ChangeToAbigail(Image SpriteView)
+    {
+        SpriteView.color = Off;
+        SpriteView.sprite = Abigail;
     }
 
     // Update is called once per frame

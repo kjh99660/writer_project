@@ -3,7 +3,10 @@ guid: 100d24acbba412d4e9cd0e97232051c2
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Amber: {instanceID: 0}
+  - Lilly: {instanceID: 0}
+  - Olivia: {fileID: 21300000, guid: 35547218f7d73c64cb8e025ebae0abd6, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

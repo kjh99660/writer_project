@@ -7,11 +7,7 @@ public class Background : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
-    private Sprite Library;
-    [SerializeField]
-    private Sprite Hallway;
-    [SerializeField]
-    private Sprite Hallway_anim;
+    private Sprite Library, Hallway, Hallway_anim;
     [SerializeField]
     private Sprite Kitchen;
     [SerializeField]
@@ -31,24 +27,20 @@ public class Background : MonoBehaviour
     [SerializeField]
     private Sprite FlowerShop;
     [SerializeField]
-    private Sprite Cabinet;
+    private Sprite Cabinet, CabinetOpen;
     [SerializeField]
-    private Sprite CabinetOpen;
+    private Sprite ClueSticker, ClueNoSticker, ClueWatch;
     [SerializeField]
-    private Sprite ClueWatch;
+    private Sprite AbigailHouse;
     [SerializeField]
-    private Sprite ClueSticker;
-    [SerializeField]
-    private Sprite ClueNoSticker;
+    private Sprite Bus;
 
     public GameObject Rain_ani;
-
-    private Image SpriteView;
-    private Image SpriteViewSearch;
-    private Image SpriteViewSearchLeft;
-    private Image SpriteViewSearchRight;
+    public Image SpriteView { get; private set; }
+    public Image SpriteViewSearch { get; private set; }
+    public Image SpriteViewSearchLeft { get; private set; }
+    public Image SpriteViewSearchRight { get; private set; }
     /***********************/
-
     void Start()
     {
         SpriteView = gameObject.GetComponent<Image>();
@@ -56,22 +48,7 @@ public class Background : MonoBehaviour
         SpriteViewSearchLeft = GameObject.Find("BackGroundSearchLeft").GetComponent<Image>();
         SpriteViewSearchRight = GameObject.Find("BackGroundSearchRight").GetComponent<Image>();
     }
-    public Image spriteView
-    {
-        get { return SpriteView; }
-    }
-    public Image spriteViewSearch
-    {
-        get { return SpriteViewSearch; }
-    }
-    public Image spriteViewSearchLeft
-    {
-        get { return SpriteViewSearchLeft; }
-    }
-    public Image spriteViewSearchRight
-    {
-        get { return SpriteViewSearchRight; }
-    }
+
 
     public void ChangeToLake(Image background) => background.sprite = Lake;
     public void ChangeToNovel(Image background) => background.sprite = Novel;
@@ -90,6 +67,8 @@ public class Background : MonoBehaviour
     public void ChangeToAmberHouse(Image background) => background.sprite = AmberHouse;
     public void ChangeToStreet(Image background) => background.sprite = Street;
     public void ChangeToFlowerShop(Image background) => background.sprite = FlowerShop;
+    public void ChangeToAbigailHouse(Image background) => background.sprite = AbigailHouse;
+    public void ChangeToBus(Image background) => background.sprite = Bus;
     /***********************/
     // Update is called once per frame
     void Update()
