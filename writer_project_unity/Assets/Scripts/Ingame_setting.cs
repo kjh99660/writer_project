@@ -37,7 +37,7 @@ public class Ingame_setting : MonoBehaviour
         targetPos = transform.position;
         targetPos.x -= 2.3f;
         Menu_Arrow = MenuArrow.GetComponent<SpriteRenderer>();
-        TextBox = GameObject.Find("HideButton(ChatUI1)").GetComponent<ChatUI>();
+        TextBox = GameObject.Find("ChatUI").GetComponent<ChatUI>();
         for (int i = 0; i < 6; i++) Buttons[i] = Setting_panel.transform.GetChild(i).gameObject;
         for (int i = 0; i < 8; i++) CluePhotos[i] = GameObject.Find("Canvas").transform.Find("CaseFile").transform.
         Find("Clue").transform.Find("CaseFilePhotos").GetChild(i).gameObject;//8로 수정 해야함

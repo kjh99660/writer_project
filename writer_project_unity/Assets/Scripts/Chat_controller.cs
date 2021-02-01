@@ -33,7 +33,7 @@ public class Chat_controller : MonoBehaviour
     {
         chapter = CSVfileReader.Read("scenario");
 
-        CenterText = GameObject.Find("HideButton(ChatUI1)").GetComponent<ChatUI>();
+        CenterText = GameObject.Find("ChatUI").GetComponent<ChatUI>();
         HelpUI = GameObject.Find("Helps").GetComponent<Help>();
         Background = GameObject.Find("BackGroundMain").GetComponent<Background>();
         Effect = GameObject.Find("Effect").GetComponent<EffectManager>();
@@ -83,12 +83,6 @@ public class Chat_controller : MonoBehaviour
             {
                 CenterText.CenterTextChange(1);
                 Manu.SetActive(false);
-                Effect.LightOff();
-            }
-            if (i == 1)
-            {
-                Effect.FadeIn();
-                CenterText.CenterTextChange(0);
             }
             if (i == 4) Effect.LightOff();
             if (i == 5)
@@ -205,14 +199,8 @@ public class Chat_controller : MonoBehaviour
             if(i == 0)
             {
                 CenterText.CenterTextChange(3);
-                Effect.LightOff();
                 if (!Manu.activeSelf) Manu.SetActive(true);
                 Background.ChangeToFireplace(Background.SpriteView);//별장 난로앞 – 아이 코트, 머그컵 없음
-            }
-            if (i == 1)
-            {
-                CenterText.CenterTextChange(0);
-                Effect.FadeIn();
             }
             if (i == 2) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
             if (i == 3) Boy.ChangeToNoting(Boy.GetSpriteView());
@@ -346,16 +334,10 @@ public class Chat_controller : MonoBehaviour
             if(i == 0)
             {
                 CenterText.CenterTextChange(4);
-                Effect.LightOff();
                 if (!Manu.activeSelf) Manu.SetActive(true);
                 Boy.ChangeToNoting(Boy.GetSpriteView());
                 Kid.ChangeToNoting(Kid.GetSpriteView());
                 Background.ChangeToLivingRoom(Background.SpriteView);
-            }
-            if (i == 1)
-            {
-                CenterText.CenterTextChange(0);
-                Effect.FadeIn();
             }
             if (i == 2) Boy.ChangeToCrossDownArm(Boy.GetSpriteView());
             if (i == 3) Boy.ChangeToNoting(Boy.GetSpriteView());
@@ -431,20 +413,14 @@ public class Chat_controller : MonoBehaviour
         Line = 0;
         chapter = CSVfileReader.Read("scenario_4");
 
-        for(int i = 0; i < 32; i++)
+        for(int i = 0; i < 32; i++)//챕터4
         {
             Debug.Log(i);
             if (NextChapter == true) break;
             if (i == 0)
             {
                 CenterText.CenterTextChange(5);
-                Effect.LightOff();
                 Background.ChangeToAmberHouse(Background.SpriteView);
-            }
-            if (i == 1)
-            {
-                Effect.FadeIn();
-                CenterText.CenterTextChange(0);
             }
             if (i == 2) Character.ChangeToAmber(Character.GetSpriteView());
             if (i == 3) Character.ChangeToNoting(Character.GetSpriteView());
@@ -485,20 +461,14 @@ public class Chat_controller : MonoBehaviour
         Line = 0;
         chapter = CSVfileReader.Read("scenario_5");
 
-        for(int i = 0; i < 70; i++)
+        for(int i = 0; i < 70; i++)//챕터5
         {
             Debug.Log(i);
             if (NextChapter == true) break;
             if(i == 0)
             {
                 CenterText.CenterTextChange(6);
-                Effect.LightOff();
                 Background.ChangeToAbigailHouse(Background.SpriteView);
-            }
-            if(i == 1)
-            {
-                CenterText.CenterTextChange(0);
-                Effect.FadeIn();
             }
             if (i == 2) Character.ChangeToAbigail(Character.GetSpriteView());
             if (i == 5) Character.ChangeToNoting(Character.GetSpriteView());
@@ -550,7 +520,50 @@ public class Chat_controller : MonoBehaviour
 
         NextChapter = false;
         Line = 0;
-        //chapter = CSVfileReader.Read("scenario_6");
+        chapter = CSVfileReader.Read("scenario_6");
+        for (int i = 0; i < 90; i++)//챕터6
+        {
+            Debug.Log(i);
+            if (NextChapter == true) break;
+            if (i == 0)
+            {
+                Character.ChangeToNoting(Character.GetSpriteView());
+                CenterText.CenterTextChange(7);
+                Background.ChangeToLivingRoom(Background.SpriteView);
+            }
+            if(i == 3) Kid.ChangeToHappyBasic(Kid.GetSpriteView());
+            if(i == 4)
+            {
+                Kid.ChangeToNoting(Kid.GetSpriteView());
+                Boy.ChangeToCrossBasic(Boy.GetSpriteView());
+            }
+            if (i == 6) Boy.ChangeToNoting(Boy.GetSpriteView());
+            if (i == 9) Boy.ChangeToBasicUpArm(Boy.GetSpriteView());
+            if (i == 12) PopUp.Choice(1);
+
+            if (PopUp.GetChoiceAnswer() != 1 && i == 13)//실패
+            {
+                Line = 20;
+                i = 20;
+            }
+            if (PopUp.GetChoiceAnswer() == 1 && i == 20)//성공
+            {
+                Line = 23;
+                i = 23;
+            }
+            if (i == 24) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
+            if(i == 26)
+            {
+                Background.ChangeToUnderConstruction(Background.SpriteView);
+                Boy.ChangeToNoting(Boy.GetSpriteView());
+            }
+
+            yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c6"].ToString(), chapter[Line]["sc6"].ToString()));
+            yield return StartCoroutine(Next());
+
+            
+
+        }
     }
 
 
