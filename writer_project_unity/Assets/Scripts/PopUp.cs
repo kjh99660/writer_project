@@ -16,7 +16,8 @@ public class PopUp : MonoBehaviour
     private GameObject ChoiceFirst, ChoiceSecond, ChoiceThird;
     private Text FirstText, SecondText, ThirdText;
 
-    private readonly string[] ChoiceString = new string[] { "비스로트수작", "비스트로수작", "비스토르수작" };
+    private readonly string[] ChoiceString = new string[] { "비스로트수작", "비스트로수작", "비스토르수작",
+        "보라색 추리닝", "패딩점퍼와 롱스커트", "스카프와 블라우스 바지" };
     private int Answer = 0;
     void Start()
     {
