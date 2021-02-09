@@ -8329,6 +8329,7 @@ MonoBehaviour:
   Lilly: {fileID: 21300000, guid: 49ae10c752a6bc2439dbbb8367d853ea, type: 3}
   Olivia: {fileID: 21300000, guid: 35547218f7d73c64cb8e025ebae0abd6, type: 3}
   Abigail: {fileID: 21300000, guid: bbe5da076386d16418345eb2c06258f0, type: 3}
+  Kate: {fileID: 21300000, guid: c7908b1243dfd664e85d45645399028f, type: 3}
 --- !u!114 &841668832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13221,6 +13222,7 @@ MonoBehaviour:
   Lilly: {fileID: 21300000, guid: 49ae10c752a6bc2439dbbb8367d853ea, type: 3}
   Olivia: {fileID: 0}
   Abigail: {fileID: 0}
+  Kate: {fileID: 0}
 --- !u!114 &1318538166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15644,6 +15646,9 @@ MonoBehaviour:
   ClueWatch: {fileID: 21300000, guid: c37f2d9136c5ba948a94621ed216cdde, type: 3}
   AbigailHouse: {fileID: 0}
   Bus: {fileID: 0}
+  UnderConstruction: {fileID: 0}
+  CakeStore: {fileID: 0}
+  KateHouse: {fileID: 0}
   Rain_ani: {fileID: 1866848033}
 --- !u!222 &1515952661
 CanvasRenderer:
@@ -21438,8 +21443,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -440.97058, y: 29.250671}
-  m_SizeDelta: {x: 198.63, y: 51.861}
+  m_AnchoredPosition: {x: -435, y: 32.429}
+  m_SizeDelta: {x: 239.7, y: 51.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1978481225
 CanvasRenderer:

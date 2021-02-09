@@ -17,7 +17,7 @@ public class PopUp : MonoBehaviour
     private Text FirstText, SecondText, ThirdText;
 
     private readonly string[] ChoiceString = new string[] { "비스로트수작", "비스트로수작", "비스토르수작",
-        "보라색 추리닝", "패딩점퍼와 롱스커트", "스카프와 블라우스 바지" };
+        "보라색 추리닝", "패딩점퍼와 롱스커트", "스카프와 블라우스 바지","23일 오후 4시","24일 오후 4시","25일 오후 4시" };
     private int Answer = 0;
     void Start()
     {

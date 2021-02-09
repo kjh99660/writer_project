@@ -542,12 +542,12 @@ public class Chat_controller : MonoBehaviour
             if (i == 10) Boy.ChangeToNoting(Boy.GetSpriteView());
             if (i == 12) PopUp.Choice(1);
 
-            if (PopUp.GetChoiceAnswer() != 1 && i == 13)//실패
+            if (PopUp.GetChoiceAnswer() != 2 && i == 13)//실패
             {
                 Line = 20;
                 i = 20;
             }
-            if (PopUp.GetChoiceAnswer() == 1 && i == 20)//성공
+            if (PopUp.GetChoiceAnswer() == 2 && i == 20)//성공
             {
                 Line = 23;
                 i = 23;
@@ -596,13 +596,13 @@ public class Chat_controller : MonoBehaviour
             if (i == 60) PopUp.Choice(2);
             if (PopUp.GetChoiceAnswer() != 3 && i == 61)//실패
             {
-                Line = 62;
-                i = 62;
+                Line = 63;
+                i = 63;
             }
-            if(PopUp.GetChoiceAnswer() == 3 && i == 62)//성공
+            if(PopUp.GetChoiceAnswer() == 3 && i == 63)//성공
             {
-                Line = 65;
-                i = 65;
+                Line = 67;
+                i = 67;
             }
             if(i == 66)
             {
@@ -618,13 +618,123 @@ public class Chat_controller : MonoBehaviour
 
         NextChapter = false;
         Line = 0;
-        //chapter = CSVfileReader.Read("scenario_7");
-        for (int i = 0; i < 68; i++)//챕터7
+        chapter = CSVfileReader.Read("scenario_7");
+        for (int i = 0; i < 79; i++)//챕터7
+        {
+            Debug.Log(i);
+            if (NextChapter == true) break;
+            if (i == 0)
+            {
+                Character.ChangeToNoting(Character.GetSpriteView());
+                CenterText.CenterTextChange(8);
+                Background.ChangeToKateHouse(Background.SpriteView);
+            }
+            if(i == 2) Character.ChangeToKate(Character.GetSpriteView());
+            if(i == 4)
+            {
+                Character.ChangeToNoting(Character.GetSpriteView());
+                Boy.ChangeToBasicBasic(Boy.GetSpriteView());
+            }
+            if(i == 5)
+            {
+                Boy.ChangeToNoting(Boy.GetSpriteView());
+                Character.ChangeToKate(Character.GetSpriteView());
+            }
+            if(i == 6)
+            {
+                Boy.ChangeToBasicBasic(Boy.GetSpriteView());
+                Character.ChangeToNoting(Character.GetSpriteView());
+            }
+            if(i == 7)
+            {
+                Character.ChangeToKate(Character.GetSpriteView());
+                Boy.ChangeToNoting(Boy.GetSpriteView());
+            }
+            if(i == 8)
+            {
+                Character.ChangeToNoting(Character.GetSpriteView());
+                Boy.ChangeToBasicUpArm(Boy.GetSpriteView());
+            }
+            if(i == 9)
+            {
+                Character.ChangeToKate(Character.GetSpriteView());
+                Boy.ChangeToNoting(Boy.GetSpriteView());
+            }
+            if (i == 16) Character.ChangeToNoting(Character.GetSpriteView());
+            if (i == 17) Boy.ChangeToHappyBasic(Boy.GetSpriteView());
+            if(i == 18)
+            {
+                Character.ChangeToKate(Character.GetSpriteView());
+                Boy.ChangeToNoting(Boy.GetSpriteView());
+            }
+            if (i == 19)
+            {
+                Character.ChangeToNoting(Character.GetSpriteView());
+                Boy.ChangeToHappyBasic(Boy.GetSpriteView());
+            }
+            if (i == 20) Boy.ChangeToNoting(Boy.GetSpriteView());
+            if (i == 21) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
+            if(i == 29)
+            {
+                Boy.ChangeToNoting(Boy.GetSpriteView());
+                PopUp.Choice(3);
+            }
+            if (PopUp.GetChoiceAnswer() == 1 && i == 34)//성공
+            {
+                Line = 45;
+                i = 45;
+            }
+            if (PopUp.GetChoiceAnswer() == 2 && i == 29)//실패 - 2
+            {
+                Line = 35;
+                i = 35;
+            }
+            if (PopUp.GetChoiceAnswer() == 2 && i == 36)//실패 - 2 - 2
+            {
+                Line = 39;
+                i = 39;
+            }
+            if (PopUp.GetChoiceAnswer() == 3 && i == 30)//실패 - 3
+            {
+                Line = 37;
+                i = 37;
+            }
+            if (i == 46) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
+            if (i == 49) Boy.ChangeToNoting(Boy.GetSpriteView());
+            if(i == 50)
+            {
+                Background.ChangeToFlowerShop(Background.SpriteView);
+                Effect.LightOff();
+                Effect.FadeIn();
+            }
+            if(i == 65)
+            {
+                Background.ChangeToStreet(Background.SpriteView);
+                Boy.ChangeToCrossBasic(Boy.GetSpriteView());
+            }
+            if (i == 67) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
+            if (i == 73) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
+            if(i == 74)
+            {
+                Boy.ChangeToNoting(Boy.GetSpriteView());
+                Kid.ChangeToCrossBasic(Kid.GetSpriteView());
+            }
+            if (i == 78) Kid.ChangeToNoting(Kid.GetSpriteView());
+
+            yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c7"].ToString(), chapter[Line]["sc7"].ToString()));
+            yield return StartCoroutine(Next());
+        }
+
+        NextChapter = false;
+        Line = 0;
+        chapter = CSVfileReader.Read("scenario_8");
+
+        for (int i = 0; i < 79; i++)//챕터8
         {
             Debug.Log(i);
             if (NextChapter == true) break;
 
-            yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c6"].ToString(), chapter[Line]["sc6"].ToString()));
+            yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c8"].ToString(), chapter[Line]["sc8"].ToString()));
             yield return StartCoroutine(Next());
         }
     }
