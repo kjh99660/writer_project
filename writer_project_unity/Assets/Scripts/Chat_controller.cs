@@ -371,7 +371,7 @@ public class Chat_controller : MonoBehaviour
                 Background.ChangeToBedroom(Background.SpriteView);
             }
             //if(i == 19)손수건 팝업 띄우기
-            if (i == 24) PopUp.TurnOnOffObject(PopUp.PopUpBackGround, PopUp.Watch, true);
+            if (i == 24) PopUp.TurnOnOffObject(PopUp.PopUpBackGround, PopUp.Watch, true);//팝업
             if (i == 26) PopUp.TurnOnOffObject(PopUp.PopUpBackGround, PopUp.Watch, false);
             if (i == 28) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
             if (i == 31) Boy.ChangeToNoting(Boy.GetSpriteView());
@@ -729,11 +729,43 @@ public class Chat_controller : MonoBehaviour
         Line = 0;
         chapter = CSVfileReader.Read("scenario_8");
 
-        for (int i = 0; i < 79; i++)//챕터8
+        for (int i = 0; i < 24; i++)//챕터8
         {
             Debug.Log(i);
             if (NextChapter == true) break;
-
+            if (i == 0)
+            {
+                Character.ChangeToNoting(Character.GetSpriteView());
+                CenterText.CenterTextChange(9);
+                Background.ChangeToBedroom(Background.SpriteView);
+            }
+            if (i == 4) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
+            if (i == 6) Boy.ChangeToBasicUpArm(Boy.GetSpriteView());
+            if (i == 7) Boy.ChangeToNoting(Boy.GetSpriteView());
+            if (i == 8) Background.ChangeToVillaStair(Background.SpriteView);
+            if (i == 13) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
+            if (i == 14) Boy.ChangeToNoting(Boy.GetSpriteView());
+            if(i == 17)
+            {
+                Effect.Flash();
+               // PopUp.TurnOnOffObject(PopUp.PopUpBackGround, PopUp.Handprint, true);//팝업
+                HelpUI.ChangeText(5);
+                HelpUI.ImformationPanelOnOff(true);
+            }
+            if(i == 18)
+            {
+                //PopUp.TurnOnOffObject(PopUp.PopUpBackGround, PopUp.Handprint, false);
+                HelpUI.ImformationPanelOnOff(false);
+            }
+            if(i == 19)
+            {
+                Background.ChangeToVillaOutSide(Background.SpriteView);
+                Boy.ChangeToCrossBasic(Boy.GetSpriteView());
+            }
+            if (i == 21) Boy.ChangeToNoting(Boy.GetSpriteView());
+            if (i == 22) Kid.ChangeToBasicUpArm(Kid.GetSpriteView());
+            if (i == 23) Kid.ChangeToNoting(Kid.GetSpriteView());
+           
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c8"].ToString(), chapter[Line]["sc8"].ToString()));
             yield return StartCoroutine(Next());
         }

@@ -8,6 +8,7 @@ public class PopUp : MonoBehaviour
     public GameObject PopUpBackGround;
     public GameObject Watch;
     public GameObject Sticker;
+    public GameObject Handprint;
     public GameObject PanelForHideText;
 
     /***************************///선택지

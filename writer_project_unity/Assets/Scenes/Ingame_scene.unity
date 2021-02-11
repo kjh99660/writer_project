@@ -7725,8 +7725,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HelpPanel:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 983579833}
+  - {fileID: 1570277801}
   HelpImage: {fileID: 1457416244}
   ImformationPanel:
   - {fileID: 1338252432}
@@ -15649,6 +15649,8 @@ MonoBehaviour:
   UnderConstruction: {fileID: 0}
   CakeStore: {fileID: 0}
   KateHouse: {fileID: 0}
+  VillaStair: {fileID: 0}
+  VillaOutSide: {fileID: 0}
   Rain_ani: {fileID: 1866848033}
 --- !u!222 &1515952661
 CanvasRenderer:
