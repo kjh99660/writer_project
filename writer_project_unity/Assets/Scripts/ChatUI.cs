@@ -22,7 +22,7 @@ public class ChatUI : MonoBehaviour
     [SerializeField]
     private bool IsClose { get; set; } = false;
     private readonly string[] TextCenter = new string[] { " ","<프롤로그>","<1장. 만남>", "<2장. 오래된 별장>", "<3장. 조사>","<4장. 알리바이>","<5장. 심화>",
-                                                        "<6장. 인상착의>","<7장. 확인>","<8장. 낭떠러지>"};
+                                                        "<6장. 인상착의>","<7장. 확인>","<8장. 낭떠러지>","<9장. 유력한 용의자>"};
 
     void Start()
     {

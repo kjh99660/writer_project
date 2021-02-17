@@ -34,6 +34,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     private EffectManager Effect;//이펙트 관련
     private Ingame_setting Ingame_Setting;//인 게임 세팅 변화
     private CharacterOther Character;//다른 등장인물 이미지
+    private List<Dictionary<string, object>> chapter9;
     private List<Dictionary<string, object>> chapter4;
     private List<Dictionary<string, object>> chapter3;
     private List<Dictionary<string, object>> chapter2;
@@ -88,11 +89,23 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     private Button LillyRoseMarieButton;
     private Button LillyHydrangeaButton;
 
+    private Button BookShelfButton;
+    private Button PotButton;
+    private Button BookButton;
+    private Button DeskButton;
+    //장소 변경선
+    private Button SofaButton; 
+    private Button WatchButtonChapterNine;
+    private Button CabinetButtonChapterNine;
+    private Button ShelfButton;
+
+
     //오브젝트 목록
     private GameObject Chapter1Object;
     private GameObject Chapter2Object;
     private GameObject Chapter3Object;
     private GameObject Chapter4Object;
+    private GameObject Chapter9Object;
 
     private readonly WaitForSeconds NextLetter = new WaitForSeconds(0.04f);//빌드시 대사 간격 추가한 후 빌드
 
@@ -110,7 +123,15 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         Chapter2Object = GameObject.Find("Chapter2Object");
         Chapter3Object = GameObject.Find("Chapter3Object");
         Chapter4Object = GameObject.Find("Chapter4Object");
+        Chapter9Object = GameObject.Find("Chapter9Object");
 
+        //챕터 1
+        LakeButton = Chapter1Object.transform.GetChild(0).GetComponent<Button>();
+        WillowButton = Chapter1Object.transform.GetChild(1).GetComponent<Button>();
+        LandButton = Chapter1Object.transform.GetChild(2).GetComponent<Button>();
+        BranchButton = Chapter1Object.transform.GetChild(3).GetComponent<Button>();
+
+        //챕터 2,3
         BlanketButton = Chapter3Object.transform.GetChild(0).GetComponent<Button>();
         WatchButton = Chapter3Object.transform.GetChild(1).GetComponent<Button>();
         TowelButton = Chapter3Object.transform.GetChild(2).GetComponent<Button>();
@@ -127,13 +148,31 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         CabinetButton = Chapter2Object.transform.GetChild(8).GetComponent<Button>();
         DrawerButton = Chapter2Object.transform.GetChild(9).GetComponent<Button>();
         SleepingBagButton = Chapter2Object.transform.GetChild(10).GetComponent<Button>();
-        BedHeadButton = Chapter2Object.transform.GetChild(11).GetComponent<Button>();
+        BedHeadButton = Chapter2Object.transform.GetChild(11).GetComponent<Button>();      
 
-        LakeButton = Chapter1Object.transform.GetChild(0).GetComponent<Button>();
-        WillowButton = Chapter1Object.transform.GetChild(1).GetComponent<Button>();
-        LandButton = Chapter1Object.transform.GetChild(2).GetComponent<Button>();
-        BranchButton = Chapter1Object.transform.GetChild(3).GetComponent<Button>();
-        //챕터 3 이후부터는 나중에 연결
+        //챕터 4
+        AmberBedButton = Chapter4Object.transform.GetChild(0).GetComponent<Button>();
+        AmberPosterButton = Chapter4Object.transform.GetChild(1).GetComponent<Button>();
+        AmberFrameButton = Chapter4Object.transform.GetChild(2).GetComponent<Button>();
+        AmberDeskButton = Chapter4Object.transform.GetChild(3).GetComponent<Button>();
+        AmberRabbitButton = Chapter4Object.transform.GetChild(4).GetComponent<Button>();
+
+        LillyCounterButton = Chapter4Object.transform.GetChild(5).GetComponent<Button>();
+        LillyFlowerPotButton = Chapter4Object.transform.GetChild(6).GetComponent<Button>();
+        LillyMarieGoldButton = Chapter4Object.transform.GetChild(7).GetComponent<Button>();
+        LillyHydrangeaButton = Chapter4Object.transform.GetChild(8).GetComponent<Button>();
+        LillyRoseMarieButton = Chapter4Object.transform.GetChild(9).GetComponent<Button>();
+        LillyRoseButton = Chapter4Object.transform.GetChild(10).GetComponent<Button>();
+
+        //챕터 9
+        BookShelfButton = Chapter9Object.transform.GetChild(0).GetComponent<Button>();
+        PotButton = Chapter9Object.transform.GetChild(1).GetComponent<Button>();
+        BookButton = Chapter9Object.transform.GetChild(2).GetComponent<Button>();
+        DeskButton = Chapter9Object.transform.GetChild(3).GetComponent<Button>();
+        SofaButton = Chapter9Object.transform.GetChild(4).GetComponent<Button>();
+        WatchButtonChapterNine = Chapter9Object.transform.GetChild(5).GetComponent<Button>();
+        CabinetButtonChapterNine = Chapter9Object.transform.GetChild(6).GetComponent<Button>();
+        ShelfButton = Chapter9Object.transform.GetChild(7).GetComponent<Button>();
     }
     public void Click_Text()
     {
@@ -509,6 +548,56 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         MiddleText.SetActive(false);
         chapter4CheckSecond[5] = 1;
     }
+    //#챕터 9 조사 내용
+    IEnumerator Bookshelf()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter9, 0, 1, NameS2, TextS2));
+        MiddleText.SetActive(false);
+    }
+    IEnumerator Pot()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter9, 1, 1, NameS2, TextS2));
+        MiddleText.SetActive(false);
+    }
+    IEnumerator Book()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter9, 2, 1, NameS2, TextS2));
+        MiddleText.SetActive(false);
+    }
+    IEnumerator Desk()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter9, 3, 1, NameS2, TextS2));
+        MiddleText.SetActive(false);
+    }
+    IEnumerator Sofa()
+    {
+        UpText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter9, 4, 1, NameS2Up, TextS2Up));
+        UpText.SetActive(false);
+        Camera.transform.position = new Vector3(0, 0, -10);
+    }
+    IEnumerator WatchChapterNine()
+    {
+        UpText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter9, 5, 1, NameS2Up, TextS2Up));
+        UpText.SetActive(false);
+    }
+    IEnumerator CabinetChapterNine()
+    {
+        UpText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter9, 6, 1, NameS2Up, TextS2Up));
+        UpText.SetActive(false);
+    }
+    IEnumerator Shelf()
+    {
+        UpText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter9, 7, 1, NameS2Up, TextS2Up));
+        UpText.SetActive(false);
+    }
 
     /********************************************************************/
     //챕터 변경 함수
@@ -558,11 +647,6 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     {
         chapter4 = CSVfileReader.Read("search_4");
         BackGround.ChangeToAmberHouse(BackGround.SpriteViewSearch);
-        AmberBedButton = Chapter4Object.transform.GetChild(0).GetComponent<Button>();
-        AmberPosterButton = Chapter4Object.transform.GetChild(1).GetComponent<Button>();
-        AmberFrameButton = Chapter4Object.transform.GetChild(2).GetComponent<Button>();
-        AmberDeskButton = Chapter4Object.transform.GetChild(3).GetComponent<Button>();
-        AmberRabbitButton = Chapter4Object.transform.GetChild(4).GetComponent<Button>();
         ChapterThree = false;
         LeftButton.gameObject.SetActive(false);
         RightButton.gameObject.SetActive(false);
@@ -572,15 +656,18 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     }
     public void ChapterFourSecondEnter()
     {
-        BackGround.ChangeToFlowerShop(BackGround.SpriteViewSearch);
-        LillyCounterButton = Chapter4Object.transform.GetChild(5).GetComponent<Button>();
-        LillyFlowerPotButton = Chapter4Object.transform.GetChild(6).GetComponent<Button>();
-        LillyMarieGoldButton = Chapter4Object.transform.GetChild(7).GetComponent<Button>();
-        LillyHydrangeaButton = Chapter4Object.transform.GetChild(8).GetComponent<Button>();
-        LillyRoseMarieButton = Chapter4Object.transform.GetChild(9).GetComponent<Button>();
-        LillyRoseButton = Chapter4Object.transform.GetChild(10).GetComponent<Button>();
+        BackGround.ChangeToFlowerShop(BackGround.SpriteViewSearch);        
         TurnChapterFourItemFirst(false);
         TurnChapterFourItemSecond(true);
+    }
+    public void ChapterNineEnter()
+    {
+        chapter9 = CSVfileReader.Read("search_5");
+        BackGround.ChangeToLibrary(BackGround.SpriteViewSearch);
+        BackGround.ChangeToLivingRoom(BackGround.SpriteViewSearchLeft);
+        LeftButton.gameObject.SetActive(true);
+        TurnChapterFourItemSecond(false);
+        TurnChapterNineItem(true);
     }
     public void TurnChapterOneItem(bool OnOff)
     {
@@ -628,6 +715,17 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         LillyRoseMarieButton.gameObject.SetActive(OnOff);
         LillyFlowerPotButton.gameObject.SetActive(OnOff);
         LillyCounterButton.gameObject.SetActive(OnOff);
+    }
+    public void TurnChapterNineItem(bool OnOff)
+    {
+        BookShelfButton.gameObject.SetActive(OnOff);
+        PotButton.gameObject.SetActive(OnOff);
+        BookButton.gameObject.SetActive(OnOff);
+        DeskButton.gameObject.SetActive(OnOff);
+        SofaButton.gameObject.SetActive(OnOff);
+        WatchButtonChapterNine.gameObject.SetActive(OnOff);
+        CabinetButtonChapterNine.gameObject.SetActive(OnOff);
+        ShelfButton.gameObject.SetActive(OnOff);
     }
 
     /*************************************************************************/
@@ -761,6 +859,15 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     public void ClickLillyHydrangea() => StartCoroutine(LillyHydrangea());
     public void ClickLillyRose() => StartCoroutine(LillyRose());
     public void ClickLillyRoseMarie() => StartCoroutine(LillyRoseMarie());
+    //#챕터 9
+    public void ClickBookSelf() => StartCoroutine(Bookshelf());
+    public void ClickBook() => StartCoroutine(Book());
+    public void ClickPot() => StartCoroutine(Pot());
+    public void ClickDesk() => StartCoroutine(Desk());
+    public void ClickSofa() => StartCoroutine(Sofa());
+    public void ClickWatchChapterNine() => StartCoroutine(WatchChapterNine());
+    public void ClickCabinetChapterNine() => StartCoroutine(CabinetChapterNine());
+    public void ClickShelf() => StartCoroutine(Shelf());
 
     /***********************************************************************/
     //챕터 클리어 조건 관련 함수 => 업데이트 

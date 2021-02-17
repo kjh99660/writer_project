@@ -27,6 +27,7 @@ public class Chat_controller : MonoBehaviour
     private CharacterBoy Boy;//소년 이미지  
     private CharacterOther Character;//다른 등장인물 이미지
     private Ingame_setting IngameSetting;//인게임 UI기능 관련
+    private GameData Data;//저장 데이터
 
     private readonly WaitForSeconds NextLetter = new WaitForSeconds(0.04f);
     void Start()
@@ -43,6 +44,7 @@ public class Chat_controller : MonoBehaviour
         Search = GameObject.Find("SearchController").GetComponent<SearchScenes>();
         PopUp = GameObject.Find("PopUp").GetComponent<PopUp>();
         IngameSetting = GameObject.Find("Canvas").transform.Find("Setting").GetComponent<Ingame_setting>();
+        Data = GameObject.Find("Data").GetComponent<GameData>();
 
         StartCoroutine(Texting());
     }
@@ -544,6 +546,7 @@ public class Chat_controller : MonoBehaviour
 
             if (PopUp.GetChoiceAnswer() != 2 && i == 13)//실패
             {
+                Data.IsBadEnding = true;
                 Line = 20;
                 i = 20;
             }
@@ -596,6 +599,7 @@ public class Chat_controller : MonoBehaviour
             if (i == 60) PopUp.Choice(2);
             if (PopUp.GetChoiceAnswer() != 3 && i == 61)//실패
             {
+                Data.IsBadEnding = true;
                 Line = 63;
                 i = 63;
             }
@@ -686,6 +690,7 @@ public class Chat_controller : MonoBehaviour
             }
             if (PopUp.GetChoiceAnswer() == 2 && i == 29)//실패 - 2
             {
+                Data.IsBadEnding = true;
                 Line = 35;
                 i = 35;
             }
@@ -696,6 +701,7 @@ public class Chat_controller : MonoBehaviour
             }
             if (PopUp.GetChoiceAnswer() == 3 && i == 30)//실패 - 3
             {
+                Data.IsBadEnding = true;
                 Line = 37;
                 i = 37;
             }
@@ -767,6 +773,116 @@ public class Chat_controller : MonoBehaviour
             if (i == 23) Kid.ChangeToNoting(Kid.GetSpriteView());
            
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c8"].ToString(), chapter[Line]["sc8"].ToString()));
+            yield return StartCoroutine(Next());
+        }
+
+        NextChapter = false;
+        Line = 0;
+        chapter = CSVfileReader.Read("scenario_9");
+
+        for (int i = 0; i < 59; i++)//챕터9
+        {
+            Debug.Log(i);
+            if (NextChapter == true) break;
+            if (i == 0)
+            {                
+                CenterText.CenterTextChange(10);
+                //배경 [별장에서 칼 들고 있는 장면 재활용 + 진짜 어두운 배경] -> 만들어줘
+            }
+            if (i == 1)
+            {
+                Background.ChangeToLibrary(Background.SpriteView);
+            }
+
+            if (Data.IsBadEnding == true)
+            {
+                if (i == 7) Background.ChangeToLivingRoom(Background.SpriteView);
+                if (i == 10) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
+                if (i == 17) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
+                if (i == 20) Boy.ChangeToNoting(Boy.GetSpriteView());
+                //i == 22 배경 어둡게
+                if(i == 27)
+                {
+                    Effect.LightOff();
+                    //베드 엔딩
+                    break;
+                }
+
+            }
+            else
+            {
+                if (i == 5)
+                {
+                    Line = 30;
+                    Background.ChangeToLibrary(Background.SpriteView);
+                }
+                //>?
+                if (i == 8) Background.ChangeToLivingRoom(Background.SpriteView);
+                if (i == 9) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
+                if(i == 12)
+                {
+                    Boy.ChangeToNoting(Boy.GetSpriteView());
+                    Kid.ChangeToBasicBasic(Kid.GetSpriteView());
+                }
+                if (i == 13) Kid.ChangeToNoting(Kid.GetSpriteView());
+                if(i == 14)
+                {
+                    //침대에서 꾼 악몽 다시
+                }
+                if (i == 15) Kid.ChangeToBasicBasic(Kid.GetSpriteView());
+                if(i == 16)
+                {
+                    Kid.ChangeToNoting(Kid.GetSpriteView());
+                    //접시 깨지는 소리
+                }
+                if(i == 23) Kid.ChangeToCrossBasic(Kid.GetSpriteView());
+                if(i == 24)
+                {
+                    Kid.ChangeToNoting(Kid.GetSpriteView());
+                    Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
+                }
+                if (i == 25) Boy.ChangeToNoting(Boy.GetSpriteView());
+                if (i == 26) Kid.ChangeToBasicUpArm(Kid.GetSpriteView());
+                if(i == 27)
+                {
+                    Kid.ChangeToNoting(Kid.GetSpriteView());
+                    Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
+                }
+                if (i == 32) Background.ChangeToLibrary(Background.SpriteView);
+                if(i == 37)
+                {
+                    Boy.ChangeToNoting(Boy.GetSpriteView());
+                    Search.ChapterNineEnter();
+                    Camera.transform.position = new Vector3(25, 0, -10);
+                }
+                if (i == 38) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
+                if (i == 40) Boy.ChangeToNoting(Boy.GetSpriteView());
+                if (i == 42) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
+                if (i == 43) Boy.ChangeToNoting(Boy.GetSpriteView());
+                if (i == 45) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
+                if (i == 47) Boy.ChangeToNoting(Boy.GetSpriteView());
+                if (i == 50) Boy.ChangeToCrossDownArm(Boy.GetSpriteView());
+                if(i == 51)
+                {
+                    Boy.ChangeToNoting(Boy.GetSpriteView());
+                    Kid.ChangeToCrossDownArm(Kid.GetSpriteView());
+                }
+                if (i == 53) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
+                if (i == 55) Boy.ChangeToNoting(Boy.GetSpriteView());
+
+            }
+
+            yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c9"].ToString(), chapter[Line]["sc9"].ToString()));
+            yield return StartCoroutine(Next());
+        }
+
+        NextChapter = false;
+        Line = 0;
+        //chapter = CSVfileReader.Read("scenario_10");
+
+        for (int i = 0; i < 59; i++)//챕터10
+        {
+            yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c9"].ToString(), chapter[Line]["sc9"].ToString()));
             yield return StartCoroutine(Next());
         }
     }
