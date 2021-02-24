@@ -34,6 +34,8 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     private EffectManager Effect;//이펙트 관련
     private Ingame_setting Ingame_Setting;//인 게임 세팅 변화
     private CharacterOther Character;//다른 등장인물 이미지
+    private GameData Data;//저장 데이터
+    private List<Dictionary<string, object>> chapter10;
     private List<Dictionary<string, object>> chapter9;
     private List<Dictionary<string, object>> chapter4;
     private List<Dictionary<string, object>> chapter3;
@@ -48,6 +50,8 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     private bool ChapterTwoHalf = false;
     private bool ChapterTwoLast = false;
     private bool ChapterThree = false;
+    private bool ChapterTenFlower = false;
+    private bool ChapterTenCounter = false;
 
     //장소 이동 버튼
     public Button LeftButton;
@@ -99,6 +103,13 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     private Button CabinetButtonChapterNine;
     private Button ShelfButton;
 
+    private Button AneMoneButton;
+    private Button HydrangeaButton;
+    private Button RosemarieButton;
+    private Button RoseButton;
+    private Button MariegoldButton;
+    private Button CountereButton;
+
 
     //오브젝트 목록
     private GameObject Chapter1Object;
@@ -106,6 +117,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     private GameObject Chapter3Object;
     private GameObject Chapter4Object;
     private GameObject Chapter9Object;
+    private GameObject Chapter10Object;
 
     private readonly WaitForSeconds NextLetter = new WaitForSeconds(0.04f);//빌드시 대사 간격 추가한 후 빌드
 
@@ -118,12 +130,14 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         Help = GameObject.Find("Helps").GetComponent<Help>();
         Ingame_Setting = GameObject.Find("Canvas").transform.Find("Setting").GetComponent<Ingame_setting>();
         Character = GameObject.Find("Standing").transform.GetChild(3).GetComponent<CharacterOther>();
+        Data = GameObject.Find("Data").GetComponent<GameData>();
 
         Chapter1Object = GameObject.Find("Chapter1Object");
         Chapter2Object = GameObject.Find("Chapter2Object");
         Chapter3Object = GameObject.Find("Chapter3Object");
         Chapter4Object = GameObject.Find("Chapter4Object");
         Chapter9Object = GameObject.Find("Chapter9Object");
+        Chapter10Object = GameObject.Find("Chapter10Object");
 
         //챕터 1
         LakeButton = Chapter1Object.transform.GetChild(0).GetComponent<Button>();
@@ -173,6 +187,14 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         WatchButtonChapterNine = Chapter9Object.transform.GetChild(5).GetComponent<Button>();
         CabinetButtonChapterNine = Chapter9Object.transform.GetChild(6).GetComponent<Button>();
         ShelfButton = Chapter9Object.transform.GetChild(7).GetComponent<Button>();
+
+        //챕터 10
+        AneMoneButton = Chapter10Object.transform.GetChild(0).GetComponent<Button>();
+        HydrangeaButton = Chapter10Object.transform.GetChild(1).GetComponent<Button>();
+        RosemarieButton = Chapter10Object.transform.GetChild(2).GetComponent<Button>();
+        RoseButton = Chapter10Object.transform.GetChild(3).GetComponent<Button>();
+        MariegoldButton = Chapter10Object.transform.GetChild(4).GetComponent<Button>();
+        CountereButton = Chapter10Object.transform.GetChild(5).GetComponent<Button>();
     }
     public void Click_Text()
     {
@@ -598,6 +620,63 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         yield return StartCoroutine(Texting(chapter9, 7, 1, NameS2Up, TextS2Up));
         UpText.SetActive(false);
     }
+    
+    //#챕터 10 조사내용
+    IEnumerator AneMone()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter10, 0, 1, NameS2, TextS2));
+        MiddleText.SetActive(false);
+    }
+    IEnumerator Hydrangea()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter10, 1, 1, NameS2, TextS2));
+        MiddleText.SetActive(false);
+    }
+    IEnumerator Rosemarie()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter10, 2, 1, NameS2, TextS2));
+        MiddleText.SetActive(false);
+    }
+    IEnumerator Rose()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter10, 3, 1, NameS2, TextS2));
+        MiddleText.SetActive(false);
+    }
+    IEnumerator Mariegold()
+    {
+        MiddleText.SetActive(true);
+        if (ChapterTenFlower)
+        {
+            yield return StartCoroutine(Texting(chapter10, 5, 1, NameS2, TextS2));
+            Camera.transform.position = new Vector3(0, 0, -10);
+        }
+        else
+        {
+            yield return StartCoroutine(Texting(chapter10, 4, 1, NameS2, TextS2));
+            ChapterTenFlower = true;
+        }
+        MiddleText.SetActive(false);
+    }
+    IEnumerator Counter()
+    {
+        MiddleText.SetActive(true);
+        if (ChapterTenCounter)
+        {
+            yield return StartCoroutine(Texting(chapter10, 7, 1, NameS2, TextS2));
+            Data.IsNormalEnding = true;
+            Camera.transform.position = new Vector3(0, 0, -10);
+        }
+        else
+        {
+            yield return StartCoroutine(Texting(chapter10, 6, 1, NameS2, TextS2));
+            ChapterTenCounter = true;
+        }
+        MiddleText.SetActive(false);
+    }
 
     /********************************************************************/
     //챕터 변경 함수
@@ -669,6 +748,14 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         TurnChapterFourItemSecond(false);
         TurnChapterNineItem(true);
     }
+    public void ChapterTenEnter()
+    {
+        chapter10 = CSVfileReader.Read("search_6");
+        BackGround.ChangeToFlowerShop(BackGround.SpriteViewSearch);
+        LeftButton.gameObject.SetActive(false);
+        TurnChapterNineItem(false);
+        TurnChapterTenItem(true);
+    }
     public void TurnChapterOneItem(bool OnOff)
     {
         LakeButton.gameObject.SetActive(OnOff);
@@ -726,6 +813,15 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         WatchButtonChapterNine.gameObject.SetActive(OnOff);
         CabinetButtonChapterNine.gameObject.SetActive(OnOff);
         ShelfButton.gameObject.SetActive(OnOff);
+    }
+    public void TurnChapterTenItem(bool OnOff)
+    {
+        AneMoneButton.gameObject.SetActive(OnOff);
+        HydrangeaButton.gameObject.SetActive(OnOff);
+        RosemarieButton.gameObject.SetActive(OnOff);
+        RoseButton.gameObject.SetActive(OnOff);
+        CountereButton.gameObject.SetActive(OnOff);
+        MariegoldButton.gameObject.SetActive(OnOff);
     }
 
     /*************************************************************************/
@@ -868,6 +964,14 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     public void ClickWatchChapterNine() => StartCoroutine(WatchChapterNine());
     public void ClickCabinetChapterNine() => StartCoroutine(CabinetChapterNine());
     public void ClickShelf() => StartCoroutine(Shelf());
+    //#챕터 10
+    public void ClickAneMone() => StartCoroutine(AneMone());
+    public void ClickHydrangea() => StartCoroutine(Hydrangea());
+    public void ClickRosemarie() => StartCoroutine(Rosemarie());
+    public void ClickRose() => StartCoroutine(Rose());
+    public void ClickMariegold() => StartCoroutine(Mariegold());
+    public void ClickCounter() => StartCoroutine(Counter());
+
 
     /***********************************************************************/
     //챕터 클리어 조건 관련 함수 => 업데이트 

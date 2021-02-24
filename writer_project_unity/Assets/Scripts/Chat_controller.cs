@@ -815,8 +815,7 @@ public class Chat_controller : MonoBehaviour
                 {
                     Line = 30;
                     Background.ChangeToLibrary(Background.SpriteView);
-                }
-                //>?
+                }                
                 if (i == 8) Background.ChangeToLivingRoom(Background.SpriteView);
                 if (i == 9) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
                 if(i == 12)
@@ -878,11 +877,72 @@ public class Chat_controller : MonoBehaviour
 
         NextChapter = false;
         Line = 0;
-        //chapter = CSVfileReader.Read("scenario_10");
+        chapter = CSVfileReader.Read("scenario_10");
 
         for (int i = 0; i < 59; i++)//챕터10
         {
-            yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c9"].ToString(), chapter[Line]["sc9"].ToString()));
+            Debug.Log(i);
+            if (NextChapter == true) break;
+            if (i == 0)
+            {
+                Background.ChangeToLibrary(Background.SpriteView);
+                CenterText.CenterTextChange(11);               
+            }
+            if (i == 4) Background.ChangeToFlowerShop(Background.SpriteView);
+            if(i == 12)
+            {
+                Search.ChapterTenEnter();
+                Camera.transform.position = new Vector3(25, 0, -10);
+            }
+            if(Data.IsNormalEnding == true)
+            {
+                if (i == 14) Boy.ChangeToCrossDownArm(Boy.GetSpriteView());
+                if (i == 15) Boy.ChangeToNoting(Boy.GetSpriteView());
+                if (i == 18) Boy.ChangeToCrossDownArm(Boy.GetSpriteView());
+                if (i == 19) Boy.ChangeToNoting(Boy.GetSpriteView());
+                if (i == 21) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
+                if(i == 22)
+                {
+                    Boy.ChangeToNoting(Boy.GetSpriteView());
+                    Kid.ChangeToBasicBasic(Kid.GetSpriteView());
+                }
+                if (i == 23) Kid.ChangeToNoting(Kid.GetSpriteView());
+                if(i == 26) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
+                if(i == 29)
+                {
+                    Boy.ChangeToNoting(Boy.GetSpriteView());
+                    Kid.ChangeToBasicBasic(Kid.GetSpriteView());
+                }
+                if (i == 30)
+                {
+                    Boy.ChangeToBasicBasic(Boy.GetSpriteView());
+                    Kid.ChangeToNoting(Kid.GetSpriteView());
+                }
+                if (i == 31) Boy.ChangeToNoting(Boy.GetSpriteView());
+                if (i == 32) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
+                if (i == 33) Boy.ChangeToNoting(Boy.GetSpriteView());
+                if (i == 35) Boy.ChangeToHappyBasic(Boy.GetSpriteView());
+                if (i == 37) Boy.ChangeToNoting(Boy.GetSpriteView());
+                if (i == 40) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
+                if (i == 44) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
+                if (i == 46) Boy.ChangeToNoting(Boy.GetSpriteView());
+                if (i == 47) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
+                if (i == 49) Boy.ChangeToNoting(Boy.GetSpriteView());
+                if (i == 50)
+                {
+                    Effect.LightOff();
+                    //노말 엔딩
+                    break;
+                }
+            }
+            else 
+            {
+                if(i == 13)
+                {
+                    //Line 변경
+                }
+            }
+            yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c10"].ToString(), chapter[Line]["sc10"].ToString()));
             yield return StartCoroutine(Next());
         }
     }
