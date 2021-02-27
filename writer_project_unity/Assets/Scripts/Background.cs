@@ -40,6 +40,8 @@ public class Background : MonoBehaviour
     //8chapter
     [SerializeField]
     private Sprite VillaStair, VillaOutSide;
+    [SerializeField]
+    private Sprite FlowerHouseBackGround;
 
     public GameObject Rain_ani;
     public Image SpriteView { get; private set; }
@@ -80,6 +82,7 @@ public class Background : MonoBehaviour
     public void ChangeToKateHouse(Image background) => background.sprite = KateHouse;
     public void ChangeToVillaStair(Image background) => background.sprite = VillaStair;
     public void ChangeToVillaOutSide(Image background) => background.sprite = VillaOutSide;
+    public void ChangeToFlowerHouseBackGround(Image background) => background.sprite = FlowerHouseBackGround;
     /***********************/
     // Update is called once per frame
     void Update()

@@ -110,6 +110,9 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     private Button MariegoldButton;
     private Button CountereButton;
 
+    private Button FlowerBedButton;
+    private Button OtherButton;
+
 
     //오브젝트 목록
     private GameObject Chapter1Object;
@@ -195,6 +198,8 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         RoseButton = Chapter10Object.transform.GetChild(3).GetComponent<Button>();
         MariegoldButton = Chapter10Object.transform.GetChild(4).GetComponent<Button>();
         CountereButton = Chapter10Object.transform.GetChild(5).GetComponent<Button>();
+
+
     }
     public void Click_Text()
     {
@@ -677,6 +682,19 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         }
         MiddleText.SetActive(false);
     }
+    IEnumerator FlowerBed()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter10, 8, 3, NameS2, TextS2));
+        MiddleText.SetActive(false);
+        Camera.transform.position = new Vector3(0, 0, -10);
+    }
+    IEnumerator OtherPoint()
+    {
+        MiddleText.SetActive(true);
+        yield return StartCoroutine(Texting(chapter10, 11, 1, NameS2, TextS2));
+        MiddleText.SetActive(false);
+    }
 
     /********************************************************************/
     //챕터 변경 함수
@@ -756,6 +774,11 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         TurnChapterNineItem(false);
         TurnChapterTenItem(true);
     }
+    public void ChapterTenSecondEnter()
+    {
+        TurnChapterTenItem(false);
+        TurnChapterTenSecondItem(true);
+    }
     public void TurnChapterOneItem(bool OnOff)
     {
         LakeButton.gameObject.SetActive(OnOff);
@@ -822,6 +845,10 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         RoseButton.gameObject.SetActive(OnOff);
         CountereButton.gameObject.SetActive(OnOff);
         MariegoldButton.gameObject.SetActive(OnOff);
+    }
+    public void TurnChapterTenSecondItem(bool OnOff)
+    {
+
     }
 
     /*************************************************************************/

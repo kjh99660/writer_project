@@ -939,7 +939,24 @@ public class Chat_controller : MonoBehaviour
             {
                 if(i == 13)
                 {
-                    //Line 변경
+                    Line = 51;
+                    //Line 변경 쪽지 팝업
+                    //PopUp
+                }
+                if(i == 16)
+                {
+                    //Popup
+                }
+                if (i == 20) Background.ChangeToFlowerHouseBackGround(Background.SpriteView);
+                if(i ==21)
+                {
+                    Search.ChapterTenSecondEnter();
+                    Camera.transform.position = new Vector3(25, 0, -10);
+                }
+                if(i == 42)
+                {
+                    Effect.LightOff();
+                    break;
                 }
             }
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c10"].ToString(), chapter[Line]["sc10"].ToString()));
