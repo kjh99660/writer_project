@@ -382,12 +382,14 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         CabinetButton.interactable = false;
         DrawerButton.interactable = false;
         SleepingBagButton.interactable = false;
-        yield return StartCoroutine(Texting(chapter2, 12, 4, NameS2Down, TextS2Down));
-
+        yield return StartCoroutine(Texting(chapter2, 12, 3, NameS2Down, TextS2Down));
+        BackGround.ChangeToBedroomCloseUp(BackGround.SpriteViewSearchRight);
+        yield return StartCoroutine(Texting(chapter2, 15, 1, NameS2Down, TextS2Down));
         CabinetButton.interactable = true;
         DrawerButton.interactable = true;
         SleepingBagButton.interactable = true;
         Camera.transform.position = new Vector3(0, 0, -10);
+        BackGround.ChangeToBedroom(BackGround.SpriteViewSearchRight);
         DownText.SetActive(false);
     }
     IEnumerator Nothing(List<Dictionary<string, object>> TextFile, Text name, Text text, int Line)

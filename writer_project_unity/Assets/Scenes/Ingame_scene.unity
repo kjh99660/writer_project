@@ -17036,6 +17036,7 @@ MonoBehaviour:
   Kitchen: {fileID: 21300000, guid: e146ffbab110c9b4e97538a351ba2ba4, type: 3}
   LivingRoom: {fileID: 21300000, guid: 1cf11334b0005b945b9c333ad99bea6f, type: 3}
   Bedroom: {fileID: 21300000, guid: c8c634371487ac447b56deed03c8be2e, type: 3}
+  BedroomCloseUp: {fileID: 21300000, guid: 75e4fec65ff6fe342bb963fac4100857, type: 3}
   Fireplace: {fileID: 21300000, guid: b80d26a30bcbcb2448603df1d90ddbca, type: 3}
   Novel: {fileID: 21300000, guid: d68b4d2bf51950c4fbc5135a1d864c2d, type: 3}
   Lake: {fileID: 0}
@@ -17054,6 +17055,7 @@ MonoBehaviour:
   KateHouse: {fileID: 0}
   VillaStair: {fileID: 0}
   VillaOutSide: {fileID: 0}
+  FlowerHouseBackGround: {fileID: 0}
   Rain_ani: {fileID: 1866848033}
 --- !u!222 &1515952661
 CanvasRenderer:

@@ -33,6 +33,11 @@ public class EffectManager : MonoBehaviour
         StartCoroutine(FlashCouroutine(speed));
         Debug.Log("Flash");
     }
+    public void Blink()//깜빡임
+    {
+        StartCoroutine(BlinkCouroutine());
+        Debug.Log("Blink");
+    }
     IEnumerator FadeOutCouroutine(float speed)
     {
         BlackEffect.gameObject.SetActive(true);
@@ -79,19 +84,24 @@ public class EffectManager : MonoBehaviour
         WhiteEffect.gameObject.SetActive(false);
     }
 
-    IEnumerator FadeCouroutine()
+    IEnumerator BlinkCouroutine()
     {
+        for(int i = 0; i < 2; i++)
+        {
+            FadeOut(0.08f);
+            yield return new WaitForSeconds(0.4f);
+            FadeIn(0.08f);
+            yield return new WaitForSeconds(0.4f);
+        }
         FadeOut();
-        yield return new WaitForSeconds(1f);
-        FadeIn();
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.D))
-            StartCoroutine(FadeCouroutine());
+        if (Input.GetKeyDown(KeyCode.E))
+            Blink();
         if (Input.GetKeyDown(KeyCode.F))
             Flash();
         if (Input.GetKeyDown(KeyCode.F1))

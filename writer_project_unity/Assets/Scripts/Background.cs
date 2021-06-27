@@ -15,6 +15,8 @@ public class Background : MonoBehaviour
     [SerializeField]
     private Sprite Bedroom;
     [SerializeField]
+    private Sprite BedroomCloseUp;
+    [SerializeField]
     private Sprite Fireplace;
     [SerializeField]
     private Sprite Novel;
@@ -67,6 +69,7 @@ public class Background : MonoBehaviour
     public void ChangeToKitchen(Image background) => background.sprite = Kitchen;
     public void ChangeToFireplace(Image background) => background.sprite = Fireplace;
     public void ChangeToBedroom(Image background) => background.sprite = Bedroom;
+    public void ChangeToBedroomCloseUp(Image background) => background.sprite = BedroomCloseUp;
     public void ChangeToCabinet(Image background) => background.sprite = Cabinet;
     public void ChangeToCabinetOpen(Image background) => background.sprite = CabinetOpen;
     public void ChangeToClueWatch(Image background) => background.sprite = ClueWatch;

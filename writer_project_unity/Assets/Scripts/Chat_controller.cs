@@ -166,6 +166,11 @@ public class Chat_controller : MonoBehaviour
                 Search.ChapterOneEnter();
                 Camera.transform.position = new Vector3(25, 0, -10);//호수탐색
             }
+            if (i == 37)
+            {
+                Effect.LightOff();
+                Effect.FadeIn();
+            }
             if(i == 41)
             {
                 //발소리 사운드
@@ -182,6 +187,11 @@ public class Chat_controller : MonoBehaviour
                 Camera.transform.position = new Vector3(25, 0, -10);
                 //나뭇가지를 탐색하는 내용
                 //호수 전경에 나뭇가지를 눌러야 다음으로 넘어가진다.
+            }
+            if(i == 48)
+            {
+                Effect.LightOff();
+                Effect.FadeIn();
             }
             //if (i == 60)CG 
             if (i == 61) Effect.LightOff();
@@ -220,12 +230,12 @@ public class Chat_controller : MonoBehaviour
                 Kid.ChangeToNoting(Kid.GetSpriteView());
                 Boy.ChangeToCrossDownArm(Boy.GetSpriteView());
             }
-            if(i == 25)
+            if(i == 26)
             {
                 Boy.ChangeToNoting(Boy.GetSpriteView());
                 Kid.ChangeToBasicDownArm(Kid.GetSpriteView());
             }
-            if(i == 27)
+            if(i == 28)
             {
                 Kid.ChangeToNoting(Kid.GetSpriteView());
                 Boy.ChangeToCrossDownArm(Boy.GetSpriteView());
@@ -240,9 +250,14 @@ public class Chat_controller : MonoBehaviour
                 Kid.ChangeToNoting(Kid.GetSpriteView());
                 Boy.ChangeToCrossDownArm(Boy.GetSpriteView());
             }
-            if (i == 34) Boy.ChangeToNoting(Boy.GetSpriteView());
-            if (i == 35)
+            if (i == 34)
             {
+                Boy.ChangeToNoting(Boy.GetSpriteView());
+                Effect.FadeOut();
+            }
+            if (i == 35)
+            {                
+                Effect.FadeIn();
                 //[별장 난로 앞 배경 – 머그컵 추가]
             }
             if (i == 36) Boy.ChangeToBasicBasic(Boy.GetSpriteView());            
@@ -309,9 +324,14 @@ public class Chat_controller : MonoBehaviour
                 Background.ChangeToCabinet(Background.SpriteView);
             }
             if (i == 97) Effect.FadeIn();
+            if(i == 98)
+            {
+                Effect.Blink();
+            }
             if (i == 99) Background.ChangeToCabinetOpen(Background.SpriteView);
+            if (i == 100) Effect.FadeIn();
             //if (i == 101) [캐비닛 앞, 칼에 이미 피가 묻어있는 장면] -> 작업중(흑백)
-            if (i == 101)
+            if (i == 100)
             {
                 Background.ChangeToBedroom(Background.SpriteView);
                 Kid.ChangeToCrossDownArm(Kid.GetSpriteView());
@@ -355,16 +375,16 @@ public class Chat_controller : MonoBehaviour
                 Effect.FadeIn();
                 Manu.SetActive(true);//+주방에서 칼을 든 장면
             }
-            if (i == 10) Background.ChangeToLibrary(Background.SpriteView);
-            if (i == 13)
+            if (i == 11) Background.ChangeToLibrary(Background.SpriteView);//+사운드 시작
+            if (i == 12)
             {
-                Manu.SetActive(false);
                 //CG3
             }
             if (i == 14)
             {
+                //사운드 끄기
                 Background.ChangeToFireplace(Background.SpriteView);
-                Manu.SetActive(true);
+                Manu.SetActive(true);//12라인에 FALSE없으면 삭제
             }
             if (i == 16)
             {

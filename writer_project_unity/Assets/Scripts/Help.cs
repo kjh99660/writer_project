@@ -12,7 +12,7 @@ public class Help : MonoBehaviour
     private GameObject[] HelpPanel = new GameObject[2];
     public GameObject HelpImage;
     public GameObject[] ImformationPanel = new GameObject[4];
-    private readonly string[] String = { "[침대 헤드]가 [사건일지]에 기록되었습니다.",
+    private readonly string[] String = { "[침대 프레임]이 [사건일지]에 기록되었습니다.",
     "[스티커]가 [사건일지]에 기록되었습니다", "[금이 간 시계]가 [사건일지]에 기록되었습니다","[하얀 손수건]이 [사건 일지]에 기록되었습니다.",
     "방 안의 물건을 선택하면 이를 주제로 대화가 가능합니다","[손바닥 자국]이 [사건 일지]에 기록되었습니다."};
 
