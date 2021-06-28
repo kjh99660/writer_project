@@ -204,7 +204,7 @@ public class Chat_controller : MonoBehaviour
         Line = 0;
         chapter = CSVfileReader.Read("scenario_2");
 
-        for (int i = 0; i<103; i++)//2챕터
+        for (int i = 0; i<106; i++)//2챕터
         {
             if (NextChapter == true) break;
             Debug.Log(i);
@@ -324,19 +324,17 @@ public class Chat_controller : MonoBehaviour
                 Background.ChangeToCabinet(Background.SpriteView);
             }
             if (i == 97) Effect.FadeIn();
-            if(i == 98)
-            {
-                Effect.Blink();
-            }
-            if (i == 99) Background.ChangeToCabinetOpen(Background.SpriteView);
-            if (i == 100) Effect.FadeIn();
-            //if (i == 101) [캐비닛 앞, 칼에 이미 피가 묻어있는 장면] -> 작업중(흑백)
-            if (i == 100)
+            //if(i == 98)//끼익 소리 추가하기
+            if (i == 98) Background.ChangeToCabinetOpen(Background.SpriteView);
+            //i == 99 + 칼들고 있는 손 추가하기
+            if (i == 100) Effect.Blink();
+            if (i == 102) Effect.FadeIn();// + 피 떨어지는 소리
+            if (i == 103)
             {
                 Background.ChangeToBedroom(Background.SpriteView);
                 Kid.ChangeToCrossDownArm(Kid.GetSpriteView());
             }
-            if (i == 102)
+            if (i == 105)
             {
                 Kid.ChangeToNoting(Kid.GetSpriteView());
                 Effect.FadeOut();
@@ -355,6 +353,7 @@ public class Chat_controller : MonoBehaviour
             if (NextChapter == true) break;
             if(i == 0)
             {
+                Effect.FadeIn();
                 CenterText.CenterTextChange(4);
                 if (!Manu.activeSelf) Manu.SetActive(true);
                 Boy.ChangeToNoting(Boy.GetSpriteView());
@@ -382,6 +381,8 @@ public class Chat_controller : MonoBehaviour
             }
             if (i == 14)
             {
+                Effect.LightOff();
+                Effect.FadeIn();
                 //사운드 끄기
                 Background.ChangeToFireplace(Background.SpriteView);
                 Manu.SetActive(true);//12라인에 FALSE없으면 삭제
