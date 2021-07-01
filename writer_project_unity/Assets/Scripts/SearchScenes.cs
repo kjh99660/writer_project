@@ -413,7 +413,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         else
         {
             TurnChapterTwoItem(false);
-            yield return StartCoroutine(Texting(chapter3, 11, 2, NameS2Down, TextS2Down));
+            yield return StartCoroutine(Texting(chapter3, 10, 3, NameS2Down, TextS2Down));
             Effect.Flash();
             yield return StartCoroutine(Texting(chapter3, 13, 3, NameS2Down, TextS2Down));
             Help.ChangeText(3);
@@ -435,14 +435,13 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         else 
         {
             TurnChapterTwoItem(false);
-            yield return StartCoroutine(Texting(chapter3, 5, 3, NameS2Down, TextS2Down));
+            yield return StartCoroutine(Texting(chapter3, 5, 4, NameS2Down, TextS2Down));
 
             BackGround.ChangeToClueWatch(BackGround.SpriteViewSearchRight);
             Effect.Flash();
             Ingame_Setting.GetClue(0);//시계
             Help.ChangeText(2);
             Help.ImformationPanelOnOff(true);
-            yield return StartCoroutine(Texting(chapter3, 8, 1, NameS2Down, TextS2Down));
             NameS2Down.gameObject.SetActive(true);
             TextS2Down.gameObject.SetActive(true);
             yield return StartCoroutine(Next());
@@ -898,7 +897,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     {
         if (ChapterTwoHalf) StartCoroutine(Noting());//이미 조사한 것 같다.
         else if (ChapterTwoLast) StartCoroutine(Nothing(chapter2, NameS2, TextS2, 20));//2쳅터는 20라인에서 시작
-        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2, TextS2, 15));
+        else if (ChapterThree) StartCoroutine(Nothing(chapter3, NameS2, TextS2, 16));
         else StartCoroutine(Coat());
     }
     public void ClickCup()

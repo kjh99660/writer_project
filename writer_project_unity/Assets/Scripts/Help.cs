@@ -13,7 +13,7 @@ public class Help : MonoBehaviour
     public GameObject HelpImage;
     public GameObject[] ImformationPanel = new GameObject[4];
     private readonly string[] String = { "[침대 프레임]이 [사건일지]에 기록되었습니다.",
-    "[스티커]가 [사건일지]에 기록되었습니다", "[금이 간 시계]가 [사건일지]에 기록되었습니다","[하얀 손수건]이 [사건 일지]에 기록되었습니다.",
+    "[스티커]가 [사건일지]에 기록되었습니다", "[깨진 시계]가 [사건일지]에 기록되었습니다","[하얀 손수건]이 [사건 일지]에 기록되었습니다.",
     "방 안의 물건을 선택하면 이를 주제로 대화가 가능합니다","[손바닥 자국]이 [사건 일지]에 기록되었습니다."};
 
     private readonly string[] HelpPanelString = { "방 안의 물건을 선택하면 이를 주제로 대화가 가능합니다.",
@@ -31,6 +31,10 @@ public class Help : MonoBehaviour
     {
         HelpPanel[Panel].transform.GetChild(1).GetComponent<Text>().text = HelpPanelString[num];
     }
+    public void HelpPanelOnOff(bool TrueOrFalse, int num)
+    {
+        HelpPanel[num].transform.gameObject.SetActive(TrueOrFalse);
+    }
 
     /****************************************/
 
@@ -41,7 +45,7 @@ public class Help : MonoBehaviour
             panel.SetActive(TrueOrFalse);
         }
     }
-    public void ChangeText(int num)//좌상단 도움말
+    public void ChangeText(int num)//좌상단 도움말 내용 변경
     {
         foreach(GameObject panel in ImformationPanel) panel.transform.GetChild(0).GetComponent<Text>().text = String[num];
     }
