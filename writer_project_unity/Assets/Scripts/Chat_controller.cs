@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Chat_controller : MonoBehaviour
@@ -823,7 +824,7 @@ public class Chat_controller : MonoBehaviour
         Line = 0;
         chapter = CSVfileReader.Read("scenario_9");
 
-        for (int i = 0; i < 59; i++)//챕터9
+        for (int i = 0; i < 83; i++)//챕터9
         {
             Debug.Log(i);
             if (NextChapter == true) break;
@@ -835,83 +836,77 @@ public class Chat_controller : MonoBehaviour
             }
             if (i == 1)
             {
-                Background.ChangeToLibrary(Background.SpriteView);
+                //열린 캐비닛 앞 칼 들고 있는 장면 -> 흑백 필터
             }
+            if (i == 2) Effect.LightOff();
+            //if(i == 5) 음악 끝
 
             if (Data.IsBadEnding == true)
             {
-                if (i == 7) Background.ChangeToLivingRoom(Background.SpriteView);
-                if (i == 10) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
-                if (i == 17) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
-                if (i == 20) Boy.ChangeToNoting(Boy.GetSpriteView());
+                if (i == 7) Background.ChangeToLibrary(Background.SpriteView);
+                if (i == 9) Background.ChangeToLivingRoom(Background.SpriteView);
+                if (i == 12) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
+                if (i == 19) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
+                //if (i == 20)심장 내려앉는 소리
                 //i == 22 배경 어둡게
-                if(i == 27)
+                if(i == 31)
                 {
-                    Effect.LightOff();
+                    Boy.ChangeToNoting(Boy.GetSpriteView());
                     //베드 엔딩
-                    break;
                 }
+                if (i == 32) SceneManager.LoadScene("Startscene");
 
             }
             else
             {
-                if (i == 5)
+                if (i == 7)
                 {
-                    Line = 30;
+                    Line = 33;
                     Background.ChangeToLibrary(Background.SpriteView);
                 }                
-                if (i == 8) Background.ChangeToLivingRoom(Background.SpriteView);
-                if (i == 9) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
-                if(i == 12)
+                if (i == 9) Background.ChangeToLivingRoom(Background.SpriteView);
+                if (i == 10) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
+                if(i == 13)
                 {
                     Boy.ChangeToNoting(Boy.GetSpriteView());
                     Kid.ChangeToBasicBasic(Kid.GetSpriteView());
                 }
-                if (i == 13) Kid.ChangeToNoting(Kid.GetSpriteView());
-                if(i == 14)
+                if (i == 14) Kid.ChangeToNoting(Kid.GetSpriteView());
+                if(i == 15)
                 {
-                    //침대에서 꾼 악몽 다시
+                    //(불안한 브금) [캐비닛 앞 노아의 모습 + 피 살짝]
                 }
-                if (i == 15) Kid.ChangeToBasicBasic(Kid.GetSpriteView());
-                if(i == 16)
+                if (i == 16) Kid.ChangeToBasicBasic(Kid.GetSpriteView());
+                if(i == 17)
                 {
                     Kid.ChangeToNoting(Kid.GetSpriteView());
                     //접시 깨지는 소리
                 }
-                if(i == 23) Kid.ChangeToCrossBasic(Kid.GetSpriteView());
-                if(i == 24)
+                if(i == 24) Kid.ChangeToCrossBasic(Kid.GetSpriteView());
+                if(i == 25)
                 {
                     Kid.ChangeToNoting(Kid.GetSpriteView());
-                    Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
+                    Boy.ChangeToCrossBasic(Boy.GetSpriteView());
                 }
-                if (i == 25) Boy.ChangeToNoting(Boy.GetSpriteView());
-                if (i == 26) Kid.ChangeToBasicUpArm(Kid.GetSpriteView());
-                if(i == 27)
+                if (i == 26) Boy.ChangeToNoting(Boy.GetSpriteView());
+                if (i == 27) Kid.ChangeToBasicUpArm(Kid.GetSpriteView());
+                if(i == 28)
                 {
                     Kid.ChangeToNoting(Kid.GetSpriteView());
-                    Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
+                    Boy.ChangeToCrossBasic(Boy.GetSpriteView());
                 }
-                if (i == 32) Background.ChangeToLibrary(Background.SpriteView);
-                if(i == 37)
+                if (i == 32)
                 {
                     Boy.ChangeToNoting(Boy.GetSpriteView());
+                    Background.ChangeToLibrary(Background.SpriteView);
+                }
+                if(i == 36)
+                {
                     Search.ChapterNineEnter();
                     Camera.transform.position = new Vector3(25, 0, -10);
                 }
-                if (i == 38) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
-                if (i == 40) Boy.ChangeToNoting(Boy.GetSpriteView());
-                if (i == 42) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
-                if (i == 43) Boy.ChangeToNoting(Boy.GetSpriteView());
-                if (i == 45) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
-                if (i == 47) Boy.ChangeToNoting(Boy.GetSpriteView());
-                if (i == 50) Boy.ChangeToCrossDownArm(Boy.GetSpriteView());
-                if(i == 51)
-                {
-                    Boy.ChangeToNoting(Boy.GetSpriteView());
-                    Kid.ChangeToCrossDownArm(Kid.GetSpriteView());
-                }
-                if (i == 53) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
-                if (i == 55) Boy.ChangeToNoting(Boy.GetSpriteView());
+                //여기까지 진행
+                
 
             }
 
