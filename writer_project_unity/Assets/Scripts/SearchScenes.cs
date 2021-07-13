@@ -606,6 +606,8 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         UpText.SetActive(true);
         yield return StartCoroutine(Texting(chapter9, 4, 1, NameS2Up, TextS2Up));
         UpText.SetActive(false);
+        Effect.LightOff();
+        Effect.FadeIn();
         Camera.transform.position = new Vector3(0, 0, -10);
     }
     IEnumerator WatchChapterNine()
