@@ -35,6 +35,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
     private Ingame_setting Ingame_Setting;//인 게임 세팅 변화
     private CharacterOther Character;//다른 등장인물 이미지
     private GameData Data;//저장 데이터
+    private Audio Audio;//사운드 관련
     private List<Dictionary<string, object>> chapter10;
     private List<Dictionary<string, object>> chapter9;
     private List<Dictionary<string, object>> chapter4;
@@ -134,6 +135,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         Ingame_Setting = GameObject.Find("Canvas").transform.Find("Setting").GetComponent<Ingame_setting>();
         Character = GameObject.Find("Standing").transform.GetChild(3).GetComponent<CharacterOther>();
         Data = GameObject.Find("Data").GetComponent<GameData>();
+        Audio = GameObject.Find("EffectSound").GetComponent<Audio>();
 
         Chapter1Object = GameObject.Find("Chapter1Object");
         Chapter2Object = GameObject.Find("Chapter2Object");
@@ -198,13 +200,9 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         RoseButton = Chapter10Object.transform.GetChild(3).GetComponent<Button>();
         MariegoldButton = Chapter10Object.transform.GetChild(4).GetComponent<Button>();
         CountereButton = Chapter10Object.transform.GetChild(5).GetComponent<Button>();
-
-
     }
-    public void Click_Text()
-    {
-        Click = false;
-    }
+    public void Click_Text() => Click = false;
+
     IEnumerator Chatting(Text name, Text text, string narrator, string narration)//채팅 진행 코루틴 , 한 프레임마다 한 글자씩 생성
     {
         name.text = narrator;
@@ -415,6 +413,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
             TurnChapterTwoItem(false);
             yield return StartCoroutine(Texting(chapter3, 10, 3, NameS2Down, TextS2Down));
             Effect.Flash();
+            Audio.PlayEffectSound("0");
             yield return StartCoroutine(Texting(chapter3, 13, 3, NameS2Down, TextS2Down));
             Help.ChangeText(3);
             Help.ImformationPanelOnOff(true);
@@ -435,10 +434,12 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         else 
         {
             TurnChapterTwoItem(false);
+            Audio.PlayEffectSound("9");
             yield return StartCoroutine(Texting(chapter3, 5, 4, NameS2Down, TextS2Down));
 
             BackGround.ChangeToClueWatch(BackGround.SpriteViewSearchRight);
             Effect.Flash();
+            Audio.PlayEffectSound("0");
             Ingame_Setting.GetClue(0);//시계
             Help.ChangeText(2);
             Help.ImformationPanelOnOff(true);
@@ -468,7 +469,11 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
             for (int i = 0; i < 5; i++)
             {
                 if (i == 2) BackGround.ChangeToClueSticker(BackGround.SpriteViewSearch);
-                if (i == 3) Effect.Flash();
+                if (i == 3)
+                {
+                    Effect.Flash();
+                    Audio.PlayEffectSound("0");
+                }
                 if (i == 4)
                 {
                     Help.ChangeText(1);

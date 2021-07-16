@@ -241,7 +241,11 @@ public class Chat_controller : MonoBehaviour
                 Background.ChangeToFireplace(Background.SpriteView);//별장 난로앞 – 아이 코트, 머그컵 없음
             }
             if (i == 1) Effect.FadeIn();
-            if (i == 2) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
+            if (i == 2)
+            {
+                Boy.ChangeToBasicBasic(Boy.GetSpriteView());
+                Audio.PlayBackGroundSound("2");
+            }
             if (i == 3) Boy.ChangeToNoting(Boy.GetSpriteView());
             if (i == 5) Boy.ChangeToBasicUpArm(Boy.GetSpriteView());
             if (i == 9) Boy.ChangeToHappyBasic(Boy.GetSpriteView());
@@ -281,6 +285,7 @@ public class Chat_controller : MonoBehaviour
             {
                 Boy.ChangeToNoting(Boy.GetSpriteView());
                 Effect.FadeOut();
+                Audio.StopBackGroundSound();
             }
             if (i == 35)
             {                
@@ -290,12 +295,19 @@ public class Chat_controller : MonoBehaviour
             if (i == 36) Boy.ChangeToBasicBasic(Boy.GetSpriteView());            
             if (i == 38) Boy.ChangeToNoting(Boy.GetSpriteView());
             //if(i == 39) 오르골 팝업 띄우기      
-            //if(i == 44)(음악소리)
-            //if(i == 47)//팝업 삭제
+            if (i == 44) Audio.PlayBackGroundSound("4");
+            if (i == 47)
+            {
+                Audio.DecreaseBackGroundSound();
+                //팝업 삭제
+            }
+            if (i == 49) Audio.DecreaseBackGroundSound(0f);
             if (i == 51) Boy.ChangeToHappyBasic(Boy.GetSpriteView());
             if (i == 52) Boy.ChangeToNoting(Boy.GetSpriteView());       
             if(i == 54)
             {
+                Audio.StopBackGroundSound();
+                Audio.SetBackGroundSound(1f);
                 Search.ChapterTwoEnter();
                 Camera.transform.position = new Vector3(25, 0, -10);//별장 탐색
             }
@@ -307,7 +319,11 @@ public class Chat_controller : MonoBehaviour
             {
                 //CG
             }
-            if(i == 63) Effect.Flash();
+            if (i == 63)
+            {
+                Effect.Flash();
+                Audio.PlayEffectSound("0");
+            }
             if(i == 64)
             {
                 HelpPanel[0].SetActive(true);
@@ -322,7 +338,11 @@ public class Chat_controller : MonoBehaviour
                 Boy.ChangeToNoting(Boy.GetSpriteView());
                 Background.ChangeToBedroom(Background.SpriteView);
             }
-            if (i == 71) Effect.Flash();
+            if (i == 71)
+            {
+                Effect.Flash();
+                Audio.PlayEffectSound("0");
+            }
             if (i == 72)
             {
                 HelpUI.ChangeText(0);
@@ -331,7 +351,11 @@ public class Chat_controller : MonoBehaviour
             if (i == 73) HelpUI.ImformationPanelOnOff(false);
             if (i == 74) Kid.ChangeToBasicUpArm(Kid.GetSpriteView());
             if (i == 75) Kid.ChangeToNoting(Kid.GetSpriteView());
-            //if (i == 76)//손목 클로즈업 배경
+            if (i == 76)
+            {
+                Audio.PlayEffectSound("4");
+                //손목 클로즈업 배경
+            }
             if (i == 78) Kid.ChangeToCrossDownArm(Kid.GetSpriteView());
             if (i == 81) Kid.ChangeToNoting(Kid.GetSpriteView());
             if (i == 87)
@@ -343,7 +367,12 @@ public class Chat_controller : MonoBehaviour
             if (i == 89) Boy.ChangeToBasicUpArm(Boy.GetSpriteView());
             if (i == 91) Boy.ChangeToNoting(Boy.GetSpriteView());
             if (i == 92) Background.ChangeToCabinet(Background.SpriteView);
-            if (i == 93) Background.ChangeToCabinetOpen(Background.SpriteView);
+            if (i == 93)
+            {
+                Background.ChangeToCabinetOpen(Background.SpriteView);
+                Audio.PlayEffectSound("5");
+            }
+            if (i == 94) Audio.PlayBackGroundSound("7");
             if (i == 97) 
             {
                 Effect.LightOff();
@@ -351,10 +380,15 @@ public class Chat_controller : MonoBehaviour
                 Background.ChangeToCabinet(Background.SpriteView);
             }
             if (i == 98) Effect.FadeIn();
-            //if(i == 99)//끼익 소리 추가하기
-            if (i == 99) Background.ChangeToCabinetOpen(Background.SpriteView);
+            if (i == 99) Audio.PlayEffectSound("5");
+            if (i == 100) Background.ChangeToCabinetOpen(Background.SpriteView);
             //i == 100 + 칼들고 있는 손 추가하기
-            if (i == 101) Effect.Blink();
+            if (i == 101)
+            {
+                Effect.Blink();
+                Audio.StopBackGroundSound();
+            }
+            if (i == 102) Audio.PlayEffectSound("7");
             if (i == 103) Effect.FadeIn();// + 피 떨어지는 소리
             if (i == 104)
             {
@@ -395,6 +429,7 @@ public class Chat_controller : MonoBehaviour
                 //살인할 때 칼을 든 장면
                 Effect.LightOff();
                 Manu.SetActive(false);
+                Audio.PlayEffectSound("8");
             }
             if (i == 8)
             {
@@ -404,13 +439,14 @@ public class Chat_controller : MonoBehaviour
             if (i == 11) Effect.FadeOut();
             if (i == 12)
             {
+                Audio.PlayBackGroundSound("5");
                 //CG3//+사운드 시작
             }
             if (i == 14)
             {
+                Audio.StopBackGroundSound();
                 Effect.LightOff();
                 Effect.FadeIn();
-                //사운드 끄기
                 Background.ChangeToFireplace(Background.SpriteView);
                 Manu.SetActive(true);//12라인에 FALSE없으면 삭제
             }
@@ -449,7 +485,7 @@ public class Chat_controller : MonoBehaviour
             if (i == 59) Boy.ChangeToNoting(Boy.GetSpriteView());
             if(i == 61)
             {
-                //책 펼치는 소리
+                Audio.PlayEffectSound("10");
                 IngameSetting.ClearSuspectPart();
                 IngameSetting.Case_file();
                 IngameSetting.Case_fileSuspect();
@@ -495,9 +531,14 @@ public class Chat_controller : MonoBehaviour
                 Character.ChangeToNoting(Character.GetSpriteView());
                 Background.ChangeToStreet(Background.SpriteView);                
             }
-            //if(i == 13)아데린 실종 포스터 팝업
+            if (i == 13)
+            {
+                Audio.PlayEffectSound("11");
+                //아데린 실종 포스터 팝업
+            }
             if(i == 15)
             {
+                Audio.PlayEffectSound("12");
                 Search.ChapterFourSecondEnter();
                 Background.ChangeToFlowerShop(Background.SpriteView);
                 Character.ChangeToLilly(Character.GetSpriteView());
@@ -535,13 +576,21 @@ public class Chat_controller : MonoBehaviour
             if (i == 7) Character.ChangeToAbigail(Character.GetSpriteView());
             if (i == 16) Character.ChangeToOlivia(Character.GetSpriteView());
             if (i == 31) Character.ChangeToNoting(Character.GetSpriteView());
-            //if(i == 33) 음악
-            //if(i == 35) 흐려지는 효과
-            if (i == 36) Background.ChangeToLivingRoom(Background.SpriteView);
+            if (i == 33) Audio.PlayBackGroundSound("7");
+            if (i == 35) Effect.Blur(true);
+            if (i == 36)
+            {
+                Background.ChangeToLivingRoom(Background.SpriteView);
+                Effect.Blur(false);
+            }
             //if(i == 37) Background.ChangeTo 문밖 배경
             //if(i == 38) 이미지 변경
             if (i == 39) Background.ChangeToLivingRoom(Background.SpriteView);
-            if (i == 40) Effect.LightOff();//+ 음악 끝
+            if (i == 40)
+            {
+                Effect.LightOff();
+                Audio.StopBackGroundSound();
+            }
             if (i == 41)
             {
                 Effect.FadeIn();
@@ -571,7 +620,7 @@ public class Chat_controller : MonoBehaviour
             }
             if (i == 60) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
             if (i == 61) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
-            //62 sound
+            if (i == 62) Audio.PlayEffectSound("13");
             if (i == 67) Boy.ChangeToCrossDownArm(Boy.GetSpriteView());
             if(i == 68)
             {
@@ -605,13 +654,16 @@ public class Chat_controller : MonoBehaviour
             if (i == 6) Boy.ChangeToNoting(Boy.GetSpriteView());
             if (i == 9) Boy.ChangeToBasicUpArm(Boy.GetSpriteView());
             if (i == 10) Boy.ChangeToNoting(Boy.GetSpriteView());
-            if (i == 12) PopUp.Choice(1);
+            if (i == 12) PopUp.Choice(1);//선택지
+            if (i == 13 && PopUp.GetChoiceAnswer() == 2) Audio.PlayEffectSound("14");
 
             if (PopUp.GetChoiceAnswer() != 2 && i == 13)//실패
             {
-                Data.IsBadEnding = true;
+                Data.SetIsBadEnding(true);
                 Line = 20;
                 i = 20;
+                Audio.PlayEffectSound("15");
+                Debug.Log("실패");
             }
             if (PopUp.GetChoiceAnswer() == 2 && i == 20)//성공
             {
@@ -624,6 +676,7 @@ public class Chat_controller : MonoBehaviour
                 Background.ChangeToUnderConstruction(Background.SpriteView);
                 Boy.ChangeToNoting(Boy.GetSpriteView());
             }
+            if (i == 28) Audio.PlayEffectSound("16");
             if (i == 30) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
             if (i == 33) Boy.ChangeToNoting(Boy.GetSpriteView());
             if(i == 34)
@@ -640,10 +693,11 @@ public class Chat_controller : MonoBehaviour
             if(i == 39)
             {
                 Kid.ChangeToNoting(Kid.GetSpriteView());
-                Boy.ChangeToBasicUpArm(Boy.GetSpriteView());
+                Boy.ChangeToBasicBasic(Boy.GetSpriteView());
             }
             if(i == 46)
             {
+                Audio.PlayEffectSound("12");
                 Boy.ChangeToNoting(Boy.GetSpriteView());
                 Background.ChangeToCakeStore(Background.SpriteView);
             }
@@ -662,7 +716,7 @@ public class Chat_controller : MonoBehaviour
             if (i == 60) PopUp.Choice(2);
             if (PopUp.GetChoiceAnswer() != 3 && i == 61)//실패
             {
-                Data.IsBadEnding = true;
+                Data.SetIsBadEnding(true);
                 Line = 63;
                 i = 63;
             }
@@ -671,6 +725,7 @@ public class Chat_controller : MonoBehaviour
                 Line = 67;
                 i = 67;
             }
+            if (i == 65) Audio.PlayEffectSound("12");
             if(i == 66)
             {
                 Background.ChangeToStreet(Background.SpriteView);
@@ -727,6 +782,8 @@ public class Chat_controller : MonoBehaviour
                 Character.ChangeToKate(Character.GetSpriteView());
                 Boy.ChangeToNoting(Boy.GetSpriteView());
             }
+            if (i == 12) Audio.PlayEffectSound("17");
+            if (i == 13) Audio.StopEffactSound();
             if (i == 16) Character.ChangeToNoting(Character.GetSpriteView());
             if (i == 17) Boy.ChangeToHappyBasic(Boy.GetSpriteView());
             if(i == 18)
@@ -753,7 +810,7 @@ public class Chat_controller : MonoBehaviour
             }
             if (PopUp.GetChoiceAnswer() == 2 && i == 29)//실패 - 2
             {
-                Data.IsBadEnding = true;
+                Data.SetIsBadEnding(true);
                 Line = 35;
                 i = 35;
             }
@@ -764,7 +821,7 @@ public class Chat_controller : MonoBehaviour
             }
             if (PopUp.GetChoiceAnswer() == 3 && i == 30)//실패 - 3
             {
-                Data.IsBadEnding = true;
+                Data.SetIsBadEnding(true);
                 Line = 37;
                 i = 37;
             }
@@ -776,7 +833,9 @@ public class Chat_controller : MonoBehaviour
                 Background.ChangeToFlowerShop(Background.SpriteView);
                 Effect.LightOff();
                 Effect.FadeIn();
+                Audio.PlayEffectSound("12");
             }
+            if (i == 64) Audio.PlayEffectSound("12");
             if (i == 65) Background.ChangeToStreet(Background.SpriteView);
             if (i == 66) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
             if (i == 74) Boy.ChangeToBasicBasic(Boy.GetSpriteView());
@@ -813,11 +872,21 @@ public class Chat_controller : MonoBehaviour
             }
             if (i == 4) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
             if (i == 6) Boy.ChangeToBasicUpArm(Boy.GetSpriteView());
-            if (i == 7) Boy.ChangeToNoting(Boy.GetSpriteView());
-            if (i == 8) Background.ChangeToVillaStair(Background.SpriteView);
+            if (i == 7)
+            {
+                Audio.PlayEffectSound("18");
+                Boy.ChangeToNoting(Boy.GetSpriteView());
+            }
+            if (i == 8)
+            {
+                Background.ChangeToVillaStair(Background.SpriteView);
+                Audio.PlayEffectSound("16");
+            }
             if (i == 13) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
             if (i == 14) Boy.ChangeToNoting(Boy.GetSpriteView());
+            if (i == 16) Audio.PlayEffectSound("19");
             //if(i == 17)계단에 손바닥 자국이 난 장면
+            if (i == 18) Audio.PlayBackGroundSound("7");
             if(i == 19)
             {
                 Background.ChangeToVillaOutSide(Background.SpriteView);
@@ -828,6 +897,7 @@ public class Chat_controller : MonoBehaviour
             if (i == 23) Kid.ChangeToNoting(Kid.GetSpriteView());
             if (i == 24)
             {
+                Audio.StopBackGroundSound();
                 Effect.Flash();
                 // PopUp.TurnOnOffObject(PopUp.PopUpBackGround, PopUp.Handprint, true);//팝업
                 HelpUI.ChangeText(5);
@@ -860,26 +930,26 @@ public class Chat_controller : MonoBehaviour
             }
             if (i == 1)
             {
+                Audio.PlayBackGroundSound("6");
                 //열린 캐비닛 앞 칼 들고 있는 장면 -> 흑백 필터
             }
             if (i == 2) Effect.LightOff();
             if (i == 3) Effect.FadeIn();
-            //if(i == 5) 음악 끝
+            if (i == 5) Audio.StopBackGroundSound();
 
-            if (Data.IsBadEnding == true)
+            if (Data.GetIsBadEnding() == true)
             {
-                if (i == 7) Background.ChangeToLibrary(Background.SpriteView);
-                if (i == 9) Background.ChangeToLivingRoom(Background.SpriteView);
-                if (i == 12) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
-                if (i == 19) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
-                //if (i == 20)심장 내려앉는 소리
-                //i == 22 배경 어둡게
-                if(i == 31)
+                if (i == 8) Background.ChangeToLibrary(Background.SpriteView);
+                if (i == 10) Background.ChangeToLivingRoom(Background.SpriteView);
+                if (i == 13) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
+                if (i == 20) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
+                if (i == 21) Audio.PlayEffectSound("4");
+                //i == 23 배경 어둡게
+                if(i == 32)
                 {
                     Boy.ChangeToNoting(Boy.GetSpriteView());
-                    //베드 엔딩
+                    //베드 엔딩 띄우기
                 }
-                if (i == 32) SceneManager.LoadScene("Startscene");
 
             }
             else
@@ -899,13 +969,14 @@ public class Chat_controller : MonoBehaviour
                 if (i == 15) Kid.ChangeToNoting(Kid.GetSpriteView());
                 if(i == 16)
                 {
-                    //(불안한 브금) [캐비닛 앞 노아의 모습 + 피 살짝]
+                    //(불안한 브금) //[캐비닛 앞 노아의 모습 + 피 살짝]
                 }
                 if (i == 17) Kid.ChangeToBasicBasic(Kid.GetSpriteView());
                 if(i == 18)
                 {
                     Kid.ChangeToNoting(Kid.GetSpriteView());
-                    //접시 깨지는 소리
+                    Background.ChangeToLivingRoom(Background.SpriteView);
+                    Audio.PlayEffectSound("20");
                 }
                 if(i == 26) Kid.ChangeToCrossBasic(Kid.GetSpriteView());
                 if(i == 27)
@@ -931,6 +1002,7 @@ public class Chat_controller : MonoBehaviour
                     Camera.transform.position = new Vector3(25, 0, -10);
                 }
                 if (i == 39) Boy.ChangeToCrossBasic(Boy.GetSpriteView());
+                if (i == 40) Audio.PlayEffectSound("19");
                 if (i == 41) Boy.ChangeToNoting(Boy.GetSpriteView());
                 if (i == 43) Boy.ChangeToCrossUpArm(Boy.GetSpriteView());
                 if (i == 51) Boy.ChangeToCrossDownArm(Boy.GetSpriteView());
@@ -1041,12 +1113,5 @@ public class Chat_controller : MonoBehaviour
             yield return StartCoroutine(Chatting(TextS1, chapter[Line]["c10"].ToString(), chapter[Line]["sc10"].ToString()));
             yield return StartCoroutine(Next());
         }
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

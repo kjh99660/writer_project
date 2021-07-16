@@ -7,6 +7,7 @@ public class EffectManager : MonoBehaviour
 {
     public Image BlackEffect;
     public Image WhiteEffect;
+    public Image BlurEffect;
     private Color BlackOutColor;//페이드 인 아웃
     private Color WhiteOutColor;//플레시
     private Color lightOff = new Color(0f, 0f, 0f, 1f);
@@ -38,6 +39,7 @@ public class EffectManager : MonoBehaviour
         StartCoroutine(BlinkCouroutine());
         Debug.Log("Blink");
     }
+    public void Blur(bool truefalse) => BlurEffect.gameObject.SetActive(truefalse);
     IEnumerator FadeOutCouroutine(float speed)
     {
         BlackEffect.gameObject.SetActive(true);

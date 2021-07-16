@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 [Serializable]
 public class GameData : MonoBehaviour
 {
-    public bool IsBadEnding;
+    private bool IsBadEnding =  false;
     public bool IsNormalEnding;
     //둘 다 false면 True 엔딩
 
@@ -21,5 +22,8 @@ public class GameData : MonoBehaviour
     //볼륨 설정 저장
     public float MusicSound;
     public float EffectSound;
+
+    public bool GetIsBadEnding() => IsBadEnding;
+    public void SetIsBadEnding(bool value) => IsBadEnding = value;
 
 }

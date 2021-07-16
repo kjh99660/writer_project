@@ -8,11 +8,13 @@ public class Audio : MonoBehaviour
     private AudioSource backgroundAudioSource;
     public AudioClip[] Effect = new AudioClip[21];
     public AudioClip[] BackGroundSound = new AudioClip[8];
+    private readonly WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
     // Start is called before the first frame update
     void Start()
     {
         effectAudioSource = GetComponent<AudioSource>();
         backgroundAudioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
+        
     }
     public void PlayEffectSound(string action)
     {
@@ -117,12 +119,20 @@ public class Audio : MonoBehaviour
         }
         backgroundAudioSource.Play();
     }
-    public void StopBackGroundSound()
+    public void StopBackGroundSound() => backgroundAudioSource.Stop();
+    public void StopEffactSound() => effectAudioSource.Stop();
+    public void SetBackGroundSound(float value) => backgroundAudioSource.volume = value;
+    public void DecreaseBackGroundSound(float min = 0.1f)
     {
-        backgroundAudioSource.Stop();
+        IEnumerator DecreaseBackGround()
+        {
+            while (backgroundAudioSource.volume > min)
+            {
+                backgroundAudioSource.volume -= 0.005f;
+                yield return waitForEndOfFrame;
+            }
+        }
+        StartCoroutine(DecreaseBackGround()); 
     }
-    public void StopEffactSound()
-    {
-        effectAudioSource.Stop();
-    }
+
 }
