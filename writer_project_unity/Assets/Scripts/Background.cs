@@ -87,9 +87,5 @@ public class Background : MonoBehaviour
     public void ChangeToVillaOutSide(Image background) => background.sprite = VillaOutSide;
     public void ChangeToFlowerHouseBackGround(Image background) => background.sprite = FlowerHouseBackGround;
     /***********************/
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

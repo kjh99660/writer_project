@@ -17311,7 +17311,7 @@ MonoBehaviour:
   Lake: {fileID: 0}
   AmberHouse: {fileID: 0}
   Street: {fileID: 0}
-  FlowerShop: {fileID: 0}
+  FlowerShop: {fileID: 21300000, guid: f0784e503a9f47b44b7138575a084ae0, type: 3}
   Cabinet: {fileID: 21300000, guid: 0a76e4e952c601342bda5262edf8c700, type: 3}
   CabinetOpen: {fileID: 21300000, guid: 72d3a8ef1c5411f41a2b202aa568adf6, type: 3}
   ClueSticker: {fileID: 21300000, guid: 1ba6b8be197b2804896a2b9c3855a7d5, type: 3}
@@ -24854,7 +24854,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -1}
-  m_SizeDelta: {x: 6, y: 14}
+  m_SizeDelta: {x: 6, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2032945630
 MonoBehaviour:
@@ -24895,15 +24895,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2551a356ad8833746ac21781c5d81db5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BasicBasic: {fileID: 21300000, guid: 47cb3a326d9f9174eb46572a260a8f86, type: 3}
-  BasicUpArm: {fileID: 21300000, guid: b278030f71f7de841880a85f0dea3e2a, type: 3}
-  BasicDownArm: {fileID: 21300000, guid: 5809da6d4ddf3eb46ae9b20758aef321, type: 3}
-  CrossBasic: {fileID: 21300000, guid: c6d7f83337f9f6743b0930f2f0f32ae4, type: 3}
-  CrossUpArm: {fileID: 21300000, guid: 3aea7df89ca3bb44c8bdff583dd57c4c, type: 3}
-  CrossDownArm: {fileID: 21300000, guid: 11d7aa16330f48e44a9e5d8ec7919a59, type: 3}
-  HappyBasic: {fileID: 21300000, guid: fce02fe1fcb39b54daac91205e3a777d, type: 3}
-  HappyUpArm: {fileID: 21300000, guid: 1a128831ef43b9c46a03bd8e9c96ae5f, type: 3}
-  HappyDownArm: {fileID: 21300000, guid: e38d293db0c529149837348f9270ab95, type: 3}
+  BasicBasic: {fileID: 21300000, guid: a7a9c6250d74e1a48b778b6742f4b976, type: 3}
+  BasicUpArm: {fileID: 21300000, guid: a3ef77197d612114f8fbafa233f8515d, type: 3}
+  BasicDownArm: {fileID: 21300000, guid: abefbf972b9a26b419a544508dbb4498, type: 3}
+  CrossBasic: {fileID: 21300000, guid: b7feb4df8a921d74e8ef88b91bc2e72b, type: 3}
+  CrossUpArm: {fileID: 21300000, guid: 629defac106fa584c83dc6bcd5be3184, type: 3}
+  CrossDownArm: {fileID: 21300000, guid: 340abe0c3d21b3d47b6281da9af9ce29, type: 3}
+  HappyBasic: {fileID: 21300000, guid: 28ec9c7d637d2b74fa482bf98933db58, type: 3}
+  HappyUpArm: {fileID: 21300000, guid: a62e7d4ddd2fa1f4fabb476121c9e32a, type: 3}
+  HappyDownArm: {fileID: 21300000, guid: 3738f838fd2ef2a4d9c10afbe7eff78f, type: 3}
 --- !u!222 &2032945632
 CanvasRenderer:
   m_ObjectHideFlags: 0
