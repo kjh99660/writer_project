@@ -1045,7 +1045,7 @@ public class Chat_controller : MonoBehaviour
                 Search.ChapterTenEnter();
                 Camera.transform.position = new Vector3(25, 0, -10);
             }
-            if(Data.IsNormalEnding == true)
+            if(Data.GetIsBadEnding())
             {
                 if (i == 14) Boy.ChangeToCrossDownArm(Boy.GetSpriteView());
                 if (i == 15) Boy.ChangeToNoting(Boy.GetSpriteView());

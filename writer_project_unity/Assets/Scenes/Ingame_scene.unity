@@ -1600,7 +1600,7 @@ GameObject:
   - component: {fileID: 136608989}
   - component: {fileID: 136608990}
   m_Layer: 5
-  m_Name: SoundSlider
+  m_Name: EffectSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1625,7 +1625,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.64, y: -0.76}
+  m_AnchoredPosition: {x: 0.91, y: -1.66}
   m_SizeDelta: {x: 191.433, y: 22.699}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &136608990
@@ -1668,13 +1668,24 @@ MonoBehaviour:
   m_FillRect: {fileID: 1929507754}
   m_HandleRect: {fileID: 1699073804}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.0001
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1896412258}
+        m_MethodName: SetEffectAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &139779072
 GameObject:
   m_ObjectHideFlags: 0
@@ -12351,7 +12362,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.35, y: -0.93}
+  m_AnchoredPosition: {x: -4.7999816, y: -1.829994}
   m_SizeDelta: {x: 97.513, y: 51.861}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1132244604
@@ -16016,7 +16027,7 @@ GameObject:
   - component: {fileID: 1427695700}
   - component: {fileID: 1427695701}
   m_Layer: 5
-  m_Name: EffectSlider
+  m_Name: SoundSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16041,7 +16052,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.64, y: 1.43}
+  m_AnchoredPosition: {x: 0.96, y: 0.79}
   m_SizeDelta: {x: 191.433, y: 22.699}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1427695701
@@ -16084,13 +16095,24 @@ MonoBehaviour:
   m_FillRect: {fileID: 370832431}
   m_HandleRect: {fileID: 595812089}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.0001
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1896412258}
+        m_MethodName: SetSoundAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1430849881
 GameObject:
   m_ObjectHideFlags: 0
@@ -22340,6 +22362,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 49aed3cf6b7cf2241be0aff5d1e8aa5f, type: 3}
   - {fileID: 8300000, guid: 469cfd0f86232d746bcbb0c32ba3521d, type: 3}
   - {fileID: 8300000, guid: eb809c9a23a6a9549a1e6c6edb4bd93c, type: 3}
+  EffectSlider: {fileID: 136608990}
+  MusicSlider: {fileID: 1427695701}
 --- !u!1 &1900888205
 GameObject:
   m_ObjectHideFlags: 0
@@ -23783,7 +23807,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.394, y: 1.25}
+  m_AnchoredPosition: {x: -4.793994, y: 0.61001587}
   m_SizeDelta: {x: 95.489, y: 51.861}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1977769683

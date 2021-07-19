@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Audio : MonoBehaviour
 {
@@ -9,11 +10,16 @@ public class Audio : MonoBehaviour
     public AudioClip[] Effect = new AudioClip[21];
     public AudioClip[] BackGroundSound = new AudioClip[8];
     private readonly WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
+    //***********//
+    public Slider EffectSlider;
+    public Slider MusicSlider;
     // Start is called before the first frame update
     void Start()
     {
         effectAudioSource = GetComponent<AudioSource>();
+        effectAudioSource.volume = PlayerPrefs.GetFloat("EffectVolume", 1f);
         backgroundAudioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
+        backgroundAudioSource.volume = PlayerPrefs.GetFloat("MusicVolume", 1f);
         
     }
     public void PlayEffectSound(string action)
@@ -134,5 +140,15 @@ public class Audio : MonoBehaviour
         }
         StartCoroutine(DecreaseBackGround()); 
     }
-
+    //****************//
+    public void SetEffectAudio()
+    {
+        effectAudioSource.volume = EffectSlider.value;
+        PlayerPrefs.SetFloat("EffectVolume", EffectSlider.value);
+    }
+    public void SetSoundAudio()
+    {
+        backgroundAudioSource.volume = MusicSlider.value;
+        PlayerPrefs.SetFloat("MusicVolume", MusicSlider.value);
+    }
 }

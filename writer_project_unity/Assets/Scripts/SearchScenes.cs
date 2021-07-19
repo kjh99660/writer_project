@@ -680,7 +680,7 @@ public class SearchScenes : MonoBehaviour//개망한 클래스 이해하려 하�
         if (ChapterTenCounter)
         {
             yield return StartCoroutine(Texting(chapter10, 7, 1, NameS2, TextS2));
-            Data.IsNormalEnding = true;
+            Data.SetIsNormalEnding(true);
             Camera.transform.position = new Vector3(0, 0, -10);
         }
         else
