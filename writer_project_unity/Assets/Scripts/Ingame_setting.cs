@@ -72,16 +72,20 @@ public class Ingame_setting : MonoBehaviour
 
 
     //인게임에서 사용
+    private void AttachCaseFileImfrmation()//사건파일 정보를 적용하는 함수
+    {
+        
+    }
     public void UIOnButton()
     {
         TextBox.SetISClose(false);//열기
         Panel_onoff();
         this.gameObject.SetActive(true);//다시 만들기
         UIOn.SetActive(false);
-        Debug.Log("UION");
     }
     public void Case_file()//사건 파일 열기
     {
+        AttachCaseFileImfrmation();
         CaseFile.SetActive(true);
         isClose = true;
         Menu_Arrow.flipX = false;
@@ -121,10 +125,12 @@ public class Ingame_setting : MonoBehaviour
 
     public void Save_in()//저장하기
     {
+        //저장 데이터 가져오기
         Camera.transform.position = new Vector3(-25, 0, -10);
     }
     public void Save_out()
     {
+        //저장 데이터 저장하기
         Camera.transform.position = new Vector3(0, 0, -10);
     }
 
@@ -132,6 +138,7 @@ public class Ingame_setting : MonoBehaviour
 
     public void Import_in()//불러오기
     {
+        //저장 데이터 가져오기
         Camera.transform.position = new Vector3(-50, 0, -10);
     }
     public void Import_out()
@@ -149,7 +156,6 @@ public class Ingame_setting : MonoBehaviour
             isClose = true;
             Menu_Arrow.flipX = true;
             Setting_panel.SetActive(false);
-
         }
     }
     public void SoundOff()//환경 설정 x 버튼
@@ -157,7 +163,6 @@ public class Ingame_setting : MonoBehaviour
         soundPanel.SetActive(false);
         Menu_Arrow.flipX = false;
         Setting_panel.SetActive(true);
-
     }
 
     /**********************************************/

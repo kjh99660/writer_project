@@ -8,7 +8,7 @@ public class Audio : MonoBehaviour
     private AudioSource effectAudioSource;
     private AudioSource backgroundAudioSource;
     public AudioClip[] Effect = new AudioClip[21];
-    public AudioClip[] BackGroundSound = new AudioClip[8];
+    public AudioClip[] BackGroundSound = new AudioClip[9];
     private readonly WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
     //***********//
     public Slider EffectSlider;
@@ -121,6 +121,9 @@ public class Audio : MonoBehaviour
                 break;
             case "8":
                 backgroundAudioSource.clip = BackGroundSound[7];
+                break;
+            case "9":
+                backgroundAudioSource.clip = BackGroundSound[8];
                 break;
         }
         backgroundAudioSource.Play();
